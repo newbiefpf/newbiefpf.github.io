@@ -2,7 +2,7 @@
 <html>
 	<head>
 		
-<title>文章归档-newbie</title>
+<title>文章分类-newbie</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -38,9 +38,6 @@
 
 	<body>
 		
-
-    
-    
 	<div class="header">
 		<div class="header-top" id="header-top">
 			<div class="h-left">
@@ -61,22 +58,22 @@
 								
 									
 						
-							<li class="select">
-								<a href="/archives">
-									归档
-								</a>
-								<span class="dot"></span>
-							</li>
-							
-									
-						
 								<li>
-									<a href="/categories">
-										分类
+									<a href="/archives">
+										归档
 									</a>
 									<span class="dot"></span>
 								</li>
 								
+									
+						
+							<li class="select">
+								<a href="/categories">
+									分类
+								</a>
+								<span class="dot"></span>
+							</li>
+							
 									
 						
 								<li>
@@ -278,58 +275,57 @@
 
 </script>
 
-    
 
-
-
-<div class="archive">
-    
-        <div class="header-body-background">
+<div class="categories">
+    <div class="header-body-background">
     <div class="header-body-background-content">
         <span>
-            <img src="https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imgicon-remixicon.svg" alt="Quiet">
+            <img src="https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imgblogmyCategory.svg" alt="Quiet">
         </span>
 
-        <h2>居然用了 2 年一共才写了 3 篇文章!</h2>
+        <h2>文章分类</h2>
     </div>
 </div>
-    
-    <div class="archive-content" id="content">
-        <div class="archive-content-data">
-            <div class="grouping">
-    
-        <p>
-            2024
-        </p>
-        
-        <a href="/2024/12/15/test/">
-            <span>内嵌网站示例</span>
-            <time>12-15</time>
-        </a>
-        
-        <a href="/2024/12/15/hello-world/">
-            <span>Hexo博客配置与使用指南</span>
-            <time>12-15</time>
-        </a>
-        
-        
-        <p>
-            2020
-        </p>
-        
-        <a href="/2020/11/03/sad/">
-            <span>一个简约扁平化的Hexo静态主题博客-Quiet</span>
-            <time>11-03</time>
-        </a>
-        
-        
-</div>
+    <div class="categories-content" id="content">
+        <div class="categories-content-data">
+            <div class="categories-class">
+                
+                    
+                        <a class="categories-class-card" href="/categories/%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/"
+                            style="background-image: url('https://api.ixiaowai.cn/gqapi/gqapi.php');">
+                            <span class="categories-class-card-title">博客配置</span>
+                            <div class="categories-class-card-number">
+                                <span>
+                                    <span class="categories-length">1</span> 篇
+                                </span>
+                            </div>
+                        </a>
+                    
+                        <a class="categories-class-card" href="/categories/ASD/"
+                            style="background-image: url('https://api.ixiaowai.cn/gqapi/gqapi.php');">
+                            <span class="categories-class-card-title">ASD</span>
+                            <div class="categories-class-card-number">
+                                <span>
+                                    <span class="categories-length">1</span> 篇
+                                </span>
+                            </div>
+                        </a>
+                    
+                        <a class="categories-class-card" href="/categories/%E7%A4%BA%E4%BE%8B/"
+                            style="background-image: url('https://api.ixiaowai.cn/gqapi/gqapi.php');">
+                            <span class="categories-class-card-title">示例</span>
+                            <div class="categories-class-card-number">
+                                <span>
+                                    <span class="categories-length">1</span> 篇
+                                </span>
+                            </div>
+                        </a>
+                    
+                
+            </div>
         </div>
-    </div>    
+    </div>
 </div>
-
-
-
 
 		
 <div class="footer">
@@ -434,7 +430,7 @@
             distractionFreeMode:false
         })
         
-        if(Boolean('')){
+        if(Boolean('true')){
             gitalk.render('gitalk-container')
         }
     </script>
