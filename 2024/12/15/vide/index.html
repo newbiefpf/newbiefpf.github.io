@@ -328,24 +328,38 @@
   <div id="article" class="post-content-info">
     
 
-    <h1 id="视频播放示例"><a href="#视频播放示例" class="headerlink" title="视频播放示例"></a>视频播放示例</h1><p>在本示例中，我们将展示如何在 Markdown 文件中嵌入一个视频播放器。</p>
-<h2 id="示例：嵌入一个视频"><a href="#示例：嵌入一个视频" class="headerlink" title="示例：嵌入一个视频"></a>示例：嵌入一个视频</h2><p>以下是使用 HTML <code>&lt;video&gt;</code> 标签在 Markdown 中嵌入视频的代码：</p>
-<video width="100%" height="auto" controls>
+    <h1 id="视频播放示例"><a href="#视频播放示例" class="headerlink" title="视频播放示例"></a>视频播放示例</h1><p>在本示例中，我们将展示如何在 Markdown 文件中嵌入一个视频播放器，并通过自定义按钮控制视频的播放和暂停。</p>
+<h2 id="示例：嵌入一个视频"><a href="#示例：嵌入一个视频" class="headerlink" title="示例：嵌入一个视频"></a>示例：嵌入一个视频</h2><p>以下是使用 HTML <code>&lt;video&gt;</code> 标签在 Markdown 中嵌入视频的代码，并通过按钮控制视频的播放与暂停：</p>
+<video id="myVideo" width="100%" height="auto">
   <source src="https://videosfpf.oss-cn-beijing.aliyuncs.com/demo" type="video/mp4">
   您的浏览器不支持播放视频。
 </video>
+
+<p><button id="playPauseBtn" onclick="togglePlayPause()">播放</button></p>
+<script>
+  var video = document.getElementById("myVideo");
+  var playPauseBtn = document.getElementById("playPauseBtn");
+
+  function togglePlayPause() {
+    if (video.paused) {
+      video.play();
+      playPauseBtn.textContent = "暂停";
+    } else {
+      video.pause();
+      playPauseBtn.textContent = "播放";
+    }
+  }
+</script>
 
 <p><strong>注意</strong>：你需要替换视频链接为你实际的视频文件 URL。</p>
 <h2 id="video-标签使用说明"><a href="#video-标签使用说明" class="headerlink" title="video 标签使用说明"></a><code>video</code> 标签使用说明</h2><p><code>&lt;video&gt;</code> 标签是 HTML 中用来嵌入视频的元素。它具有多个属性，可以用来控制视频的显示方式。例如：</p>
 <ul>
 <li><code>width=&quot;100%&quot;</code>：设置视频的宽度为页面宽度的100%。</li>
 <li><code>height=&quot;auto&quot;</code>：自动调整视频的高度，以保持视频的宽高比。</li>
-<li><code>controls</code>：启用视频播放器的控制选项（播放、暂停、音量、进度条等）。</li>
 </ul>
 <h3 id="其他视频格式"><a href="#其他视频格式" class="headerlink" title="其他视频格式"></a>其他视频格式</h3><p>除了 <code>.mp4</code> 格式，<code>&lt;video&gt;</code> 标签还支持其他格式的视频，例如 <code>.webm</code> 和 <code>.ogg</code>，你可以根据需要提供不同的视频格式：</p>
-<pre><code class="html">&lt;video width=&quot;100%&quot; height=&quot;auto&quot; controls&gt;
+<pre><code class="html">&lt;video width=&quot;100%&quot; height=&quot;auto&quot;&gt;
   &lt;source src=&quot;https://videosfpf.oss-cn-beijing.aliyuncs.com/meeting_01.mp4?Expires=1734276559&amp;OSSAccessKeyId=TMP.3KiTDWYhAVirGNK9KqvYAivoW87ZixpvQwJQxopHG47C8QFbM3dP4LBWKJnHDdpgm6Gpger2MSnteg1UBTPsf2AWKE7YnB&amp;Signature=Pvo5lDWJtnHxpyKEkaHajzbRibM%3D&quot; type=&quot;video/mp4&quot;&gt;
- 
   您的浏览器不支持播放视频。
 &lt;/video&gt;
 </code></pre>
