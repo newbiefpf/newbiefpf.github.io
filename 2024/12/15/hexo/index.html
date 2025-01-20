@@ -2,7 +2,7 @@
 <html>
 	<head>
 		
-<title>视频播放示例-newbie</title>
+<title>Hexo博客配置与使用指南-newbie</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -12,8 +12,8 @@
 
 
 
-<meta name="keywords" content="Markdown,视频播放,示例,">
-<meta name="description" content="这是一个包含视频播放的Markdown文件示例">
+<meta name="keywords" content="Hexo,配置,使用指南,">
+<meta name="description" content="一篇关于如何配置与使用Hexo博客的详细指南">
 
 
 <script src="/js/jquery.min.js"></script>
@@ -278,22 +278,22 @@
 
 <div class="post">
     <div class="post-header-background post-header-img"
-    style="background: url('https://api.ixiaowai.cn/gqapi/gqapi.php')" 
+    style="background: url('https://img.51miz.com/Element/00/82/31/51/ce452115_E823151_1f394d81.jpg')" 
 >
     <div class="post-header-background-content">
         <ul class="post-header-tag">
             
                 
-                    <li><a href="/tags/Markdown">Markdown</a></li>
+                    <li><a href="/tags/Hexo">Hexo</a></li>
                 
-                    <li><a href="/tags/视频播放">视频播放</a></li>
+                    <li><a href="/tags/配置">配置</a></li>
                 
-                    <li><a href="/tags/示例">示例</a></li>
+                    <li><a href="/tags/使用指南">使用指南</a></li>
                 
             
         </ul>
         
-        <h1>视频播放示例</h1>
+        <h1>Hexo博客配置与使用指南</h1>
 
         <div class="post-header-info">
             <div class="post-header-info-author">
@@ -313,7 +313,7 @@
                 <div class="post-header-info-author-categories">
                     
                         
-                            <a href="../../categories/示例/" target="_blank">示例</a>
+                            <a href="../../categories/Hexo博客配置/" target="_blank">Hexo博客配置</a>
                         
                     
                 </div>
@@ -328,41 +328,61 @@
   <div id="article" class="post-content-info">
     
 
-    <h1 id="视频播放示例"><a href="#视频播放示例" class="headerlink" title="视频播放示例"></a>视频播放示例</h1><p>在本示例中，我们将展示如何在 Markdown 文件中嵌入一个视频播放器，并通过自定义按钮控制视频的播放和暂停。</p>
-<h2 id="示例：嵌入一个视频"><a href="#示例：嵌入一个视频" class="headerlink" title="示例：嵌入一个视频"></a>示例：嵌入一个视频</h2><p>以下是使用 HTML <code>&lt;video&gt;</code> 标签在 Markdown 中嵌入视频的代码，并通过按钮控制视频的播放与暂停：</p>
-<video id="myVideo" width="100%" height="auto">
-  <source src="https://videosfpf.oss-cn-beijing.aliyuncs.com/demo" type="video/mp4">
-  您的浏览器不支持播放视频。
-</video>
+    <p>欢迎来到 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! 这是你的第一篇文章。你可以查看 <a target="_blank" rel="noopener" href="https://hexo.io/docs/">文档</a> 获取更多信息。如果在使用 Hexo 时遇到任何问题，你可以在 <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">故障排除</a> 中找到答案，或者你也可以在 <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a> 向我提问。</p>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="创建新文章"><a href="#创建新文章" class="headerlink" title="创建新文章"></a>创建新文章</h3><p>要在 Hexo 中创建一篇新文章，只需运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p><button id="playPauseBtn" onclick="togglePlayPause()">播放</button></p>
-<script>
-  var video = document.getElementById("myVideo");
-  var playPauseBtn = document.getElementById("playPauseBtn");
+<p>这会使用默认模板创建一篇新文章。你可以在 <code>source/_posts/</code> 目录中修改生成的 Markdown 文件。</p>
+<p>更多信息：<a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">写作</a></p>
+<h3 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h3><p>要启动 Hexo 服务器并在本地预览博客，运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-  function togglePlayPause() {
-    if (video.paused) {
-      video.play();
-      playPauseBtn.textContent = "暂停";
-    } else {
-      video.pause();
-      playPauseBtn.textContent = "播放";
-    }
-  }
-</script>
+<p>服务器启动后，你可以打开浏览器，访问 <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a> 来查看你的博客。</p>
+<p>更多信息：<a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">服务器</a></p>
+<h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><p>要生成 Hexo 博客的静态文件，运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p><strong>注意</strong>：你需要替换视频链接为你实际的视频文件 URL。</p>
-<h2 id="video-标签使用说明"><a href="#video-标签使用说明" class="headerlink" title="video 标签使用说明"></a><code>video</code> 标签使用说明</h2><p><code>&lt;video&gt;</code> 标签是 HTML 中用来嵌入视频的元素。它具有多个属性，可以用来控制视频的显示方式。例如：</p>
+<p>此命令会处理你的 Markdown 文件并在 <code>public/</code> 目录中生成 HTML 文件。然后，你可以将这些文件部署到你的托管服务上。</p>
+<p>更多信息：<a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">生成</a></p>
+<h3 id="📖发布文章"><a href="#📖发布文章" class="headerlink" title="📖发布文章"></a>📖发布文章</h3><p>你需要在发布文章时，按照以下格式写标头：</p>
 <ul>
-<li><code>width=&quot;100%&quot;</code>：设置视频的宽度为页面宽度的100%。</li>
-<li><code>height=&quot;auto&quot;</code>：自动调整视频的高度，以保持视频的宽高比。</li>
+<li><code>title</code>: 一个简约扁平化的Hexo静态主题博客</li>
+<li><code>comments</code>: false</li>
+<li><code>categories</code>: 项目案例</li>
+<li><code>aubot</code>: Cange-Q</li>
+<li><code>aubot_link</code>: ‘xxxx’</li>
+<li><code>tags</code>: Hexo Quiet主题 静态主题</li>
+<li><code>excerpt</code>:简约大方</li>
+<li><code>toc</code>: false</li>
+<li><code>date</code>: 2020-11-03 20:33:36</li>
+<li><code>cover</code>: ‘xxxx’</li>
 </ul>
-<h3 id="其他视频格式"><a href="#其他视频格式" class="headerlink" title="其他视频格式"></a>其他视频格式</h3><p>除了 <code>.mp4</code> 格式，<code>&lt;video&gt;</code> 标签还支持其他格式的视频，例如 <code>.webm</code> 和 <code>.ogg</code>，你可以根据需要提供不同的视频格式：</p>
-<pre><code class="html">&lt;video width=&quot;100%&quot; height=&quot;auto&quot;&gt;
-  &lt;source src=&quot;https://videosfpf.oss-cn-beijing.aliyuncs.com/meeting_01.mp4?Expires=1734276559&amp;OSSAccessKeyId=TMP.3KiTDWYhAVirGNK9KqvYAivoW87ZixpvQwJQxopHG47C8QFbM3dP4LBWKJnHDdpgm6Gpger2MSnteg1UBTPsf2AWKE7YnB&amp;Signature=Pvo5lDWJtnHxpyKEkaHajzbRibM%3D&quot; type=&quot;video/mp4&quot;&gt;
-  您的浏览器不支持播放视频。
-&lt;/video&gt;
-</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li><code>title</code>：文章标题。</li>
+<li><code>categories</code>：分类（最好只写一个）。</li>
+<li><code>tags</code>：标签可以有多个。</li>
+<li><code>excerpt</code>：文章描述。</li>
+<li><code>toc</code>：是否显示文章目录（默认值为 <code>false</code>）。</li>
+<li><code>date</code>：创建日期。</li>
+<li><code>cover</code>：文章缩略图（不填则使用默认的）。</li>
+<li><code>comments</code>：是否开启评论。</li>
+<li><code>aubot</code>：作者名称，未设置则默认为配置文件中的名称。</li>
+<li><code>aubot_link</code>：点击作者名称时跳转的地址，默认跳转到关于我的页面。</li>
+</ul>
+<h3 id="🏆主题配置"><a href="#🏆主题配置" class="headerlink" title="🏆主题配置"></a>🏆主题配置</h3><p>进入主题根目录下的 <code>themes</code> 文件夹中的 <code>Quiet</code> 目录，找到 <code>_config.yml</code> 配置文件，我们可以在里面设置网站的标题、各种 Logo 图标等。</p>
+<p><strong>添加友情链接</strong></p>
+<p>在配置文件中，找到 <code>linksList</code>，可以按照示例添加你的友情链接。</p>
+<h3 id="💌评论配置"><a href="#💌评论配置" class="headerlink" title="💌评论配置"></a>💌评论配置</h3><p>本主题使用 <code>gitalk</code> 评论插件，它基于 Github Issue 和 Preact 开发。你只需要在 <code>Quiet</code> 主题文件夹中的 <code>_config.yml</code> 配置文件的 <code>gitalk</code> 部分进行配置。</p>
+<p>首先，你需要选择一个公共 GitHub 存储库（已存在或创建一个新的）来存储评论，并创建 <strong>GitHub 应用</strong>。如果没有应用， <a target="_blank" rel="noopener" href="https://github.com/settings/applications/new">点击这里申请</a>，<code>Authorization callback URL</code> 填写当前使用插件页面的域名。</p>
+<p><strong>配置项：</strong></p>
+<ul>
+<li><strong>clientID</strong> <code>String</code>：GitHub 应用的 Client ID。</li>
+<li><strong>clientSecret</strong> <code>String</code>：GitHub 应用的 Client Secret。</li>
+<li><strong>repo</strong> <code>String</code>：GitHub 存储库。</li>
+<li><strong>owner</strong> <code>String</code>：GitHub 存储库的所有者，可以是个人或组织。</li>
+<li><strong>admin</strong> <code>Array</code>：GitHub 存储库的所有者和合作者（对这个存储库有写权限的用户）。</li>
+</ul>
 
   </div>
   <div id=""></div>
@@ -423,28 +443,21 @@ Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
 
     <div class="post-paging">
     
-    <a href="/2024/12/15/hello-world/">
+    <a href="/2024/12/15/frp/">
         <div class="post-paging-last">
             <span>上一篇</span>
-            <p>Hexo博客配置与使用指南</p>
+            <p>内网穿透配置与使用指南</p>
         </div>
     </a>
     
 
-    
-    <a href="/2020/11/03/sad/">
-        <div class="post-paging-next">
-            <span>下一篇</span>
-            <p>一个简约扁平化的Hexo静态主题博客-Quiet</p>
-        </div>
-    </a>
     
 </div>
 </div>
 		
 <div class="footer">
 	<div class="Copyright">
-		©2024 By 付鹏篚. 主题：<a
+		©2025 By 付鹏篚. 主题：<a
 			style="text-decoration: none;display: contents; color: #898F9F;"
 			href="#">Quiet</a>
 	</div>
