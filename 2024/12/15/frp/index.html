@@ -331,46 +331,82 @@
     <p>内网穿透技术能够帮助我们穿越 NAT（网络地址转换）和防火墙，实现远程访问内网服务。FRP（Fast Reverse Proxy）是一款高性能的内网穿透工具，本文将介绍如何配置和使用 FRP 进行内网穿透。</p>
 <h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="创建新文章"><a href="#创建新文章" class="headerlink" title="创建新文章"></a>创建新文章</h3><p>首先，你需要在内网主机（客户端）和公网上的服务器（服务端）上安装 FRP。可以从 <a target="_blank" rel="noopener" href="https://github.com/fatedier/frp">FRP GitHub 仓库</a> 下载最新版本，支持 Windows、Linux 等操作系统。</p>
 <h4 id="Windows-客户端安装"><a href="#Windows-客户端安装" class="headerlink" title="Windows 客户端安装"></a>Windows 客户端安装</h4><p>在 Windows 系统中，下载并解压 FRP 压缩包，然后进入解压后的文件夹，直接运行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frpc.exe -c frpc.toml</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs bash">frpc.exe -c frpc.toml</code></pre>
 
 <p>其中 <code>frpc.toml</code> 是客户端的配置文件，包含了服务器地址、端口、映射规则等信息。</p>
 <h3 id="配置-FRP-服务端（frps）"><a href="#配置-FRP-服务端（frps）" class="headerlink" title="配置 FRP 服务端（frps）"></a>配置 FRP 服务端（frps）</h3><p>FRP 服务端需要部署在公网上的服务器上，接收并转发客户端的请求。服务端的配置文件通常是 <code>frps.toml</code>，可以根据需求修改配置。</p>
 <h4 id="启动-FRP-服务端"><a href="#启动-FRP-服务端" class="headerlink" title="启动 FRP 服务端"></a>启动 FRP 服务端</h4><p>使用以下命令启动 FRP 服务端：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./frps -c ./frps.toml</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs bash">./frps -c ./frps.toml</code></pre>
 
 <p>在 Linux 系统中，使用 <code>nohup</code> 命令来确保 FRP 服务端在后台持续运行。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> ./frps -c ./frps.toml &amp;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> ./frps -c ./frps.toml &amp;</code></pre>
 
 <p><code>nohup</code> 会将输出重定向到 <code>nohup.out</code> 文件，你可以使用以下命令查看日志：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> -f nohup.out</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs bash"><span class="hljs-built_in">tail</span> -f nohup.out</code></pre>
 
 <h2 id="端口映射配置"><a href="#端口映射配置" class="headerlink" title="端口映射配置"></a>端口映射配置</h2><p>FRP 支持多种类型的端口映射，以下是一些常见的配置方式：</p>
 <h3 id="HTTP-映射："><a href="#HTTP-映射：" class="headerlink" title="HTTP 映射："></a>HTTP 映射：</h3><p>客户端配置：<code>frpc.toml</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[http] </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> type = tcp  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">local_port = 80</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">remote_port = 8080</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs ini"><span class="hljs-section">[http]</span> 
+
+
+ <span class="hljs-attr">type</span> = tcp  
+
+
+
+<span class="hljs-attr">local_ip</span> = <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
+
+
+<span class="hljs-attr">local_port</span> = <span class="hljs-number">80</span>
+
+
+<span class="hljs-attr">remote_port</span> = <span class="hljs-number">8080</span></code></pre>
 
 <p>上述配置将本地的 80 端口映射到公网的 8080 端口。</p>
 <h3 id="SSH-映射："><a href="#SSH-映射：" class="headerlink" title="SSH 映射："></a>SSH 映射：</h3><p>客户端配置：<code>frpc.toml</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[ssh]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 6000</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs ini"><span class="hljs-section">[ssh]</span>
+<span class="hljs-attr">type</span> = tcp
+<span class="hljs-attr">local_ip</span> = <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
+<span class="hljs-attr">local_port</span> = <span class="hljs-number">22</span>
+<span class="hljs-attr">remote_port</span> = <span class="hljs-number">6000</span></code></pre>
 
 <p>这会将本地的 SSH 端口（22）映射到公网的 6000 端口，方便通过公网访问内网的 SSH 服务。</p>
 <h2 id="常见问题与解决"><a href="#常见问题与解决" class="headerlink" title="常见问题与解决"></a>常见问题与解决</h2><h3 id="如何让-FRP-服务端持续运行？"><a href="#如何让-FRP-服务端持续运行？" class="headerlink" title="如何让 FRP 服务端持续运行？"></a>如何让 FRP 服务端持续运行？</h3><p>当你通过 SSH 连接到服务器并启动 FRP 服务端时，关闭 SSH 会导致服务端进程被终止。为了确保 FRP 服务端在后台持续运行，可以使用以下方法：</p>
 <h4 id="1-使用-nohup-命令"><a href="#1-使用-nohup-命令" class="headerlink" title="1. 使用 nohup 命令"></a>1. 使用 <code>nohup</code> 命令</h4><p>在 Linux 系统中，<code>nohup</code> 命令可以将进程放到后台运行，避免因终端关闭而中断进程。</p>
 <p>启动 FRP 服务端时使用 <code>nohup</code>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> ./frps -c ./frps.toml &amp;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> ./frps -c ./frps.toml &amp;</code></pre>
 
 <h4 id="2-查找进程-ID（PID）"><a href="#2-查找进程-ID（PID）" class="headerlink" title="2. 查找进程 ID（PID）"></a>2. 查找进程 ID（PID）</h4><p>如果需要查看 FRP 服务端的运行状态，可以通过以下命令查找进程 ID：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep frps</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs bash">ps aux | grep frps</code></pre>
 
 <h4 id="3-终止进程"><a href="#3-终止进程" class="headerlink" title="3. 终止进程"></a>3. 终止进程</h4><p>如果需要停止 FRP 服务端，可以使用 <code>kill</code> 命令终止进程：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> &lt;PID&gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs bash"><span class="hljs-built_in">kill</span> &lt;PID&gt;</code></pre>
 
 <p>如果进程没有响应，可以使用 <code>kill -9</code> 强制终止：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -9 &lt;PID&gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs bash"><span class="hljs-built_in">kill</span> -9 &lt;PID&gt;</code></pre>
 
 <h2 id="发布服务"><a href="#发布服务" class="headerlink" title="发布服务"></a>发布服务</h2><p>配置好 FRP 后，你可以通过访问公网服务器的 IP 地址和端口，访问内网主机的服务。例如，在上面的 HTTP 映射中，你可以通过 <code>http://&lt;server_ip&gt;:8080</code> 来访问内网主机的 80 端口服务。</p>
-<h2 id="FRP-配置示例"><a href="#FRP-配置示例" class="headerlink" title="FRP 配置示例"></a>FRP 配置示例</h2><h3 id="客户端配置（frpc-toml）"><a href="#客户端配置（frpc-toml）" class="headerlink" title="客户端配置（frpc.toml）"></a>客户端配置（<code>frpc.toml</code>）</h3><figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[common]</span></span><br><span class="line"><span class="attr">server_addr</span> = <span class="string">&quot;your_server_ip&quot;</span></span><br><span class="line"><span class="attr">server_port</span> = <span class="number">7000</span></span><br><span class="line"></span><br><span class="line"><span class="section">[http]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">8080</span></span><br><span class="line"></span><br><span class="line"><span class="section">[ssh]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">22</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">6000</span></span><br></pre></td></tr></table></figure>
+<h2 id="FRP-配置示例"><a href="#FRP-配置示例" class="headerlink" title="FRP 配置示例"></a>FRP 配置示例</h2><h3 id="客户端配置（frpc-toml）"><a href="#客户端配置（frpc-toml）" class="headerlink" title="客户端配置（frpc.toml）"></a>客户端配置（<code>frpc.toml</code>）</h3><pre><code class="hljs toml"><span class="hljs-section">[common]</span>
+<span class="hljs-attr">server_addr</span> = <span class="hljs-string">&quot;your_server_ip&quot;</span>
+<span class="hljs-attr">server_port</span> = <span class="hljs-number">7000</span>
 
-<h3 id="服务端配置（frps-toml）"><a href="#服务端配置（frps-toml）" class="headerlink" title="服务端配置（frps.toml）"></a>服务端配置（<code>frps.toml</code>）</h3><figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[common]</span></span><br><span class="line"><span class="attr">bind_port</span> = <span class="number">7000</span></span><br><span class="line"></span><br><span class="line"><span class="section">[http]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">custom_domains</span> = <span class="string">&quot;your_domain.com&quot;</span></span><br></pre></td></tr></table></figure>
+<span class="hljs-section">[http]</span>
+<span class="hljs-attr">type</span> = tcp
+<span class="hljs-attr">local_ip</span> = <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
+<span class="hljs-attr">local_port</span> = <span class="hljs-number">80</span>
+<span class="hljs-attr">remote_port</span> = <span class="hljs-number">8080</span>
+
+<span class="hljs-section">[ssh]</span>
+<span class="hljs-attr">type</span> = tcp
+<span class="hljs-attr">local_ip</span> = <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
+<span class="hljs-attr">local_port</span> = <span class="hljs-number">22</span>
+<span class="hljs-attr">remote_port</span> = <span class="hljs-number">6000</span></code></pre>
+
+<h3 id="服务端配置（frps-toml）"><a href="#服务端配置（frps-toml）" class="headerlink" title="服务端配置（frps.toml）"></a>服务端配置（<code>frps.toml</code>）</h3><pre><code class="hljs toml"><span class="hljs-section">[common]</span>
+<span class="hljs-attr">bind_port</span> = <span class="hljs-number">7000</span>
+
+<span class="hljs-section">[http]</span>
+<span class="hljs-attr">type</span> = tcp
+<span class="hljs-attr">custom_domains</span> = <span class="hljs-string">&quot;your_domain.com&quot;</span></code></pre>
 
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>FRP 是一个强大且灵活的内网穿透工具，适用于多种场景，如远程开发、远程桌面访问等。通过本文的配置指南，你应该能够快速上手 FRP，成功实现内网穿透并访问内网服务。如果遇到任何问题，可以参考 FRP 的官方文档，或者在 GitHub 上提出问题。</p>
 <pre><code>

@@ -356,24 +356,56 @@
 </ul>
 <h3 id="🚁快速使用"><a href="#🚁快速使用" class="headerlink" title="🚁快速使用"></a>🚁快速使用</h3><p><a target="_blank" rel="noopener" href="https://github.com/79e/hexo-theme-quiet/blob/master/README-EN.md">English Documents</a> </p>
 <p>我们首先下载主题</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/79e/hexo-theme-quiet.git</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/79e/hexo-theme-quiet.git</span></code></pre>
 
 <p>然后我们修改Hexo根目录下的 <code>_config.yml</code> 文件启用 Quiet 主题：</p>
 <p>（大概在最后的位置 — 你需要将下载下来主题文件放在 themes里面并且将名字修改为 Quiet ）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: Quiet</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs avrasm"><span class="hljs-symbol">theme:</span> Quiet</code></pre>
 
 <p>建议将每页展示的文章数量设置为 每页9篇</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">index_generator:</span><br><span class="line">  path: &#x27;&#x27;</span><br><span class="line">  per_page: 9</span><br><span class="line">  order_by: -date</span><br><span class="line">// 下面还有个 10 的 修改为 9</span><br><span class="line">per_page: 9</span><br><span class="line">pagination_dir: page</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs nestedtext"><span class="hljs-attribute">index_generator</span><span class="hljs-punctuation">:</span>
+  <span class="hljs-attribute">path</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&#x27;&#x27;</span>
+  <span class="hljs-attribute">per_page</span><span class="hljs-punctuation">:</span> <span class="hljs-string">9</span>
+  <span class="hljs-attribute">order_by</span><span class="hljs-punctuation">:</span> <span class="hljs-string">-date</span>
+<span class="hljs-attribute">// 下面还有个 10 的 修改为 9</span>
+<span class="hljs-attribute">per_page</span><span class="hljs-punctuation">:</span> <span class="hljs-string">9</span>
+<span class="hljs-attribute">pagination_dir</span><span class="hljs-punctuation">:</span> <span class="hljs-string">page</span></code></pre>
 
 <p>将下面此项设置为跟我一样即可显示文章的代码高亮</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 我的配置</span><br><span class="line">highlight:</span><br><span class="line">  enable: false</span><br><span class="line">  line_number: false</span><br><span class="line">  auto_detect: true</span><br><span class="line">  tab_replace: &#x27;&#x27;</span><br><span class="line">  wrap: true</span><br><span class="line">  hljs: true</span><br><span class="line">prismjs:</span><br><span class="line">  enable: false</span><br><span class="line">  preprocess: true</span><br><span class="line">  line_number: true</span><br><span class="line">  tab_replace: &#x27;&#x27;</span><br></pre></td></tr></table></figure>
-<h4 id="🏠首页布局"><a href="#🏠首页布局" class="headerlink" title="🏠首页布局"></a>🏠首页布局</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 首页文章布局 默认 &#x27;card&#x27; 可选择 &#x27;block-card&#x27;</span><br><span class="line">home_layout: card</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs yaml"><span class="hljs-comment"># 我的配置</span>
+<span class="hljs-attr">highlight:</span>
+  <span class="hljs-attr">enable:</span> <span class="hljs-literal">false</span>
+  <span class="hljs-attr">line_number:</span> <span class="hljs-literal">false</span>
+  <span class="hljs-attr">auto_detect:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">tab_replace:</span> <span class="hljs-string">&#x27;&#x27;</span>
+  <span class="hljs-attr">wrap:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">hljs:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">prismjs:</span>
+  <span class="hljs-attr">enable:</span> <span class="hljs-literal">false</span>
+  <span class="hljs-attr">preprocess:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">line_number:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">tab_replace:</span> <span class="hljs-string">&#x27;&#x27;</span></code></pre>
+<h4 id="🏠首页布局"><a href="#🏠首页布局" class="headerlink" title="🏠首页布局"></a>🏠首页布局</h4><pre><code class="hljs autoit"><span class="hljs-meta"># 首页文章布局 默认 <span class="hljs-string">&#x27;card&#x27;</span> 可选择 <span class="hljs-string">&#x27;block-card&#x27;</span></span>
+home_layout: card</code></pre>
 
 <h4 id="🔧标签页"><a href="#🔧标签页" class="headerlink" title="🔧标签页"></a>🔧标签页</h4><p>进入根目录下的<code>source</code>文件夹下创建<code>tags</code>文件夹新建<code>index.md</code>文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2020-09-19 16:19:22</span><br><span class="line">layout: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">title:</span> <span class="hljs-string">tags</span>
+<span class="hljs-attr">date:</span> <span class="hljs-number">2020-09-19 16:19:22</span>
+<span class="hljs-attr">layout:</span> <span class="hljs-string">&quot;tags&quot;</span>
+<span class="hljs-meta">---</span></code></pre>
 
 <h4 id="🏂简介页"><a href="#🏂简介页" class="headerlink" title="🏂简介页"></a>🏂简介页</h4><p>进入根目录下的<code>source</code>文件夹下创建<code>about</code>文件夹新建<code>index.md</code>文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 个人简介</span><br><span class="line">date: 2020-11-03</span><br><span class="line">aubot: Cange-Q</span><br><span class="line">portrait: &#x27;https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imgIMG_7327.jpeg&#x27;</span><br><span class="line">describe: &#x27;一个阳光快乐的BOY,在正合适的年龄里希望遇见正好的你。&#x27;</span><br><span class="line">type: &quot;about&quot;</span><br><span class="line">layout: &quot;about&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">title:</span> <span class="hljs-string">个人简介</span>
+<span class="hljs-attr">date:</span> <span class="hljs-number">2020-11-03</span>
+<span class="hljs-attr">aubot:</span> <span class="hljs-string">Cange-Q</span>
+<span class="hljs-attr">portrait:</span> <span class="hljs-string">&#x27;https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imgIMG_7327.jpeg&#x27;</span>
+<span class="hljs-attr">describe:</span> <span class="hljs-string">&#x27;一个阳光快乐的BOY,在正合适的年龄里希望遇见正好的你。&#x27;</span>
+<span class="hljs-attr">type:</span> <span class="hljs-string">&quot;about&quot;</span>
+<span class="hljs-attr">layout:</span> <span class="hljs-string">&quot;about&quot;</span>
+<span class="hljs-attr">comments:</span> <span class="hljs-literal">false</span>
+<span class="hljs-meta">---</span></code></pre>
 
 <p><strong>解释</strong></p>
 <p><code>aubot</code> ：博主名称显示在 About 页面的最上面</p>
@@ -385,16 +417,40 @@
 <p>在简介页面你可以写很多的东西 你可以向写文章一样去写你的简介</p>
 <p>你只需将内容写在 <code>about</code>文件夹下<code>index.md</code>文件里面</p>
 <h4 id="🎉友情链接"><a href="#🎉友情链接" class="headerlink" title="🎉友情链接"></a>🎉友情链接</h4><p>进入根目录下的<code>source</code>文件夹下创建<code>links</code>文件夹新建<code>index.md</code>文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 友情链接</span><br><span class="line">date: 2020-09-19</span><br><span class="line">type: &quot;links&quot;</span><br><span class="line">layout: &quot;links&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">title:</span> <span class="hljs-string">友情链接</span>
+<span class="hljs-attr">date:</span> <span class="hljs-number">2020-09-19</span>
+<span class="hljs-attr">type:</span> <span class="hljs-string">&quot;links&quot;</span>
+<span class="hljs-attr">layout:</span> <span class="hljs-string">&quot;links&quot;</span>
+<span class="hljs-attr">comments:</span> <span class="hljs-literal">false</span>
+<span class="hljs-meta">---</span></code></pre>
 
 <p><strong>内容</strong></p>
 <p>你可能需要描述你的友情链接 那么你就需要将你想要描述的内容写在<code>links</code>文件夹下的<code>index.md</code>文件内</p>
 <p>你会发现和 简介页 内容写法是一样的</p>
 <h4 id="🎪分类页"><a href="#🎪分类页" class="headerlink" title="🎪分类页"></a>🎪分类页</h4><p>进入根目录下的<code>source</code>文件夹下创建<code>categories</code>文件夹新建<code>index.md</code>文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 文章分类</span><br><span class="line">date: 2020-11-02</span><br><span class="line">type: categories</span><br><span class="line">layout: categories</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">title:</span> <span class="hljs-string">文章分类</span>
+<span class="hljs-attr">date:</span> <span class="hljs-number">2020-11-02</span>
+<span class="hljs-attr">type:</span> <span class="hljs-string">categories</span>
+<span class="hljs-attr">layout:</span> <span class="hljs-string">categories</span>
+<span class="hljs-meta">---</span></code></pre>
 
 <h3 id="📖发布文章"><a href="#📖发布文章" class="headerlink" title="📖发布文章"></a>📖发布文章</h3><p>你需要在发布文章的时候写标头</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">title: 一个简约扁平化的Hexo静态主题博客-Quiet</span><br><span class="line">comments: false</span><br><span class="line">categories: 项目案例</span><br><span class="line">aubot: Cange-Q</span><br><span class="line">aubot_link: &#x27;https://github.com/79E/hexo-theme-quiet&#x27;</span><br><span class="line">tags:</span><br><span class="line">  - Hexo</span><br><span class="line">  - Quiet</span><br><span class="line">  - 主题</span><br><span class="line">  - 静态主题</span><br><span class="line">excerpt: 采用简约大方的扁平化Hexo-Quiet主题</span><br><span class="line">toc: false</span><br><span class="line">date: 2020-11-03 20:33:36</span><br><span class="line">cover: &#x27;https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imgQuietView.png&#x27;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs nestedtext"><span class="hljs-attribute">title</span><span class="hljs-punctuation">:</span> <span class="hljs-string">一个简约扁平化的Hexo静态主题博客-Quiet</span>
+<span class="hljs-attribute">comments</span><span class="hljs-punctuation">:</span> <span class="hljs-string">false</span>
+<span class="hljs-attribute">categories</span><span class="hljs-punctuation">:</span> <span class="hljs-string">项目案例</span>
+<span class="hljs-attribute">aubot</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Cange-Q</span>
+<span class="hljs-attribute">aubot_link</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&#x27;https://github.com/79E/hexo-theme-quiet&#x27;</span>
+<span class="hljs-attribute">tags</span><span class="hljs-punctuation">:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">Hexo</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">Quiet</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">主题</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">静态主题</span>
+<span class="hljs-attribute">excerpt</span><span class="hljs-punctuation">:</span> <span class="hljs-string">采用简约大方的扁平化Hexo-Quiet主题</span>
+<span class="hljs-attribute">toc</span><span class="hljs-punctuation">:</span> <span class="hljs-string">false</span>
+<span class="hljs-attribute">date</span><span class="hljs-punctuation">:</span> <span class="hljs-string">2020-11-03 20:33:36</span>
+<span class="hljs-attribute">cover</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&#x27;https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imgQuietView.png&#x27;</span></code></pre>
 
 <p><strong>解释</strong></p>
 <p><code>title</code>：文章标题</p>
@@ -438,10 +494,10 @@
 <h3 id="🔎问题"><a href="#🔎问题" class="headerlink" title="🔎问题"></a>🔎问题</h3><ul>
 <li><p><strong>css 样式没有加载出来</strong></p>
 <p>本主题使用 <code>less </code> 对 <code>css</code> 进行处理 所以依赖 <code>hexo-renderer-less</code> 安装后重新编译即可</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-renderer-less</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs cmake">npm i hexo-renderer-<span class="hljs-keyword">less</span></code></pre>
 </li>
 <li><p><strong>ejs 作为 模版语言</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-renderer-ejs</span><br></pre></td></tr></table></figure></li>
+<pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> i hexo-renderer-ejs</code></pre></li>
 </ul>
 <h3 id="📝-License"><a href="#📝-License" class="headerlink" title="📝 License"></a>📝 License</h3><p><img src="https://img.shields.io/badge/License-MIT-brightgreen.svg" alt="LicenseMIT"> </p>
 <p>根据 <a target="_blank" rel="noopener" href="https://github.com/79e/hexo-theme-quiet/blob/master/LICENSE">MIT</a> 协议开源</p>
