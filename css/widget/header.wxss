@@ -12,7 +12,7 @@
   height: 100px;
   background: #21262d;
   z-index: 99;
-  padding: 0 calc((100% - 1160px)/2);
+  padding: 0 calc(-530%);
 }
 .header .header-top .h-left {
   display: flex;

@@ -70,7 +70,7 @@
   border: 0;
 }
 #article pre {
-  font-size: 0.85em;
+  font-size: .85em;
   line-height: 1.5em;
   display: flex;
   max-width: 1000px;
@@ -205,7 +205,7 @@
   height: 3em;
 }
 #article thead tr:nth-child(odd) {
-  background: hsla(0, 0%, 96.5%, 0.51);
+  background: rgba(246, 246, 246, 0.51);
 }
 #article thead th {
   background: rgba(153, 169, 191, 0.1);

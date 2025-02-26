@@ -1,7 +1,7 @@
 .footer {
   background-color: #21262d;
   display: flex;
-  padding: 0 calc((100% - 1160px)/2);
+  padding: 0 calc(-530%);
   height: 80px;
 }
 .footer .Copyright {
