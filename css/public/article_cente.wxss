@@ -43,7 +43,7 @@
 }
 #article a {
   position: relative;
-  color: #c9d1d9;
+  color: #0e83cd;
   text-decoration: none;
   outline: 0;
   cursor: pointer;

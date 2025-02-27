@@ -48,7 +48,7 @@ html {
 }
 #article a {
   position: relative;
-  color: #c9d1d9;
+  color: #0e83cd;
   text-decoration: none;
   outline: 0;
   cursor: pointer;
@@ -1389,7 +1389,7 @@ hue-6-2: #e6c07b
   align-content: flex-start;
   justify-content: center;
   flex-direction: column;
-  color: #c9d1d9;
+  color: #0e83cd;
 }
 .post-paging a .post-paging-last:hover {
   margin-top: -10px;
