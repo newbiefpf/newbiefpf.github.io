@@ -75,7 +75,7 @@ html {
   border: 0;
 }
 #article pre {
-  font-size: 0.85em;
+  font-size: .85em;
   line-height: 1.5em;
   display: flex;
   max-width: 1000px;
@@ -210,7 +210,7 @@ html {
   height: 3em;
 }
 #article thead tr:nth-child(odd) {
-  background: hsla(0, 0%, 96.5%, 0.51);
+  background: rgba(246, 246, 246, 0.51);
 }
 #article thead th {
   background: rgba(153, 169, 191, 0.1);
@@ -231,7 +231,7 @@ html {
 .footer {
   background-color: #21262d;
   display: flex;
-  padding: 0 calc((100% - 1160px)/2);
+  padding: 0 calc(-530%);
   height: 80px;
 }
 .footer .Copyright {
@@ -295,7 +295,7 @@ html {
   height: 100px;
   background: #21262d;
   z-index: 99;
-  padding: 0 calc((100% - 1160px)/2);
+  padding: 0 calc(-530%);
 }
 .header .header-top .h-left {
   display: flex;
@@ -477,7 +477,7 @@ html {
     font-size: 1rem;
   }
   .grouping p {
-    font-size: 1.5rem;
+    font-size: 1.50rem;
   }
   .grouping a {
     padding: 15px;
@@ -767,7 +767,7 @@ hue-6-2: #e6c07b
   background: #121212;
   display: flex;
   max-width: 100%;
-  padding: 0 calc((100% - 1200px)/2) 40px;
+  padding: 0 calc(-550%) 40px;
   flex-wrap: wrap;
   justify-content: center;
   align-items: stretch;
@@ -787,9 +787,9 @@ hue-6-2: #e6c07b
   flex-direction: column;
   top: 0px;
   transition: ease-in-out;
-  -moz-transition: top 0.5s;
-  -webkit-transition: top 0.5s;
-  -o-transition: top 0.5s;
+  -moz-transition: top .5s;
+  -webkit-transition: top .5s;
+  -o-transition: top .5s;
 }
 .home .main .post-card-display:hover {
   cursor: pointer;
@@ -852,7 +852,7 @@ hue-6-2: #e6c07b
   color: #c9d1d9;
 }
 .home .main .post-block {
-  padding: 0 calc((100% - 1160px)/2);
+  padding: 0 calc(-530%);
   margin-bottom: 50px;
 }
 .home .main .post-block-content {
@@ -866,9 +866,9 @@ hue-6-2: #e6c07b
   position: relative;
   top: 0px;
   transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
+  -moz-transition: all .5s;
+  -webkit-transition: all .5s;
+  -o-transition: all .5s;
 }
 .home .main .post-block-content:hover {
   cursor: pointer;
@@ -1012,7 +1012,7 @@ hue-6-2: #e6c07b
   background: #121212;
   height: 40px;
   display: flex;
-  padding: 0 calc((100% - 1160px)/2);
+  padding: 0 calc(-530%);
   color: #c9d1d9;
 }
 .home .change-page .p-page {
@@ -1113,9 +1113,9 @@ hue-6-2: #e6c07b
   position: relative;
   top: 0;
   transition: ease-in-out;
-  -moz-transition: all 0.4s;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
+  -moz-transition: all .4s;
+  -webkit-transition: all .4s;
+  -o-transition: all .4s;
 }
 .links-content-data-item:hover {
   background: #F8F9FB;
@@ -1226,7 +1226,7 @@ hue-6-2: #e6c07b
 }
 .post-header-background-content .post-header-tag li {
   z-index: 4!important;
-  background: #fff !important;
+  background: #fff!important;
   color: #fff;
   display: flex;
   margin-top: 20px;
@@ -1235,9 +1235,9 @@ hue-6-2: #e6c07b
   border-radius: 4px;
   background: rgba(18, 24, 58, 0.06);
   line-height: 20px;
-  -webkit-transition: background 0.5s;
-  -moz-transition: background 0.5s;
-  -o-transition: background 0.5s;
+  -webkit-transition: background .5s;
+  -moz-transition: background .5s;
+  -o-transition: background .5s;
   transition: ease-in-out;
   flex-grow: 0;
 }
@@ -1247,11 +1247,11 @@ hue-6-2: #e6c07b
 .post-header-background-content .post-header-tag li a {
   position: relative;
   z-index: 4 !important;
-  color: #333333;
+  color: #333333 ;
   text-decoration: none;
-  -webkit-transition: color 0.5s;
-  -moz-transition: color 0.5s;
-  -o-transition: color 0.5s;
+  -webkit-transition: color .5s;
+  -moz-transition: color .5s;
+  -o-transition: color .5s;
   transition: ease-in-out;
 }
 .post-header-background-content .post-header-info {
@@ -1383,7 +1383,7 @@ hue-6-2: #e6c07b
   height: 150px;
   border-radius: 10px;
   background-size: 100% 100%;
-  opacity: 0.4;
+  opacity: .4;
   cursor: pointer;
   transition: all 0.5s ease-in-out;
   align-content: flex-start;
@@ -1408,7 +1408,7 @@ hue-6-2: #e6c07b
   height: 150px;
   border-radius: 10px;
   background-size: 100% 100%;
-  opacity: 0.4;
+  opacity: .4;
   cursor: pointer;
   transition: all 0.5s ease-in-out;
   align-content: flex-end;
@@ -1494,7 +1494,7 @@ hue-6-2: #e6c07b
 .tags-content-data a > span {
   background-color: rgba(96, 125, 139, 0.05);
   line-height: 2.4;
-  transition: all 0.15s;
+  transition: all .15s;
   padding: 0 12px;
   margin-bottom: 15px;
   border-radius: 6px;
