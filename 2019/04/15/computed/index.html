@@ -2,7 +2,7 @@
 <html>
 	<head>
 		
-<title>内网穿透配置与使用指南-newbie</title>
+<title>Hexo博客配置与使用指南-newbie</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -12,8 +12,8 @@
 
 
 
-<meta name="keywords" content="内网穿透,">
-<meta name="description" content="一篇关于如何配置与使用内网穿透工具 FRP 的详细指南">
+<meta name="keywords" content="address,配置,">
+<meta name="description" content="可以将一个完整的地址字符串解析为省、市、区、街道等详细信息">
 
 
 <script src="/js/jquery.min.js"></script>
@@ -273,12 +273,14 @@
         <ul class="post-header-tag">
             
                 
-                    <li><a href="/tags/内网穿透">内网穿透</a></li>
+                    <li><a href="/tags/address">address</a></li>
+                
+                    <li><a href="/tags/配置">配置</a></li>
                 
             
         </ul>
         
-        <h1>内网穿透配置与使用指南</h1>
+        <h1>Hexo博客配置与使用指南</h1>
 
         <div class="post-header-info">
             <div class="post-header-info-author">
@@ -291,18 +293,18 @@
                     </svg>
                 
                 <span class="post-header-info-author-text"> 
-                    <a href="../../about">
+                    <a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
                         付鹏篚
                     </a>
                 </span>
                 <div class="post-header-info-author-categories">
                     
                         
-                            <a href="../../categories/内网穿透/" target="_blank">内网穿透</a>
+                            <a href="../../categories/Vue/" target="_blank">Vue</a>
                         
                     
                 </div>
-                <p>2018-12-15 21:00:00</p>
+                <p>2019-04-15 20:00:00</p>
             </div>
         </div>
     </div>
@@ -312,84 +314,50 @@
   
   <div id="article" class="post-content-info">
     
+      <div id="post-toc">
+        <span class="post-toc-title">文章目录</span>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E7%9A%84%E7%BC%93%E5%AD%98%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F"><span class="toc-text">计算属性的缓存是什么意思？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-text">例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E7%9A%84%E6%95%88%E6%9E%9C"><span class="toc-text">缓存的效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BC%93%E5%AD%98%E5%BE%88%E9%87%8D%E8%A6%81%EF%BC%9F"><span class="toc-text">为什么缓存很重要？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+      </div>
+    
 
-    <p>内网穿透技术能够帮助我们穿越 NAT（网络地址转换）和防火墙，实现远程访问内网服务。FRP（Fast Reverse Proxy）是一款高性能的内网穿透工具，本文将介绍如何配置和使用 FRP 进行内网穿透。</p>
-<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="创建新文章"><a href="#创建新文章" class="headerlink" title="创建新文章"></a>创建新文章</h3><p>首先，你需要在内网主机（客户端）和公网上的服务器（服务端）上安装 FRP。可以从 <a target="_blank" rel="noopener" href="https://github.com/fatedier/frp">FRP GitHub 仓库</a> 下载最新版本，支持 Windows、Linux 等操作系统。</p>
-<h4 id="Windows-客户端安装"><a href="#Windows-客户端安装" class="headerlink" title="Windows 客户端安装"></a>Windows 客户端安装</h4><p>在 Windows 系统中，下载并解压 FRP 压缩包，然后进入解压后的文件夹，直接运行：</p>
-<pre><code class="hljs bash">frpc.exe -c frpc.toml</code></pre>
+    <p>在 Vue 中，<strong>计算属性（computed properties）</strong> 是基于它们的依赖进行缓存的，这意味着只有当它们的依赖发生变化时，计算属性才会重新计算。如果依赖没有变化，计算属性会直接返回之前的计算结果，而不再执行计算函数。</p>
+<h3 id="计算属性的缓存是什么意思？"><a href="#计算属性的缓存是什么意思？" class="headerlink" title="计算属性的缓存是什么意思？"></a>计算属性的缓存是什么意思？</h3><p><strong>缓存</strong>的意思是，计算属性的值是经过缓存的，只有当依赖的数据发生变化时，计算属性才会重新计算并更新缓存的值。如果依赖的数据没有变化，Vue 会直接使用缓存的值，而不是每次都重新计算。这种机制能够提高性能，避免不必要的计算。</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>假设我们有一个 Vue 实例，里面有一个 <code>fullName</code> 计算属性，它依赖于 <code>firstName</code> 和 <code>lastName</code> 数据属性：</p>
+<pre><code class="hljs js"><span class="hljs-keyword">new</span> <span class="hljs-title class_">Vue</span>(&#123;
+  <span class="hljs-attr">el</span>: <span class="hljs-string">&#x27;#app&#x27;</span>,
+  <span class="hljs-attr">data</span>: &#123;
+    <span class="hljs-attr">firstName</span>: <span class="hljs-string">&#x27;John&#x27;</span>,
+    <span class="hljs-attr">lastName</span>: <span class="hljs-string">&#x27;Doe&#x27;</span>
+  &#125;,
+  <span class="hljs-attr">computed</span>: &#123;
+    <span class="hljs-attr">fullName</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Calculating full name...&#x27;</span>);
+      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">firstName</span> + <span class="hljs-string">&#x27; &#x27;</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">lastName</span>;
+    &#125;
+  &#125;
+&#125;);</code></pre>
 
-<p>其中 <code>frpc.toml</code> 是客户端的配置文件，包含了服务器地址、端口、映射规则等信息。</p>
-<h3 id="配置-FRP-服务端（frps）"><a href="#配置-FRP-服务端（frps）" class="headerlink" title="配置 FRP 服务端（frps）"></a>配置 FRP 服务端（frps）</h3><p>FRP 服务端需要部署在公网上的服务器上，接收并转发客户端的请求。服务端的配置文件通常是 <code>frps.toml</code>，可以根据需求修改配置。</p>
-<h4 id="启动-FRP-服务端"><a href="#启动-FRP-服务端" class="headerlink" title="启动 FRP 服务端"></a>启动 FRP 服务端</h4><p>使用以下命令启动 FRP 服务端：</p>
-<pre><code class="hljs bash">./frps -c ./frps.toml</code></pre>
+<p>在这个例子中，<code>fullName</code> 是一个计算属性，它依赖于 <code>firstName</code> 和 <code>lastName</code>。当我们访问 <code>fullName</code> 时，计算属性会执行 <code>this.firstName + &#39; &#39; + this.lastName</code>，并返回计算结果。</p>
+<h3 id="缓存的效果"><a href="#缓存的效果" class="headerlink" title="缓存的效果"></a>缓存的效果</h3><ul>
+<li><strong>第一次访问 <code>fullName</code></strong> 时，计算属性会计算并返回结果：<code>&quot;John Doe&quot;</code>，同时 Vue 会缓存这个值。</li>
+<li><strong>如果 <code>firstName</code> 或 <code>lastName</code> 没有变化</strong>，再次访问 <code>fullName</code> 时，Vue 会直接返回缓存的值，而不会重新计算。</li>
+<li><strong>如果 <code>firstName</code> 或 <code>lastName</code> 发生变化</strong>，那么下次访问 <code>fullName</code> 时，Vue 会重新计算并更新缓存的值。</li>
+</ul>
+<pre><code class="hljs js">vm.<span class="hljs-property">firstName</span> = <span class="hljs-string">&#x27;Jane&#x27;</span>; <span class="hljs-comment">// 修改 firstName</span>
 
-<p>在 Linux 系统中，使用 <code>nohup</code> 命令来确保 FRP 服务端在后台持续运行。</p>
-<pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> ./frps -c ./frps.toml &amp;</code></pre>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(vm.<span class="hljs-property">fullName</span>); <span class="hljs-comment">// 重新计算并输出 &quot;Jane Doe&quot;</span></code></pre>
 
-<p><code>nohup</code> 会将输出重定向到 <code>nohup.out</code> 文件，你可以使用以下命令查看日志：</p>
-<pre><code class="hljs bash"><span class="hljs-built_in">tail</span> -f nohup.out</code></pre>
-
-<h2 id="端口映射配置"><a href="#端口映射配置" class="headerlink" title="端口映射配置"></a>端口映射配置</h2><p>FRP 支持多种类型的端口映射，以下是一些常见的配置方式：</p>
-<h3 id="HTTP-映射："><a href="#HTTP-映射：" class="headerlink" title="HTTP 映射："></a>HTTP 映射：</h3><p>客户端配置：<code>frpc.toml</code></p>
-<pre><code class="hljs ini"><span class="hljs-section">[http]</span> 
- <span class="hljs-attr">type</span> = tcp  
-<span class="hljs-attr">local_ip</span> = <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
-<span class="hljs-attr">local_port</span> = <span class="hljs-number">80</span>
-<span class="hljs-attr">remote_port</span> = <span class="hljs-number">8080</span></code></pre>
-<p>上述配置将本地的 80 端口映射到公网的 8080 端口。</p>
-<h3 id="SSH-映射："><a href="#SSH-映射：" class="headerlink" title="SSH 映射："></a>SSH 映射：</h3><p>客户端配置：<code>frpc.toml</code></p>
-<pre><code class="hljs ini"><span class="hljs-section">[ssh]</span>
-<span class="hljs-attr">type</span> = tcp
-<span class="hljs-attr">local_ip</span> = <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
-<span class="hljs-attr">local_port</span> = <span class="hljs-number">22</span>
-<span class="hljs-attr">remote_port</span> = <span class="hljs-number">6000</span></code></pre>
-
-<p>这会将本地的 SSH 端口（22）映射到公网的 6000 端口，方便通过公网访问内网的 SSH 服务。</p>
-<h2 id="常见问题与解决"><a href="#常见问题与解决" class="headerlink" title="常见问题与解决"></a>常见问题与解决</h2><h3 id="如何让-FRP-服务端持续运行？"><a href="#如何让-FRP-服务端持续运行？" class="headerlink" title="如何让 FRP 服务端持续运行？"></a>如何让 FRP 服务端持续运行？</h3><p>当你通过 SSH 连接到服务器并启动 FRP 服务端时，关闭 SSH 会导致服务端进程被终止。为了确保 FRP 服务端在后台持续运行，可以使用以下方法：</p>
-<h4 id="1-使用-nohup-命令"><a href="#1-使用-nohup-命令" class="headerlink" title="1. 使用 nohup 命令"></a>1. 使用 <code>nohup</code> 命令</h4><p>在 Linux 系统中，<code>nohup</code> 命令可以将进程放到后台运行，避免因终端关闭而中断进程。</p>
-<p>启动 FRP 服务端时使用 <code>nohup</code>：</p>
-<pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> ./frps -c ./frps.toml &amp;</code></pre>
-
-<h4 id="2-查找进程-ID（PID）"><a href="#2-查找进程-ID（PID）" class="headerlink" title="2. 查找进程 ID（PID）"></a>2. 查找进程 ID（PID）</h4><p>如果需要查看 FRP 服务端的运行状态，可以通过以下命令查找进程 ID：</p>
-<pre><code class="hljs bash">ps aux | grep frps</code></pre>
-
-<h4 id="3-终止进程"><a href="#3-终止进程" class="headerlink" title="3. 终止进程"></a>3. 终止进程</h4><p>如果需要停止 FRP 服务端，可以使用 <code>kill</code> 命令终止进程：</p>
-<pre><code class="hljs bash"><span class="hljs-built_in">kill</span> &lt;PID&gt;</code></pre>
-
-<p>如果进程没有响应，可以使用 <code>kill -9</code> 强制终止：</p>
-<pre><code class="hljs bash"><span class="hljs-built_in">kill</span> -9 &lt;PID&gt;</code></pre>
-
-<h2 id="发布服务"><a href="#发布服务" class="headerlink" title="发布服务"></a>发布服务</h2><p>配置好 FRP 后，你可以通过访问公网服务器的 IP 地址和端口，访问内网主机的服务。例如，在上面的 HTTP 映射中，你可以通过 <code>http://&lt;server_ip&gt;:8080</code> 来访问内网主机的 80 端口服务。</p>
-<h2 id="FRP-配置示例"><a href="#FRP-配置示例" class="headerlink" title="FRP 配置示例"></a>FRP 配置示例</h2><h3 id="客户端配置（frpc-toml）"><a href="#客户端配置（frpc-toml）" class="headerlink" title="客户端配置（frpc.toml）"></a>客户端配置（<code>frpc.toml</code>）</h3><pre><code class="hljs toml"><span class="hljs-section">[common]</span>
-<span class="hljs-attr">server_addr</span> = <span class="hljs-string">&quot;your_server_ip&quot;</span>
-<span class="hljs-attr">server_port</span> = <span class="hljs-number">7000</span>
-
-<span class="hljs-section">[http]</span>
-<span class="hljs-attr">type</span> = tcp
-<span class="hljs-attr">local_ip</span> = <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
-<span class="hljs-attr">local_port</span> = <span class="hljs-number">80</span>
-<span class="hljs-attr">remote_port</span> = <span class="hljs-number">8080</span>
-
-<span class="hljs-section">[ssh]</span>
-<span class="hljs-attr">type</span> = tcp
-<span class="hljs-attr">local_ip</span> = <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
-<span class="hljs-attr">local_port</span> = <span class="hljs-number">22</span>
-<span class="hljs-attr">remote_port</span> = <span class="hljs-number">6000</span></code></pre>
-
-<h3 id="服务端配置（frps-toml）"><a href="#服务端配置（frps-toml）" class="headerlink" title="服务端配置（frps.toml）"></a>服务端配置（<code>frps.toml</code>）</h3><pre><code class="hljs toml"><span class="hljs-section">[common]</span>
-<span class="hljs-attr">bind_port</span> = <span class="hljs-number">7000</span>
-
-<span class="hljs-section">[http]</span>
-<span class="hljs-attr">type</span> = tcp
-<span class="hljs-attr">custom_domains</span> = <span class="hljs-string">&quot;your_domain.com&quot;</span></code></pre>
-
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>FRP 是一个强大且灵活的内网穿透工具，适用于多种场景，如远程开发、远程桌面访问等。通过本文的配置指南，你应该能够快速上手 FRP，成功实现内网穿透并访问内网服务。如果遇到任何问题，可以参考 FRP 的官方文档，或者在 GitHub 上提出问题。</p>
-<pre><code>
-在这篇文章中，我添加了详细的 `frpc.toml` 和 `frps.toml` 配置示例，以及如何配置和启动 FRP 服务端与客户端的步骤。这些内容现在包含在文章的正文部分，并且按照 Hexo 的格式进行了组织。
-</code></pre>
+<h3 id="为什么缓存很重要？"><a href="#为什么缓存很重要？" class="headerlink" title="为什么缓存很重要？"></a>为什么缓存很重要？</h3><ol>
+<li><strong>性能优化</strong>：如果计算属性涉及到复杂的运算或者大量的数据处理，不进行缓存会导致每次访问计算属性时都进行重复计算，增加了不必要的开销。缓存可以避免这种重复计算，提升性能。</li>
+<li><strong>自动依赖追踪</strong>：Vue 会自动追踪计算属性所依赖的响应式数据，只有当这些依赖的数据发生变化时，计算属性才会重新计算，避免了手动管理依赖关系的复杂性。</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>计算属性会缓存计算结果，只有当其依赖的响应式数据发生变化时，才会重新计算。</li>
+<li>计算属性的缓存机制可以显著提升性能，避免不必要的重复计算。</li>
+</ul>
 
   </div>
-  <!-- <div id=""></div> -->
+  <!-- <div id="gitalk-container"></div> -->
 </div>
 
 <script>
@@ -447,7 +415,7 @@ Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
 
     <div class="post-paging">
     
-    <a href="/2019/04/15/vuedraggable/">
+    <a href="/2019/04/15/addRoutes/">
         <div class="post-paging-last">
             <span>上一篇</span>
             <p>Hexo博客配置与使用指南</p>
@@ -455,6 +423,13 @@ Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
     </a>
     
 
+    
+    <a href="/2019/04/15/hexo/">
+        <div class="post-paging-next">
+            <span>下一篇</span>
+            <p>Hexo博客配置与使用指南</p>
+        </div>
+    </a>
     
 </div>
 </div>
@@ -561,7 +536,7 @@ Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
             distractionFreeMode:false
         })
         
-        // if(Boolean('false')){
+        // if(Boolean('true')){
         //     gitalk.render('gitalk-container')
         // }
     </script>

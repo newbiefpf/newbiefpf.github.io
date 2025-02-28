@@ -2,7 +2,7 @@
 <html>
 	<head>
 		
-<title>内网穿透配置与使用指南-newbie</title>
+<title>Hexo博客配置与使用指南-newbie</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -12,8 +12,8 @@
 
 
 
-<meta name="keywords" content="内网穿透,">
-<meta name="description" content="一篇关于如何配置与使用内网穿透工具 FRP 的详细指南">
+<meta name="keywords" content="address,配置,">
+<meta name="description" content="可以将一个完整的地址字符串解析为省、市、区、街道等详细信息">
 
 
 <script src="/js/jquery.min.js"></script>
@@ -273,12 +273,14 @@
         <ul class="post-header-tag">
             
                 
-                    <li><a href="/tags/内网穿透">内网穿透</a></li>
+                    <li><a href="/tags/address">address</a></li>
+                
+                    <li><a href="/tags/配置">配置</a></li>
                 
             
         </ul>
         
-        <h1>内网穿透配置与使用指南</h1>
+        <h1>Hexo博客配置与使用指南</h1>
 
         <div class="post-header-info">
             <div class="post-header-info-author">
@@ -291,18 +293,18 @@
                     </svg>
                 
                 <span class="post-header-info-author-text"> 
-                    <a href="../../about">
+                    <a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
                         付鹏篚
                     </a>
                 </span>
                 <div class="post-header-info-author-categories">
                     
                         
-                            <a href="../../categories/内网穿透/" target="_blank">内网穿透</a>
+                            <a href="../../categories/Vue/" target="_blank">Vue</a>
                         
                     
                 </div>
-                <p>2018-12-15 21:00:00</p>
+                <p>2019-04-15 20:00:00</p>
             </div>
         </div>
     </div>
@@ -312,84 +314,109 @@
   
   <div id="article" class="post-content-info">
     
+      <div id="post-toc">
+        <span class="post-toc-title">文章目录</span>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85-jsonp-%E5%BA%93"><span class="toc-text">1. 安装 jsonp 库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA-jsonp-%E6%8F%92%E4%BB%B6"><span class="toc-text">2. 创建 jsonp 插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9C%A8-main-js-%E4%B8%AD%E6%B3%A8%E5%86%8C%E6%8F%92%E4%BB%B6"><span class="toc-text">3. 在 main.js 中注册插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%9C%A8%E7%BB%84%E4%BB%B6%E4%B8%AD%E4%BD%BF%E7%94%A8-jsonp"><span class="toc-text">4. 在组件中使用 $jsonp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-text">5. 参数说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="toc-text">6. 错误处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">7. 注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+      </div>
+    
 
-    <p>内网穿透技术能够帮助我们穿越 NAT（网络地址转换）和防火墙，实现远程访问内网服务。FRP（Fast Reverse Proxy）是一款高性能的内网穿透工具，本文将介绍如何配置和使用 FRP 进行内网穿透。</p>
-<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="创建新文章"><a href="#创建新文章" class="headerlink" title="创建新文章"></a>创建新文章</h3><p>首先，你需要在内网主机（客户端）和公网上的服务器（服务端）上安装 FRP。可以从 <a target="_blank" rel="noopener" href="https://github.com/fatedier/frp">FRP GitHub 仓库</a> 下载最新版本，支持 Windows、Linux 等操作系统。</p>
-<h4 id="Windows-客户端安装"><a href="#Windows-客户端安装" class="headerlink" title="Windows 客户端安装"></a>Windows 客户端安装</h4><p>在 Windows 系统中，下载并解压 FRP 压缩包，然后进入解压后的文件夹，直接运行：</p>
-<pre><code class="hljs bash">frpc.exe -c frpc.toml</code></pre>
+    <p>在 Vue 中使用 <code>$jsonp</code> 主要是为了方便地发送 JSONP 请求，通常用于跨域请求，因为 JSONP 通过 <code>&lt;script&gt;</code> 标签实现请求，而不受同源策略限制。下面是一个简单的使用文档，帮助你快速了解如何在 Vue 中配置和使用 <code>$jsonp</code>。</p>
+<h3 id="1-安装-jsonp-库"><a href="#1-安装-jsonp-库" class="headerlink" title="1. 安装 jsonp 库"></a>1. 安装 <code>jsonp</code> 库</h3><p>首先，你需要安装 <code>jsonp</code> 库，通常可以通过 npm 或 yarn 安装：</p>
+<pre><code class="hljs bash">npm install jsonp --save</code></pre>
 
-<p>其中 <code>frpc.toml</code> 是客户端的配置文件，包含了服务器地址、端口、映射规则等信息。</p>
-<h3 id="配置-FRP-服务端（frps）"><a href="#配置-FRP-服务端（frps）" class="headerlink" title="配置 FRP 服务端（frps）"></a>配置 FRP 服务端（frps）</h3><p>FRP 服务端需要部署在公网上的服务器上，接收并转发客户端的请求。服务端的配置文件通常是 <code>frps.toml</code>，可以根据需求修改配置。</p>
-<h4 id="启动-FRP-服务端"><a href="#启动-FRP-服务端" class="headerlink" title="启动 FRP 服务端"></a>启动 FRP 服务端</h4><p>使用以下命令启动 FRP 服务端：</p>
-<pre><code class="hljs bash">./frps -c ./frps.toml</code></pre>
+<p>或者</p>
+<pre><code class="hljs bash">yarn add jsonp</code></pre>
 
-<p>在 Linux 系统中，使用 <code>nohup</code> 命令来确保 FRP 服务端在后台持续运行。</p>
-<pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> ./frps -c ./frps.toml &amp;</code></pre>
+<h3 id="2-创建-jsonp-插件"><a href="#2-创建-jsonp-插件" class="headerlink" title="2. 创建 jsonp 插件"></a>2. 创建 <code>jsonp</code> 插件</h3><p>在 Vue 中，通常会通过插件的形式来封装 <code>jsonp</code>，并在全局注入 <code>$jsonp</code>，以便你在任何组件中直接使用。</p>
+<p>首先，在 <code>src/plugins</code> 目录下创建一个名为 <code>jsonp.js</code> 的文件，并将 <code>jsonp</code> 库引入并封装：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// src/plugins/jsonp.js</span>
+<span class="hljs-keyword">import</span> jsonp <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;jsonp&#x27;</span>;
 
-<p><code>nohup</code> 会将输出重定向到 <code>nohup.out</code> 文件，你可以使用以下命令查看日志：</p>
-<pre><code class="hljs bash"><span class="hljs-built_in">tail</span> -f nohup.out</code></pre>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;
+  <span class="hljs-title function_">install</span>(<span class="hljs-params">Vue</span>) &#123;
+    <span class="hljs-comment">// 给 Vue 原型添加 $jsonp 方法</span>
+    <span class="hljs-title class_">Vue</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">$jsonp</span> = <span class="hljs-function">(<span class="hljs-params">url, params = &#123;&#125;</span>) =&gt;</span> &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;
+        <span class="hljs-comment">// 构建请求的 URL 和参数</span>
+        <span class="hljs-keyword">const</span> queryParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">URLSearchParams</span>(params).<span class="hljs-title function_">toString</span>();
+        <span class="hljs-keyword">const</span> fullUrl = <span class="hljs-string">`<span class="hljs-subst">$&#123;url&#125;</span>?<span class="hljs-subst">$&#123;queryParams&#125;</span>`</span>;
 
-<h2 id="端口映射配置"><a href="#端口映射配置" class="headerlink" title="端口映射配置"></a>端口映射配置</h2><p>FRP 支持多种类型的端口映射，以下是一些常见的配置方式：</p>
-<h3 id="HTTP-映射："><a href="#HTTP-映射：" class="headerlink" title="HTTP 映射："></a>HTTP 映射：</h3><p>客户端配置：<code>frpc.toml</code></p>
-<pre><code class="hljs ini"><span class="hljs-section">[http]</span> 
- <span class="hljs-attr">type</span> = tcp  
-<span class="hljs-attr">local_ip</span> = <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
-<span class="hljs-attr">local_port</span> = <span class="hljs-number">80</span>
-<span class="hljs-attr">remote_port</span> = <span class="hljs-number">8080</span></code></pre>
-<p>上述配置将本地的 80 端口映射到公网的 8080 端口。</p>
-<h3 id="SSH-映射："><a href="#SSH-映射：" class="headerlink" title="SSH 映射："></a>SSH 映射：</h3><p>客户端配置：<code>frpc.toml</code></p>
-<pre><code class="hljs ini"><span class="hljs-section">[ssh]</span>
-<span class="hljs-attr">type</span> = tcp
-<span class="hljs-attr">local_ip</span> = <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
-<span class="hljs-attr">local_port</span> = <span class="hljs-number">22</span>
-<span class="hljs-attr">remote_port</span> = <span class="hljs-number">6000</span></code></pre>
+        <span class="hljs-comment">// 使用 jsonp 库进行请求</span>
+        <span class="hljs-title function_">jsonp</span>(fullUrl, &#123; <span class="hljs-attr">param</span>: <span class="hljs-string">&#x27;callback&#x27;</span> &#125;, <span class="hljs-function">(<span class="hljs-params">err, data</span>) =&gt;</span> &#123;
+          <span class="hljs-keyword">if</span> (err) &#123;
+            <span class="hljs-title function_">reject</span>(err); <span class="hljs-comment">// 请求失败时返回错误</span>
+          &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-title function_">resolve</span>(data); <span class="hljs-comment">// 请求成功时返回数据</span>
+          &#125;
+        &#125;);
+      &#125;);
+    &#125;;
+  &#125;
+&#125;;</code></pre>
 
-<p>这会将本地的 SSH 端口（22）映射到公网的 6000 端口，方便通过公网访问内网的 SSH 服务。</p>
-<h2 id="常见问题与解决"><a href="#常见问题与解决" class="headerlink" title="常见问题与解决"></a>常见问题与解决</h2><h3 id="如何让-FRP-服务端持续运行？"><a href="#如何让-FRP-服务端持续运行？" class="headerlink" title="如何让 FRP 服务端持续运行？"></a>如何让 FRP 服务端持续运行？</h3><p>当你通过 SSH 连接到服务器并启动 FRP 服务端时，关闭 SSH 会导致服务端进程被终止。为了确保 FRP 服务端在后台持续运行，可以使用以下方法：</p>
-<h4 id="1-使用-nohup-命令"><a href="#1-使用-nohup-命令" class="headerlink" title="1. 使用 nohup 命令"></a>1. 使用 <code>nohup</code> 命令</h4><p>在 Linux 系统中，<code>nohup</code> 命令可以将进程放到后台运行，避免因终端关闭而中断进程。</p>
-<p>启动 FRP 服务端时使用 <code>nohup</code>：</p>
-<pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> ./frps -c ./frps.toml &amp;</code></pre>
+<h3 id="3-在-main-js-中注册插件"><a href="#3-在-main-js-中注册插件" class="headerlink" title="3. 在 main.js 中注册插件"></a>3. 在 <code>main.js</code> 中注册插件</h3><p>然后，在 <code>main.js</code> 文件中引入并使用这个插件：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// src/main.js</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Vue</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">App</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App.vue&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">JsonpPlugin</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./plugins/jsonp&#x27;</span>;
 
-<h4 id="2-查找进程-ID（PID）"><a href="#2-查找进程-ID（PID）" class="headerlink" title="2. 查找进程 ID（PID）"></a>2. 查找进程 ID（PID）</h4><p>如果需要查看 FRP 服务端的运行状态，可以通过以下命令查找进程 ID：</p>
-<pre><code class="hljs bash">ps aux | grep frps</code></pre>
+<span class="hljs-comment">// 注册插件</span>
+<span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">JsonpPlugin</span>);
 
-<h4 id="3-终止进程"><a href="#3-终止进程" class="headerlink" title="3. 终止进程"></a>3. 终止进程</h4><p>如果需要停止 FRP 服务端，可以使用 <code>kill</code> 命令终止进程：</p>
-<pre><code class="hljs bash"><span class="hljs-built_in">kill</span> &lt;PID&gt;</code></pre>
+<span class="hljs-keyword">new</span> <span class="hljs-title class_">Vue</span>(&#123;
+  <span class="hljs-attr">render</span>: <span class="hljs-function"><span class="hljs-params">h</span> =&gt;</span> <span class="hljs-title function_">h</span>(<span class="hljs-title class_">App</span>),
+&#125;).$mount(<span class="hljs-string">&#x27;#app&#x27;</span>);</code></pre>
 
-<p>如果进程没有响应，可以使用 <code>kill -9</code> 强制终止：</p>
-<pre><code class="hljs bash"><span class="hljs-built_in">kill</span> -9 &lt;PID&gt;</code></pre>
+<h3 id="4-在组件中使用-jsonp"><a href="#4-在组件中使用-jsonp" class="headerlink" title="4. 在组件中使用 $jsonp"></a>4. 在组件中使用 <code>$jsonp</code></h3><p>现在你可以在任何 Vue 组件中使用 <code>$jsonp</code> 进行 JSONP 请求了。下面是一个简单的使用示例：</p>
+<pre><code class="hljs vue">&lt;template&gt;
+  &lt;div&gt;
+    &lt;h1&gt;JSONP 示例&lt;/h1&gt;
+    &lt;button @click=&quot;getData&quot;&gt;获取数据&lt;/button&gt;
+    &lt;pre&gt;&#123;&#123; result &#125;&#125;&lt;/pre&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
 
-<h2 id="发布服务"><a href="#发布服务" class="headerlink" title="发布服务"></a>发布服务</h2><p>配置好 FRP 后，你可以通过访问公网服务器的 IP 地址和端口，访问内网主机的服务。例如，在上面的 HTTP 映射中，你可以通过 <code>http://&lt;server_ip&gt;:8080</code> 来访问内网主机的 80 端口服务。</p>
-<h2 id="FRP-配置示例"><a href="#FRP-配置示例" class="headerlink" title="FRP 配置示例"></a>FRP 配置示例</h2><h3 id="客户端配置（frpc-toml）"><a href="#客户端配置（frpc-toml）" class="headerlink" title="客户端配置（frpc.toml）"></a>客户端配置（<code>frpc.toml</code>）</h3><pre><code class="hljs toml"><span class="hljs-section">[common]</span>
-<span class="hljs-attr">server_addr</span> = <span class="hljs-string">&quot;your_server_ip&quot;</span>
-<span class="hljs-attr">server_port</span> = <span class="hljs-number">7000</span>
+&lt;script&gt;
+export default &#123;
+  data() &#123;
+    return &#123;
+      result: null,
+    &#125;;
+  &#125;,
+  methods: &#123;
+    async getData() &#123;
+      try &#123;
+        const url = &#x27;https://example.com/api/data&#x27;; // 替换成你的 JSONP 请求 URL
+        const params = &#123; key: &#x27;value&#x27; &#125;; // 替换成你需要的参数
+        this.result = await this.$jsonp(url, params);
+      &#125; catch (error) &#123;
+        console.error(&#x27;请求失败:&#x27;, error);
+      &#125;
+    &#125;
+  &#125;
+&#125;;
+&lt;/script&gt;
 
-<span class="hljs-section">[http]</span>
-<span class="hljs-attr">type</span> = tcp
-<span class="hljs-attr">local_ip</span> = <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
-<span class="hljs-attr">local_port</span> = <span class="hljs-number">80</span>
-<span class="hljs-attr">remote_port</span> = <span class="hljs-number">8080</span>
+&lt;style scoped&gt;
+/* 你可以在这里写样式 */
+&lt;/style&gt;</code></pre>
 
-<span class="hljs-section">[ssh]</span>
-<span class="hljs-attr">type</span> = tcp
-<span class="hljs-attr">local_ip</span> = <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
-<span class="hljs-attr">local_port</span> = <span class="hljs-number">22</span>
-<span class="hljs-attr">remote_port</span> = <span class="hljs-number">6000</span></code></pre>
-
-<h3 id="服务端配置（frps-toml）"><a href="#服务端配置（frps-toml）" class="headerlink" title="服务端配置（frps.toml）"></a>服务端配置（<code>frps.toml</code>）</h3><pre><code class="hljs toml"><span class="hljs-section">[common]</span>
-<span class="hljs-attr">bind_port</span> = <span class="hljs-number">7000</span>
-
-<span class="hljs-section">[http]</span>
-<span class="hljs-attr">type</span> = tcp
-<span class="hljs-attr">custom_domains</span> = <span class="hljs-string">&quot;your_domain.com&quot;</span></code></pre>
-
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>FRP 是一个强大且灵活的内网穿透工具，适用于多种场景，如远程开发、远程桌面访问等。通过本文的配置指南，你应该能够快速上手 FRP，成功实现内网穿透并访问内网服务。如果遇到任何问题，可以参考 FRP 的官方文档，或者在 GitHub 上提出问题。</p>
-<pre><code>
-在这篇文章中，我添加了详细的 `frpc.toml` 和 `frps.toml` 配置示例，以及如何配置和启动 FRP 服务端与客户端的步骤。这些内容现在包含在文章的正文部分，并且按照 Hexo 的格式进行了组织。
-</code></pre>
+<h3 id="5-参数说明"><a href="#5-参数说明" class="headerlink" title="5. 参数说明"></a>5. 参数说明</h3><ul>
+<li><strong>url</strong>: 请求的地址，通常是一个 JSONP 支持的 API 地址。</li>
+<li><strong>params</strong>: 一个对象，包含你需要传递的参数（如 <code>key=value</code> 的形式）。这些参数会被拼接到 URL 后面。</li>
+</ul>
+<h3 id="6-错误处理"><a href="#6-错误处理" class="headerlink" title="6. 错误处理"></a>6. 错误处理</h3><ul>
+<li>如果请求失败，<code>$jsonp</code> 方法会返回一个拒绝的 Promise，你可以通过 <code>catch</code> 来处理错误。</li>
+<li>在请求成功时，返回的是从服务器返回的数据，通常是一个 JSON 格式的数据。</li>
+</ul>
+<h3 id="7-注意事项"><a href="#7-注意事项" class="headerlink" title="7. 注意事项"></a>7. 注意事项</h3><ul>
+<li><strong>跨域问题</strong>：由于 JSONP 的实现原理是通过 <code>&lt;script&gt;</code> 标签进行跨域请求，因此它不受同源策略的限制。通常用于服务端提供的支持 JSONP 的接口。</li>
+<li><strong>安全性</strong>：使用 JSONP 需要注意安全问题，因为它会执行返回的数据，可能存在 XSS 攻击风险。因此，只能从信任的来源请求数据。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过上面的步骤，你可以在 Vue 项目中方便地使用 <code>$jsonp</code> 发送跨域请求。你可以根据需要在插件中封装更多配置选项，比如修改 JSONP 请求的参数名称、超时控制等。</p>
 
   </div>
-  <!-- <div id=""></div> -->
+  <!-- <div id="gitalk-container"></div> -->
 </div>
 
 <script>
@@ -447,7 +474,7 @@ Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
 
     <div class="post-paging">
     
-    <a href="/2019/04/15/vuedraggable/">
+    <a href="/2019/04/15/jsSF/">
         <div class="post-paging-last">
             <span>上一篇</span>
             <p>Hexo博客配置与使用指南</p>
@@ -455,6 +482,13 @@ Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
     </a>
     
 
+    
+    <a href="/2019/04/15/keep-alive/">
+        <div class="post-paging-next">
+            <span>下一篇</span>
+            <p>Hexo博客配置与使用指南</p>
+        </div>
+    </a>
     
 </div>
 </div>
@@ -561,7 +595,7 @@ Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
             distractionFreeMode:false
         })
         
-        // if(Boolean('false')){
+        // if(Boolean('true')){
         //     gitalk.render('gitalk-container')
         // }
     </script>

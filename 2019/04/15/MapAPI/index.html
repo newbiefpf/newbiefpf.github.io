@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+<title>Hexo博客配置与使用指南-newbie</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico">
+
+<link rel="stylesheet" href="/css/index.css">
+
+
+
+<meta name="keywords" content="address,配置,">
+<meta name="description" content="可以将一个完整的地址字符串解析为省、市、区、街道等详细信息">
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/index.js"></script>
+
+
+<script src="/js/fancybox.umd.js"></script>
+
+
+<script src="/js/fancybox-images.js"></script>
+
+
+<script src="/js/gitalk.min.js"></script>
+
+
+<script src="/js/hljs.min.js"></script>
+ 
+<script>hljs.highlightAll();</script>
+
+	<meta name="generator" content="Hexo 7.3.0"></head>
+
+	<body>
+		
+	<div class="header">
+		<div class="header-top" id="header-top">
+			<div class="h-left">
+				<a href="/">
+					<img src="/image/logo.png" alt="FPF">
+				</a>
+				
+				<span style="color: #c9d1d9;font-weight: bolder; ">&nbsp;&nbsp;付鹏篚的笔记 </span>
+			</div>
+			<div class="h-right">
+				<ul>
+					
+						
+								<li>
+									<a href="/">
+										主页
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/archives">
+										归档
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/categories">
+										分类
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/tags">
+										标签
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/about">
+										关于
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+				</ul>
+			</div>
+			<div class="h-right-close">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+					<path fill="none" d="M0 0h24v24H0z" />
+					<path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(68,68,68,1)" />
+				</svg>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar">
+    <div class="topo">
+        <h2>付鹏篚</h2>
+    </div>
+    <ul>
+        
+        <li>
+            <a href="/">主页</a>
+        </li>
+        
+        <li>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <a href="/about">关于</a>
+        </li>
+        
+    </ul>
+    <div class="my_foot">
+        
+        <a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+            <img src="/image/logo.png" alt="Quiet主题">
+        </a>
+        
+    </div>
+</div>
+<div class='shelter'>
+</div>
+<style>
+    .shelter{
+        background-color: #333;
+        opacity:0.5;
+        cursor: pointer;
+        display: none; 
+        position: fixed;
+        left: 0;
+        top: 0; 
+        right: 0;
+        bottom: 0;
+        z-index: 1998;
+    }
+    .sidebar {
+        width: 66%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        background: #fff;
+        z-index: 1999;
+        text-align: center;
+        box-shadow: -6px 0 20px rgba(98, 94, 94, .815);
+    }
+
+    .topo {
+        width: 100%;
+        height: 200px;
+        background: url(https://api.ixiaowai.cn/gqapi/gqapi.php) no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+        display: flex;
+        align-items: flex-end
+    }
+
+    .topo h2 {
+        color: #fff;
+        z-index: 1;
+        position: relative;
+        margin: 0 0 10px 10px;
+        font-size: 1.2em;
+        box-sizing: border-box
+    }
+
+    .topo:before {
+        content: '';
+        background-image: url(/image/pattern.png);
+        background-repeat: repeat;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1
+    }
+
+    .sidebar ul {
+        width: 100%;
+        margin-top: 50px
+    }
+
+    .sidebar ul li {
+        height: 50px;
+        list-style: none;
+        font-size: 1.2em;
+        text-align: right;
+        margin-right: 10px
+    }
+
+    .sidebar ul li a {
+        display: grid;
+        color: #5d606a;
+        text-overflow: ellipsis;
+        width: 100%;
+        text-decoration: none
+    }
+
+    .my_foot {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        position: absolute;
+        bottom: 0
+    }
+
+    .my_foot a {
+        text-decoration: none;
+        margin-right: 10px;
+        display: inline-block
+    }
+
+    .my_foot a img {
+        width: 30px;
+        height: 30px
+    }
+</style>
+
+<script>
+    $( function () {
+	$( '.h-right-close>svg' )
+		.click( function () {
+			$( '.sidebar' )
+				.animate( {
+					right: "0"
+				}, 500 );
+			$( '.shelter' )
+				.fadeIn( "slow" )
+		} );
+	$( '.shelter' )
+		.click( function ( e ) {
+			$( '.sidebar' )
+				.animate( {
+					right: "-100%"
+				}, 500 );
+			$( '.shelter' )
+				.fadeOut( "slow" )
+		} )
+} )
+
+</script>
+
+<div class="post">
+    <div class="post-header-background post-header-img"
+    
+>
+    <div class="post-header-background-content">
+        <ul class="post-header-tag">
+            
+                
+                    <li><a href="/tags/address">address</a></li>
+                
+                    <li><a href="/tags/配置">配置</a></li>
+                
+            
+        </ul>
+        
+        <h1>Hexo博客配置与使用指南</h1>
+
+        <div class="post-header-info">
+            <div class="post-header-info-author">
+                
+                    <svg t="1604839279282" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="2901" width="20" height="20">
+                        <path
+                            d="M513 956.3c-247.7 0-448-200.3-448-448S265.3 66.2 513 66.2s448 200.3 448 448-200.3 442.1-448 442.1z m0-830.9c-212.2 0-388.8 170.7-388.8 388.8C124.2 726.3 294.9 903 513 903c212.2 0 388.8-170.7 388.8-388.8S725.2 125.4 513 125.4z m0 430.2c-94.2 0-170.7-76.5-170.7-170.7S418.8 207.8 513 207.8s170.7 76.5 170.7 170.7S607.2 555.6 513 555.6z m0-289.1c-64.6 0-112 52.8-112 112s47.4 117.9 112 117.9 112-52.8 112-112-47.4-117.9-112-117.9z m0 689.8c-135.7 0-259-58.7-341.9-158.9l-11.8-17.8 11.8-17.8c76.5-117.9 206.2-188.5 347.8-188.5 135.7 0 265 64.6 341.9 182.6l11.8 17.8-11.8 17.8C778 897.1 648.7 956.3 513 956.3zM230.3 773.2C300.9 849.7 406.9 897 513 897c112 0 218.1-47.4 288.6-129.8-70.5-88.2-170.7-135.6-282.7-135.6s-218.1 53.3-288.6 141.6z"
+                            p-id="2902" fill="#ffffff"></path>
+                    </svg>
+                
+                <span class="post-header-info-author-text"> 
+                    <a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+                        付鹏篚
+                    </a>
+                </span>
+                <div class="post-header-info-author-categories">
+                    
+                        
+                            <a href="../../categories/Vue/" target="_blank">Vue</a>
+                        
+                    
+                </div>
+                <p>2019-04-15 20:00:00</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="post-content" id="content">
+  
+  <div id="article" class="post-content-info">
+    
+      <div id="post-toc">
+        <span class="post-toc-title">文章目录</span>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue-js-%E9%9B%86%E6%88%90%E8%85%BE%E8%AE%AF%E5%9C%B0%E5%9B%BEAPI%E9%AB%98%E6%95%88%E6%8E%A5%E5%85%A5%E4%B8%8E%E4%BA%A4%E4%BA%92%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97"><span class="toc-text">Vue.js 集成腾讯地图API高效接入与交互实战指南</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-text">一、准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%B3%A8%E5%86%8C%E8%85%BE%E8%AE%AF%E5%9C%B0%E5%9B%BE%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0"><span class="toc-text">1. 注册腾讯地图开放平台</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%8E%B7%E5%8F%96API%E5%AF%86%E9%92%A5"><span class="toc-text">2. 获取API密钥</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%9C%A8Vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%BC%95%E5%85%A5%E8%85%BE%E8%AE%AF%E5%9C%B0%E5%9B%BEAPI"><span class="toc-text">二、在Vue项目中引入腾讯地图API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%BC%95%E5%85%A5%E8%85%BE%E8%AE%AF%E5%9C%B0%E5%9B%BEJavaScript-API"><span class="toc-text">1. 引入腾讯地图JavaScript API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA%E5%9C%B0%E5%9B%BE%E7%BB%84%E4%BB%B6"><span class="toc-text">2. 创建地图组件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9C%A8%E7%88%B6%E7%BB%84%E4%BB%B6%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%9C%B0%E5%9B%BE%E7%BB%84%E4%BB%B6"><span class="toc-text">三、在父组件中使用地图组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E8%BF%9B%E9%98%B6%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="toc-text">四、进阶功能实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E4%BD%8D%E7%BD%AE"><span class="toc-text">1. 获取当前位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%85%B3%E9%94%AE%E5%AD%97%E6%90%9C%E7%B4%A2"><span class="toc-text">2. 关键字搜索</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-text">五、总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol>
+      </div>
+    
+
+    <h3 id="Vue-js-集成腾讯地图API高效接入与交互实战指南"><a href="#Vue-js-集成腾讯地图API高效接入与交互实战指南" class="headerlink" title="Vue.js 集成腾讯地图API高效接入与交互实战指南"></a>Vue.js 集成腾讯地图API高效接入与交互实战指南</h3><hr>
+<h3 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h3><h4 id="1-注册腾讯地图开放平台"><a href="#1-注册腾讯地图开放平台" class="headerlink" title="1. 注册腾讯地图开放平台"></a>1. 注册腾讯地图开放平台</h4><p>首先，我们需要注册腾讯地图开放平台账号并创建应用，以获取API密钥（Key）。具体步骤如下：</p>
+<ol>
+<li>访问腾讯地图开放平台：<a target="_blank" rel="noopener" href="https://lbs.qq.com/">腾讯地图开放平台</a>。</li>
+<li>注册并登录腾讯地图开放平台账号。</li>
+<li>在“我的应用”页面，点击“创建应用”按钮。</li>
+<li>填写应用名称、选择应用类型，点击“创建”。</li>
+<li>在应用列表中找到新创建的应用，点击“添加Key”来配置相关信息并启用所需产品。</li>
+<li>如果是微信小程序开发，还需填写小程序的AppId。</li>
+</ol>
+<h4 id="2-获取API密钥"><a href="#2-获取API密钥" class="headerlink" title="2. 获取API密钥"></a>2. 获取API密钥</h4><p>完成上述步骤后，你将获得一个API密钥（Key），后续引入腾讯地图API时需要使用此密钥。</p>
+<hr>
+<h3 id="二、在Vue项目中引入腾讯地图API"><a href="#二、在Vue项目中引入腾讯地图API" class="headerlink" title="二、在Vue项目中引入腾讯地图API"></a>二、在Vue项目中引入腾讯地图API</h3><h4 id="1-引入腾讯地图JavaScript-API"><a href="#1-引入腾讯地图JavaScript-API" class="headerlink" title="1. 引入腾讯地图JavaScript API"></a>1. 引入腾讯地图JavaScript API</h4><p>在Vue项目的 <code>public/index.html</code> 文件中，添加以下代码来引入腾讯地图的JavaScript API：</p>
+<pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Vue 腾讯地图示例<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://map.qq.com/api/gljs?v1.exp&amp;key=YOUR_API_KEY&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+
+<p>将 <code>YOUR_API_KEY</code> 替换为你申请到的API密钥。</p>
+<h4 id="2-创建地图组件"><a href="#2-创建地图组件" class="headerlink" title="2. 创建地图组件"></a>2. 创建地图组件</h4><p>在 <code>src/components</code> 目录下创建一个新的Vue组件 <code>MapComponent.vue</code>：</p>
+<pre><code class="hljs vue">&lt;template&gt;
+  &lt;div id=&quot;map&quot; style=&quot;width: 100%; height: 400px;&quot;&gt;&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default &#123;
+  name: &#x27;MapComponent&#x27;,
+  mounted() &#123;
+    this.initMap();
+  &#125;,
+  methods: &#123;
+    initMap() &#123;
+      const map = new qq.maps.Map(document.getElementById(&#x27;map&#x27;), &#123;
+        center: new qq.maps.LatLng(39.916527, 116.397128), // 设置地图中心点
+        zoom: 10, // 设置缩放级别
+      &#125;);
+    &#125;,
+  &#125;,
+&#125;;
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+/* 地图组件样式 */
+&lt;/style&gt;</code></pre>
+
+<hr>
+<h3 id="三、在父组件中使用地图组件"><a href="#三、在父组件中使用地图组件" class="headerlink" title="三、在父组件中使用地图组件"></a>三、在父组件中使用地图组件</h3><p>在父组件中使用 <code>MapComponent</code>，例如 <code>App.vue</code>：</p>
+<pre><code class="hljs vue">&lt;template&gt;
+  &lt;div&gt;
+    &lt;h1&gt;腾讯地图示例&lt;/h1&gt;
+    &lt;MapComponent /&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import MapComponent from &#x27;./components/MapComponent.vue&#x27;;
+
+export default &#123;
+  name: &#x27;App&#x27;,
+  components: &#123;
+    MapComponent,
+  &#125;,
+&#125;;
+&lt;/script&gt;
+
+&lt;style&gt;
+/* 父组件样式 */
+&lt;/style&gt;</code></pre>
+
+<hr>
+<h3 id="四、进阶功能实现"><a href="#四、进阶功能实现" class="headerlink" title="四、进阶功能实现"></a>四、进阶功能实现</h3><h4 id="1-获取当前位置"><a href="#1-获取当前位置" class="headerlink" title="1. 获取当前位置"></a>1. 获取当前位置</h4><p>使用腾讯地图API的定位功能获取用户的当前位置：</p>
+<pre><code class="hljs javascript"><span class="hljs-attr">methods</span>: &#123;
+  <span class="hljs-title function_">getCurrentLocation</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">const</span> geolocation = <span class="hljs-keyword">new</span> qq.<span class="hljs-property">maps</span>.<span class="hljs-title class_">Geolocation</span>(<span class="hljs-string">&#x27;YOUR_API_KEY&#x27;</span>, <span class="hljs-string">&#x27;your-app-name&#x27;</span>);
+    geolocation.<span class="hljs-title function_">getLocation</span>(<span class="hljs-function">(<span class="hljs-params">position</span>) =&gt;</span> &#123;
+      <span class="hljs-keyword">const</span> lat = position.<span class="hljs-property">lat</span>; <span class="hljs-comment">// 纬度</span>
+      <span class="hljs-keyword">const</span> lng = position.<span class="hljs-property">lng</span>; <span class="hljs-comment">// 经度</span>
+      <span class="hljs-keyword">const</span> map = <span class="hljs-keyword">new</span> qq.<span class="hljs-property">maps</span>.<span class="hljs-title class_">Map</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;map&#x27;</span>), &#123;
+        <span class="hljs-attr">center</span>: <span class="hljs-keyword">new</span> qq.<span class="hljs-property">maps</span>.<span class="hljs-title class_">LatLng</span>(lat, lng),
+        <span class="hljs-attr">zoom</span>: <span class="hljs-number">14</span>,
+      &#125;);
+      <span class="hljs-keyword">const</span> marker = <span class="hljs-keyword">new</span> qq.<span class="hljs-property">maps</span>.<span class="hljs-title class_">Marker</span>(&#123;
+        <span class="hljs-attr">position</span>: <span class="hljs-keyword">new</span> qq.<span class="hljs-property">maps</span>.<span class="hljs-title class_">LatLng</span>(lat, lng),
+        <span class="hljs-attr">map</span>: map,
+      &#125;);
+    &#125;, <span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> &#123;
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;定位失败：&#x27;</span>, error);
+    &#125;);
+  &#125;,
+&#125;,</code></pre>
+
+<p>在 <code>mounted</code> 钩子中调用 <code>getCurrentLocation</code> 方法：</p>
+<pre><code class="hljs javascript"><span class="hljs-title function_">mounted</span>(<span class="hljs-params"></span>) &#123;
+  <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getCurrentLocation</span>();
+&#125;</code></pre>
+
+<h4 id="2-关键字搜索"><a href="#2-关键字搜索" class="headerlink" title="2. 关键字搜索"></a>2. 关键字搜索</h4><p>实现关键字搜索功能，可以在地图上根据用户输入的关键字查找地点。首先在 <code>MapComponent.vue</code> 中添加搜索功能：</p>
+<pre><code class="hljs javascript"><span class="hljs-attr">methods</span>: &#123;
+  <span class="hljs-title function_">searchKeyword</span>(<span class="hljs-params">keyword</span>) &#123;
+    <span class="hljs-keyword">const</span> searchService = <span class="hljs-keyword">new</span> qq.<span class="hljs-property">maps</span>.<span class="hljs-title class_">SearchService</span>(&#123;
+      <span class="hljs-attr">map</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span>,
+      <span class="hljs-attr">complete</span>: <span class="hljs-function">(<span class="hljs-params">results</span>) =&gt;</span> &#123;
+        <span class="hljs-keyword">const</span> pois = results.<span class="hljs-property">detail</span>.<span class="hljs-property">pois</span>;
+        <span class="hljs-keyword">if</span> (pois &amp;&amp; pois.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;
+          <span class="hljs-keyword">const</span> latLng = <span class="hljs-keyword">new</span> qq.<span class="hljs-property">maps</span>.<span class="hljs-title class_">LatLng</span>(pois[<span class="hljs-number">0</span>].<span class="hljs-property">lat</span>, pois[<span class="hljs-number">0</span>].<span class="hljs-property">lng</span>);
+          <span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span>.<span class="hljs-title function_">setCenter</span>(latLng);
+          <span class="hljs-keyword">const</span> marker = <span class="hljs-keyword">new</span> qq.<span class="hljs-property">maps</span>.<span class="hljs-title class_">Marker</span>(&#123;
+            <span class="hljs-attr">position</span>: latLng,
+            <span class="hljs-attr">map</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span>,
+          &#125;);
+        &#125;
+      &#125;,
+    &#125;);
+    searchService.<span class="hljs-title function_">search</span>(keyword);
+  &#125;,
+&#125;</code></pre>
+
+<p>在模板中添加搜索框，用户可以输入关键字进行搜索：</p>
+<pre><code class="hljs vue">&lt;template&gt;
+  &lt;div&gt;
+    &lt;input type=&quot;text&quot; v-model=&quot;keyword&quot; @keyup.enter=&quot;searchKeyword(keyword)&quot; placeholder=&quot;输入关键字搜索&quot; /&gt;
+    &lt;MapComponent ref=&quot;mapComponent&quot; /&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import MapComponent from &#x27;./components/MapComponent.vue&#x27;;
+
+export default &#123;
+  name: &#x27;App&#x27;,
+  components: &#123;
+    MapComponent,
+  &#125;,
+  data() &#123;
+    return &#123;
+      keyword: &#x27;&#x27;,
+    &#125;;
+  &#125;,
+  methods: &#123;
+    searchKeyword(keyword) &#123;
+      this.$refs.mapComponent.searchKeyword(keyword);
+    &#125;,
+  &#125;,
+&#125;;
+&lt;/script&gt;
+
+&lt;style&gt;
+/* 搜索框样式 */
+&lt;/style&gt;</code></pre>
+
+<hr>
+<h3 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h3><ul>
+<li>注册腾讯地图开放平台并获取API密钥。</li>
+<li>在Vue项目中引入腾讯地图API。</li>
+<li>创建地图组件并展示基本地图。</li>
+<li>实现获取当前位置功能。</li>
+<li>添加关键字搜索功能，用户可以输入关键词在地图上定位地点。</li>
+</ul>
+<hr>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://lbs.qq.com/">腾讯地图开放平台</a></li>
+<li><a target="_blank" rel="noopener" href="https://lbs.qq.com/console/project">腾讯地图JavaScript API文档</a></li>
+</ul>
+
+  </div>
+  <!-- <div id="gitalk-container"></div> -->
+</div>
+
+<script>
+  
+Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
+  dragToClose: true,
+  Toolbar: true,
+  closeButton: "top",
+  Image: {
+    zoom: true,
+  },
+  on: {
+    initCarousel: (fancybox) => {
+      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+    "Carousel.change": (fancybox, carousel, to, from) => {
+      const slide = carousel.slides[to];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+  },
+});
+</script>
+
+<style>
+    #noneimg img {
+        display: none;
+        z-index: 9999;
+        /* width: 600px !important; */
+        min-width: 0%;
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 0px;
+        position: fixed;
+        box-shadow: 0 0 0px #c3c3c300 !important;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto !important;
+    }
+
+    @media screen and (max-width:600px) {
+        #noneimg img {
+            max-width: 88%
+        }
+    }
+</style>
+
+    <div class="post-paging">
+    
+    <a href="/2019/04/15/BTPanel/">
+        <div class="post-paging-last">
+            <span>上一篇</span>
+            <p>Hexo博客配置与使用指南</p>
+        </div>
+    </a>
+    
+
+    
+    <a href="/2019/04/15/OCR/">
+        <div class="post-paging-next">
+            <span>下一篇</span>
+            <p>Hexo博客配置与使用指南</p>
+        </div>
+    </a>
+    
+</div>
+</div>
+		
+<div class="footer">
+	<div class="Copyright">
+		©2025 By 付鹏篚. 主题：<a
+			style="text-decoration: none;display: contents; color: #898F9F;"
+			href="#">Quiet</a>
+	</div>
+	<div class="contact">
+		
+		<a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+			<img src="/image/logo.png" alt="Quiet主题">
+		</a>
+		
+	</div>
+</div>
+
+<script src="/js/gotop.js"></script>
+
+
+<style type="text/css">
+    @media screen and (min-width: 600px) {
+        .goTop>span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            opacity: 0.8;
+            background: #F1F5FB;
+            text-align: center;
+            transition: border .5s;
+            border: 1px solid rgba(18, 24, 58, 0.06);
+
+            -moz-transition: border .5s;
+            /* Firefox 4 */
+            -webkit-transition: border .5s;
+            /* Safari 和 Chrome */
+            -o-transition: border .5s;
+            /* Opera */
+        }
+
+        .goTop>span:hover {
+            border: 1px solid #6680B3;
+        }
+
+
+        .goTop {
+            position: fixed;
+            right: 30px;
+            bottom: 80px;
+        }
+
+        .goTop>span>svg {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+    }
+
+    @media screen and (max-width: 600px) {
+        .goTop {
+            display: none;
+        }
+    }
+</style>
+<div class="goTop" id="js-go_top">
+    <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g>
+                <path d="M13 12v8h-2v-8H4l8-8 8 8z"></path>
+            </g>
+        </svg>
+    </span>
+</div>
+<script>
+    $( '#js-go_top' )
+	.gotoTop( {
+		offset: 500,
+		speed: 300,
+		animationShow: {
+			'transform': 'translate(0,0)',
+			'transition': 'transform .5s ease-in-out'
+		},
+		animationHide: {
+			'transform': 'translate(100px,0)',
+			'transition': 'transform .5s ease-in-out'
+		}
+	} );
+</script>
+
+
+    <!-- Gitalk -->
+    <script>
+        const data = '{"clientID":"02b3c","clientSecret":"adfc7b4","repo":"gimment","owner":"duneng","admin":"duneng"}'
+        const gitalk = new Gitalk({
+            ...JSON.parse( data),
+            id:location.pathname,
+            distractionFreeMode:false
+        })
+        
+        // if(Boolean('true')){
+        //     gitalk.render('gitalk-container')
+        // }
+    </script>
+
+
+	</body>
+</html>
+

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+<title>Hexo博客配置与使用指南-newbie</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico">
+
+<link rel="stylesheet" href="/css/index.css">
+
+
+
+<meta name="keywords" content="address,配置,">
+<meta name="description" content="可以将一个完整的地址字符串解析为省、市、区、街道等详细信息">
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/index.js"></script>
+
+
+<script src="/js/fancybox.umd.js"></script>
+
+
+<script src="/js/fancybox-images.js"></script>
+
+
+<script src="/js/gitalk.min.js"></script>
+
+
+<script src="/js/hljs.min.js"></script>
+ 
+<script>hljs.highlightAll();</script>
+
+	<meta name="generator" content="Hexo 7.3.0"></head>
+
+	<body>
+		
+	<div class="header">
+		<div class="header-top" id="header-top">
+			<div class="h-left">
+				<a href="/">
+					<img src="/image/logo.png" alt="FPF">
+				</a>
+				
+				<span style="color: #c9d1d9;font-weight: bolder; ">&nbsp;&nbsp;付鹏篚的笔记 </span>
+			</div>
+			<div class="h-right">
+				<ul>
+					
+						
+								<li>
+									<a href="/">
+										主页
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/archives">
+										归档
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/categories">
+										分类
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/tags">
+										标签
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/about">
+										关于
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+				</ul>
+			</div>
+			<div class="h-right-close">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+					<path fill="none" d="M0 0h24v24H0z" />
+					<path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(68,68,68,1)" />
+				</svg>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar">
+    <div class="topo">
+        <h2>付鹏篚</h2>
+    </div>
+    <ul>
+        
+        <li>
+            <a href="/">主页</a>
+        </li>
+        
+        <li>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <a href="/about">关于</a>
+        </li>
+        
+    </ul>
+    <div class="my_foot">
+        
+        <a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+            <img src="/image/logo.png" alt="Quiet主题">
+        </a>
+        
+    </div>
+</div>
+<div class='shelter'>
+</div>
+<style>
+    .shelter{
+        background-color: #333;
+        opacity:0.5;
+        cursor: pointer;
+        display: none; 
+        position: fixed;
+        left: 0;
+        top: 0; 
+        right: 0;
+        bottom: 0;
+        z-index: 1998;
+    }
+    .sidebar {
+        width: 66%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        background: #fff;
+        z-index: 1999;
+        text-align: center;
+        box-shadow: -6px 0 20px rgba(98, 94, 94, .815);
+    }
+
+    .topo {
+        width: 100%;
+        height: 200px;
+        background: url(https://api.ixiaowai.cn/gqapi/gqapi.php) no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+        display: flex;
+        align-items: flex-end
+    }
+
+    .topo h2 {
+        color: #fff;
+        z-index: 1;
+        position: relative;
+        margin: 0 0 10px 10px;
+        font-size: 1.2em;
+        box-sizing: border-box
+    }
+
+    .topo:before {
+        content: '';
+        background-image: url(/image/pattern.png);
+        background-repeat: repeat;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1
+    }
+
+    .sidebar ul {
+        width: 100%;
+        margin-top: 50px
+    }
+
+    .sidebar ul li {
+        height: 50px;
+        list-style: none;
+        font-size: 1.2em;
+        text-align: right;
+        margin-right: 10px
+    }
+
+    .sidebar ul li a {
+        display: grid;
+        color: #5d606a;
+        text-overflow: ellipsis;
+        width: 100%;
+        text-decoration: none
+    }
+
+    .my_foot {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        position: absolute;
+        bottom: 0
+    }
+
+    .my_foot a {
+        text-decoration: none;
+        margin-right: 10px;
+        display: inline-block
+    }
+
+    .my_foot a img {
+        width: 30px;
+        height: 30px
+    }
+</style>
+
+<script>
+    $( function () {
+	$( '.h-right-close>svg' )
+		.click( function () {
+			$( '.sidebar' )
+				.animate( {
+					right: "0"
+				}, 500 );
+			$( '.shelter' )
+				.fadeIn( "slow" )
+		} );
+	$( '.shelter' )
+		.click( function ( e ) {
+			$( '.sidebar' )
+				.animate( {
+					right: "-100%"
+				}, 500 );
+			$( '.shelter' )
+				.fadeOut( "slow" )
+		} )
+} )
+
+</script>
+
+<div class="post">
+    <div class="post-header-background post-header-img"
+    
+>
+    <div class="post-header-background-content">
+        <ul class="post-header-tag">
+            
+                
+                    <li><a href="/tags/address">address</a></li>
+                
+                    <li><a href="/tags/配置">配置</a></li>
+                
+            
+        </ul>
+        
+        <h1>Hexo博客配置与使用指南</h1>
+
+        <div class="post-header-info">
+            <div class="post-header-info-author">
+                
+                    <svg t="1604839279282" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="2901" width="20" height="20">
+                        <path
+                            d="M513 956.3c-247.7 0-448-200.3-448-448S265.3 66.2 513 66.2s448 200.3 448 448-200.3 442.1-448 442.1z m0-830.9c-212.2 0-388.8 170.7-388.8 388.8C124.2 726.3 294.9 903 513 903c212.2 0 388.8-170.7 388.8-388.8S725.2 125.4 513 125.4z m0 430.2c-94.2 0-170.7-76.5-170.7-170.7S418.8 207.8 513 207.8s170.7 76.5 170.7 170.7S607.2 555.6 513 555.6z m0-289.1c-64.6 0-112 52.8-112 112s47.4 117.9 112 117.9 112-52.8 112-112-47.4-117.9-112-117.9z m0 689.8c-135.7 0-259-58.7-341.9-158.9l-11.8-17.8 11.8-17.8c76.5-117.9 206.2-188.5 347.8-188.5 135.7 0 265 64.6 341.9 182.6l11.8 17.8-11.8 17.8C778 897.1 648.7 956.3 513 956.3zM230.3 773.2C300.9 849.7 406.9 897 513 897c112 0 218.1-47.4 288.6-129.8-70.5-88.2-170.7-135.6-282.7-135.6s-218.1 53.3-288.6 141.6z"
+                            p-id="2902" fill="#ffffff"></path>
+                    </svg>
+                
+                <span class="post-header-info-author-text"> 
+                    <a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+                        付鹏篚
+                    </a>
+                </span>
+                <div class="post-header-info-author-categories">
+                    
+                        
+                            <a href="../../categories/Vue/" target="_blank">Vue</a>
+                        
+                    
+                </div>
+                <p>2019-04-15 20:00:00</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="post-content" id="content">
+  
+  <div id="article" class="post-content-info">
+    
+      <div id="post-toc">
+        <span class="post-toc-title">文章目录</span>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E6%9C%AC%E6%8F%92%E6%A7%BD"><span class="toc-text">一、基本插槽</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%8F%92%E6%A7%BD%E7%A4%BA%E4%BE%8B"><span class="toc-text">1. 基本插槽示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%85%B7%E5%90%8D%E6%8F%92%E6%A7%BD"><span class="toc-text">二、具名插槽</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%85%B7%E5%90%8D%E6%8F%92%E6%A7%BD%E7%A4%BA%E4%BE%8B"><span class="toc-text">1. 具名插槽示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD%EF%BC%88Scoped-Slots%EF%BC%89"><span class="toc-text">三、作用域插槽（Scoped Slots）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD%E7%A4%BA%E4%BE%8B"><span class="toc-text">1. 作用域插槽示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%8F%92%E6%A7%BD%E7%9A%84-v-bind-%E5%92%8C%E9%BB%98%E8%AE%A4%E5%86%85%E5%AE%B9"><span class="toc-text">四、插槽的 v-bind 和默认内容</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%BD%BF%E7%94%A8-v-bind-%E5%92%8C%E9%BB%98%E8%AE%A4%E6%8F%92%E6%A7%BD%E5%86%85%E5%AE%B9"><span class="toc-text">1. 使用 v-bind 和默认插槽内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%BB%98%E8%AE%A4%E5%86%85%E5%AE%B9"><span class="toc-text">2. 默认内容</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-text">五、总结</span></a></li></ol>
+      </div>
+    
+
+    <p>在 Vue 中，<code>slot</code> 是一种用于分发内容的机制，它允许父组件向子组件传递内容，而子组件通过插槽来接收和渲染这些内容。<code>slot</code> 可以用于创建更加灵活和可复用的组件。它的工作原理类似于 HTML 中的插入点，允许将父组件的内容传递给子组件进行渲染。</p>
+<h3 id="一、基本插槽"><a href="#一、基本插槽" class="headerlink" title="一、基本插槽"></a>一、基本插槽</h3><p>最基本的插槽用法是父组件向子组件传递内容，子组件通过 <code>&lt;slot&gt;&lt;/slot&gt;</code> 标签来接收和渲染这些内容。</p>
+<h4 id="1-基本插槽示例"><a href="#1-基本插槽示例" class="headerlink" title="1. 基本插槽示例"></a>1. 基本插槽示例</h4><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- ParentComponent.vue --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ChildComponent</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>这是父组件传递给子组件的内容<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ChildComponent</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span>
+<span class="language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">ChildComponent</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./ChildComponent.vue&#x27;</span>;</span>
+<span class="language-javascript"></span>
+<span class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span>
+<span class="language-javascript">  <span class="hljs-attr">components</span>: &#123;</span>
+<span class="language-javascript">    <span class="hljs-title class_">ChildComponent</span></span>
+<span class="language-javascript">  &#125;</span>
+<span class="language-javascript">&#125;;</span>
+<span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- ChildComponent.vue --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>子组件内容<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span> <span class="hljs-comment">&lt;!-- 渲染父组件传递的内容 --&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span>
+<span class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span>
+<span class="language-javascript">  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;ChildComponent&#x27;</span></span>
+<span class="language-javascript">&#125;;</span>
+<span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+
+<p>在上面的例子中，父组件通过 <code>&lt;ChildComponent&gt;</code> 标签向子组件传递一个 <code>&lt;p&gt;</code> 元素的内容。子组件通过 <code>&lt;slot&gt;&lt;/slot&gt;</code> 来接收并渲染父组件的内容。</p>
+<h3 id="二、具名插槽"><a href="#二、具名插槽" class="headerlink" title="二、具名插槽"></a>二、具名插槽</h3><p>具名插槽允许我们为插槽命名，从而在父组件中更精确地控制哪些内容传递到哪个插槽。</p>
+<h4 id="1-具名插槽示例"><a href="#1-具名插槽示例" class="headerlink" title="1. 具名插槽示例"></a>1. 具名插槽示例</h4><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- ParentComponent.vue --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ChildComponent</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">v-slot:header</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>这是父组件传递给header插槽的内容<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">v-slot:footer</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>这是父组件传递给footer插槽的内容<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ChildComponent</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span>
+<span class="language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">ChildComponent</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./ChildComponent.vue&#x27;</span>;</span>
+<span class="language-javascript"></span>
+<span class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span>
+<span class="language-javascript">  <span class="hljs-attr">components</span>: &#123;</span>
+<span class="language-javascript">    <span class="hljs-title class_">ChildComponent</span></span>
+<span class="language-javascript">  &#125;</span>
+<span class="language-javascript">&#125;;</span>
+<span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- ChildComponent.vue --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;header&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;header&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span> <span class="hljs-comment">&lt;!-- 渲染传递给header的内容 --&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;footer&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span> <span class="hljs-comment">&lt;!-- 渲染传递给footer的内容 --&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span>
+<span class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span>
+<span class="language-javascript">  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;ChildComponent&#x27;</span></span>
+<span class="language-javascript">&#125;;</span>
+<span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+
+<p>在这个示例中，父组件将内容分别传递给 <code>header</code> 和 <code>footer</code> 这两个具名插槽。子组件通过 <code>&lt;slot name=&quot;header&quot;&gt;&lt;/slot&gt;</code> 和 <code>&lt;slot name=&quot;footer&quot;&gt;&lt;/slot&gt;</code> 来渲染这些内容。</p>
+<h3 id="三、作用域插槽（Scoped-Slots）"><a href="#三、作用域插槽（Scoped-Slots）" class="headerlink" title="三、作用域插槽（Scoped Slots）"></a>三、作用域插槽（Scoped Slots）</h3><p>作用域插槽允许父组件向子组件传递内容的同时，子组件也可以向父组件暴露一些数据或方法，这样父组件可以使用子组件的数据来渲染内容。通过作用域插槽，父组件可以获取子组件中的数据。</p>
+<h4 id="1-作用域插槽示例"><a href="#1-作用域插槽示例" class="headerlink" title="1. 作用域插槽示例"></a>1. 作用域插槽示例</h4><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- ParentComponent.vue --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ChildComponent</span> <span class="hljs-attr">v-slot:default</span>=<span class="hljs-string">&quot;slotProps&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#123;&#123; slotProps.message &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ChildComponent</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span>
+<span class="language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">ChildComponent</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./ChildComponent.vue&#x27;</span>;</span>
+<span class="language-javascript"></span>
+<span class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span>
+<span class="language-javascript">  <span class="hljs-attr">components</span>: &#123;</span>
+<span class="language-javascript">    <span class="hljs-title class_">ChildComponent</span></span>
+<span class="language-javascript">  &#125;</span>
+<span class="language-javascript">&#125;;</span>
+<span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- ChildComponent.vue --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">:message</span>=<span class="hljs-string">&quot;message&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span> <span class="hljs-comment">&lt;!-- 向父组件暴露数据 --&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span>
+<span class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span>
+<span class="language-javascript">  <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span>
+<span class="language-javascript">    <span class="hljs-keyword">return</span> &#123;</span>
+<span class="language-javascript">      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;这是来自子组件的数据&#x27;</span></span>
+<span class="language-javascript">    &#125;;</span>
+<span class="language-javascript">  &#125;</span>
+<span class="language-javascript">&#125;;</span>
+<span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+
+<p>在上面的例子中，子组件通过 <code>slot</code> 向父组件暴露一个 <code>message</code> 数据，父组件通过 <code>v-slot:default=&quot;slotProps&quot;</code> 获取这个数据，并在模板中使用它。<code>slotProps</code> 包含了子组件传递给父组件的所有数据。</p>
+<h3 id="四、插槽的-v-bind-和默认内容"><a href="#四、插槽的-v-bind-和默认内容" class="headerlink" title="四、插槽的 v-bind 和默认内容"></a>四、插槽的 <code>v-bind</code> 和默认内容</h3><p>插槽也可以通过 <code>v-bind</code> 将数据传递给子组件，子组件可以使用传递的数据进行渲染。同时，我们还可以为插槽指定默认内容，在没有传递内容时显示默认内容。</p>
+<h4 id="1-使用-v-bind-和默认插槽内容"><a href="#1-使用-v-bind-和默认插槽内容" class="headerlink" title="1. 使用 v-bind 和默认插槽内容"></a>1. 使用 <code>v-bind</code> 和默认插槽内容</h4><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- ParentComponent.vue --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ChildComponent</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">v-slot:default</span>=<span class="hljs-string">&quot;slotProps&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#123;&#123; slotProps.text &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ChildComponent</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span>
+<span class="language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">ChildComponent</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./ChildComponent.vue&#x27;</span>;</span>
+<span class="language-javascript"></span>
+<span class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span>
+<span class="language-javascript">  <span class="hljs-attr">components</span>: &#123;</span>
+<span class="language-javascript">    <span class="hljs-title class_">ChildComponent</span></span>
+<span class="language-javascript">  &#125;</span>
+<span class="language-javascript">&#125;;</span>
+<span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- ChildComponent.vue --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">:text</span>=<span class="hljs-string">&quot;message&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span> <span class="hljs-comment">&lt;!-- 向父组件暴露数据 --&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span>
+<span class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span>
+<span class="language-javascript">  <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span>
+<span class="language-javascript">    <span class="hljs-keyword">return</span> &#123;</span>
+<span class="language-javascript">      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Hello from child component!&#x27;</span></span>
+<span class="language-javascript">    &#125;;</span>
+<span class="language-javascript">  &#125;</span>
+<span class="language-javascript">&#125;;</span>
+<span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+
+<p>在这个例子中，子组件通过 <code>slot</code> 向父组件传递 <code>message</code> 数据，父组件通过 <code>v-slot</code> 获取并使用它。父组件渲染出 <code>message</code> 内容。</p>
+<h4 id="2-默认内容"><a href="#2-默认内容" class="headerlink" title="2. 默认内容"></a>2. 默认内容</h4><p>如果父组件没有传递插槽内容，子组件可以使用默认内容。</p>
+<pre><code class="hljs html"><span class="hljs-comment">&lt;!-- ParentComponent.vue --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ChildComponent</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- 如果没有传递内容，则显示默认内容 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">v-slot:default</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>这是父组件提供的默认内容<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ChildComponent</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span>
+<span class="language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">ChildComponent</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./ChildComponent.vue&#x27;</span>;</span>
+<span class="language-javascript"></span>
+<span class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span>
+<span class="language-javascript">  <span class="hljs-attr">components</span>: &#123;</span>
+<span class="language-javascript">    <span class="hljs-title class_">ChildComponent</span></span>
+<span class="language-javascript">  &#125;</span>
+<span class="language-javascript">&#125;;</span>
+<span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- ChildComponent.vue --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span>这是子组件的默认内容<span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span> <span class="hljs-comment">&lt;!-- 默认内容 --&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></code></pre>
+
+<p>在这个例子中，如果父组件没有传递内容给插槽，则 <code>ChildComponent</code> 会使用默认的插槽内容。</p>
+<h3 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h3><ol>
+<li><strong>基本插槽</strong>：通过 <code>&lt;slot&gt;&lt;/slot&gt;</code> 标签将父组件的内容传递给子组件。</li>
+<li><strong>具名插槽</strong>：使用 <code>name</code> 属性为插槽命名，从而指定父组件的不同内容传递到不同的插槽中。</li>
+<li><strong>作用域插槽</strong>：允许父组件访问子组件暴露的数据，从而更灵活地控制插槽内容。</li>
+<li><strong><code>v-bind</code> 和默认内容</strong>：可以通过 <code>v-bind</code> 向插槽传递数据，并为插槽设置默认内容。</li>
+</ol>
+<p><code>slot</code> 是 Vue 中非常强大的功能，它使得组件更加灵活和可复用，帮助我们更高效地构建 UI 组件。</p>
+
+  </div>
+  <!-- <div id="gitalk-container"></div> -->
+</div>
+
+<script>
+  
+Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
+  dragToClose: true,
+  Toolbar: true,
+  closeButton: "top",
+  Image: {
+    zoom: true,
+  },
+  on: {
+    initCarousel: (fancybox) => {
+      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+    "Carousel.change": (fancybox, carousel, to, from) => {
+      const slide = carousel.slides[to];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+  },
+});
+</script>
+
+<style>
+    #noneimg img {
+        display: none;
+        z-index: 9999;
+        /* width: 600px !important; */
+        min-width: 0%;
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 0px;
+        position: fixed;
+        box-shadow: 0 0 0px #c3c3c300 !important;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto !important;
+    }
+
+    @media screen and (max-width:600px) {
+        #noneimg img {
+            max-width: 88%
+        }
+    }
+</style>
+
+    <div class="post-paging">
+    
+    <a href="/2019/04/15/keep-alive/">
+        <div class="post-paging-last">
+            <span>上一篇</span>
+            <p>Hexo博客配置与使用指南</p>
+        </div>
+    </a>
+    
+
+    
+    <a href="/2019/04/15/tampermonkey/">
+        <div class="post-paging-next">
+            <span>下一篇</span>
+            <p>Hexo博客配置与使用指南</p>
+        </div>
+    </a>
+    
+</div>
+</div>
+		
+<div class="footer">
+	<div class="Copyright">
+		©2025 By 付鹏篚. 主题：<a
+			style="text-decoration: none;display: contents; color: #898F9F;"
+			href="#">Quiet</a>
+	</div>
+	<div class="contact">
+		
+		<a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+			<img src="/image/logo.png" alt="Quiet主题">
+		</a>
+		
+	</div>
+</div>
+
+<script src="/js/gotop.js"></script>
+
+
+<style type="text/css">
+    @media screen and (min-width: 600px) {
+        .goTop>span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            opacity: 0.8;
+            background: #F1F5FB;
+            text-align: center;
+            transition: border .5s;
+            border: 1px solid rgba(18, 24, 58, 0.06);
+
+            -moz-transition: border .5s;
+            /* Firefox 4 */
+            -webkit-transition: border .5s;
+            /* Safari 和 Chrome */
+            -o-transition: border .5s;
+            /* Opera */
+        }
+
+        .goTop>span:hover {
+            border: 1px solid #6680B3;
+        }
+
+
+        .goTop {
+            position: fixed;
+            right: 30px;
+            bottom: 80px;
+        }
+
+        .goTop>span>svg {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+    }
+
+    @media screen and (max-width: 600px) {
+        .goTop {
+            display: none;
+        }
+    }
+</style>
+<div class="goTop" id="js-go_top">
+    <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g>
+                <path d="M13 12v8h-2v-8H4l8-8 8 8z"></path>
+            </g>
+        </svg>
+    </span>
+</div>
+<script>
+    $( '#js-go_top' )
+	.gotoTop( {
+		offset: 500,
+		speed: 300,
+		animationShow: {
+			'transform': 'translate(0,0)',
+			'transition': 'transform .5s ease-in-out'
+		},
+		animationHide: {
+			'transform': 'translate(100px,0)',
+			'transition': 'transform .5s ease-in-out'
+		}
+	} );
+</script>
+
+
+    <!-- Gitalk -->
+    <script>
+        const data = '{"clientID":"02b3c","clientSecret":"adfc7b4","repo":"gimment","owner":"duneng","admin":"duneng"}'
+        const gitalk = new Gitalk({
+            ...JSON.parse( data),
+            id:location.pathname,
+            distractionFreeMode:false
+        })
+        
+        // if(Boolean('true')){
+        //     gitalk.render('gitalk-container')
+        // }
+    </script>
+
+
+	</body>
+</html>
+
