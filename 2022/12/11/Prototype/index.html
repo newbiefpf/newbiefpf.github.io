@@ -320,7 +320,8 @@
       </div>
     
 
-    <h3 id="一、什么是原型链？"><a href="#一、什么是原型链？" class="headerlink" title="一、什么是原型链？"></a>一、什么是原型链？</h3><p>在 JavaScript 中，每个对象都有一个内部属性 <code>[[Prototype]]</code>，指向另一个对象，这个指向的对象被称为原型（<code>prototype</code>）。通过原型，子对象可以访问父对象的属性和方法。原型链就是一系列对象通过 <code>prototype</code> 属性连接起来的链条，最终指向 <code>null</code>。</p>
+    <p><img src="https://gitee.com/newbiefpf/picture-database/raw/master/20250228172441470.png" alt="image-20250228165638690"></p>
+<h3 id="一、什么是原型链？"><a href="#一、什么是原型链？" class="headerlink" title="一、什么是原型链？"></a>一、什么是原型链？</h3><p>在 JavaScript 中，每个对象都有一个内部属性 <code>[[Prototype]]</code>，指向另一个对象，这个指向的对象被称为原型（<code>prototype</code>）。通过原型，子对象可以访问父对象的属性和方法。原型链就是一系列对象通过 <code>prototype</code> 属性连接起来的链条，最终指向 <code>null</code>。</p>
 <h3 id="二、原型链的基本原理"><a href="#二、原型链的基本原理" class="headerlink" title="二、原型链的基本原理"></a>二、原型链的基本原理</h3><ul>
 <li>每个 JavaScript 对象都有一个 <code>prototype</code> 属性，指向其原型对象。</li>
 <li>当访问一个对象的属性时，JavaScript 引擎会先查找对象本身，如果找不到，则会顺着 <code>[[Prototype]]</code> 链向上查找，直到找到该属性或者到达链条的末端 <code>null</code>。</li>
