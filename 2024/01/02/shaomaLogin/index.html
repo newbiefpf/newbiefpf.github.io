@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+<title>微信扫码登录-newbie</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="referrer" content="no-referrer" />
+
+<link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico">
+
+<link rel="stylesheet" href="/css/index.css">
+
+
+
+<meta name="keywords" content="微信,">
+<meta name="description" content="网站进行微信扫码登录。">
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/index.js"></script>
+
+
+<script src="/js/fancybox.umd.js"></script>
+
+
+<script src="/js/fancybox-images.js"></script>
+
+
+<script src="/js/gitalk.min.js"></script>
+
+
+<script src="/js/hljs.min.js"></script>
+ 
+<script>hljs.highlightAll();</script>
+
+	<meta name="generator" content="Hexo 7.3.0"></head>
+
+	<body>
+		
+	<div class="header">
+		<div class="header-top" id="header-top">
+			<div class="h-left">
+				<a href="/">
+					<img src="/image/logo.png" alt="FPF">
+				</a>
+				
+				<span style="color: #c9d1d9;font-weight: bolder; ">&nbsp;&nbsp;付鹏篚的笔记 </span>
+			</div>
+			<div class="h-right">
+				<ul>
+					
+						
+								<li>
+									<a href="/">
+										主页
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/archives">
+										归档
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/categories">
+										分类
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/tags">
+										标签
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/about">
+										关于
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+				</ul>
+			</div>
+			<div class="h-right-close">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+					<path fill="none" d="M0 0h24v24H0z" />
+					<path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(68,68,68,1)" />
+				</svg>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar">
+    <div class="topo">
+        <h2>付鹏篚</h2>
+    </div>
+    <ul>
+        
+        <li>
+            <a href="/">主页</a>
+        </li>
+        
+        <li>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <a href="/about">关于</a>
+        </li>
+        
+    </ul>
+    <div class="my_foot">
+        
+        <a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+            <img src="/image/logo.png" alt="Quiet主题">
+        </a>
+        
+    </div>
+</div>
+<div class='shelter'>
+</div>
+<style>
+    .shelter{
+        background-color: #333;
+        opacity:0.5;
+        cursor: pointer;
+        display: none; 
+        position: fixed;
+        left: 0;
+        top: 0; 
+        right: 0;
+        bottom: 0;
+        z-index: 1998;
+    }
+    .sidebar {
+        width: 66%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        background: #fff;
+        z-index: 1999;
+        text-align: center;
+        box-shadow: -6px 0 20px rgba(98, 94, 94, .815);
+    }
+
+    .topo {
+        width: 100%;
+        height: 200px;
+        background: url(https://api.ixiaowai.cn/gqapi/gqapi.php) no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+        display: flex;
+        align-items: flex-end
+    }
+
+    .topo h2 {
+        color: #fff;
+        z-index: 1;
+        position: relative;
+        margin: 0 0 10px 10px;
+        font-size: 1.2em;
+        box-sizing: border-box
+    }
+
+    .topo:before {
+        content: '';
+        background-image: url(/image/pattern.png);
+        background-repeat: repeat;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1
+    }
+
+    .sidebar ul {
+        width: 100%;
+        margin-top: 50px
+    }
+
+    .sidebar ul li {
+        height: 50px;
+        list-style: none;
+        font-size: 1.2em;
+        text-align: right;
+        margin-right: 10px
+    }
+
+    .sidebar ul li a {
+        display: grid;
+        color: #5d606a;
+        text-overflow: ellipsis;
+        width: 100%;
+        text-decoration: none
+    }
+
+    .my_foot {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        position: absolute;
+        bottom: 0
+    }
+
+    .my_foot a {
+        text-decoration: none;
+        margin-right: 10px;
+        display: inline-block
+    }
+
+    .my_foot a img {
+        width: 30px;
+        height: 30px
+    }
+</style>
+
+<script>
+    $( function () {
+	$( '.h-right-close>svg' )
+		.click( function () {
+			$( '.sidebar' )
+				.animate( {
+					right: "0"
+				}, 500 );
+			$( '.shelter' )
+				.fadeIn( "slow" )
+		} );
+	$( '.shelter' )
+		.click( function ( e ) {
+			$( '.sidebar' )
+				.animate( {
+					right: "-100%"
+				}, 500 );
+			$( '.shelter' )
+				.fadeOut( "slow" )
+		} )
+} )
+
+</script>
+
+<div class="post">
+    <div class="post-header-background post-header-img"
+    
+>
+    <div class="post-header-background-content">
+        <ul class="post-header-tag">
+            
+                
+                    <li><a href="/tags/微信">微信</a></li>
+                
+            
+        </ul>
+        
+        <h1>微信扫码登录</h1>
+
+        <div class="post-header-info">
+            <div class="post-header-info-author">
+                
+                    <svg t="1604839279282" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="2901" width="20" height="20">
+                        <path
+                            d="M513 956.3c-247.7 0-448-200.3-448-448S265.3 66.2 513 66.2s448 200.3 448 448-200.3 442.1-448 442.1z m0-830.9c-212.2 0-388.8 170.7-388.8 388.8C124.2 726.3 294.9 903 513 903c212.2 0 388.8-170.7 388.8-388.8S725.2 125.4 513 125.4z m0 430.2c-94.2 0-170.7-76.5-170.7-170.7S418.8 207.8 513 207.8s170.7 76.5 170.7 170.7S607.2 555.6 513 555.6z m0-289.1c-64.6 0-112 52.8-112 112s47.4 117.9 112 117.9 112-52.8 112-112-47.4-117.9-112-117.9z m0 689.8c-135.7 0-259-58.7-341.9-158.9l-11.8-17.8 11.8-17.8c76.5-117.9 206.2-188.5 347.8-188.5 135.7 0 265 64.6 341.9 182.6l11.8 17.8-11.8 17.8C778 897.1 648.7 956.3 513 956.3zM230.3 773.2C300.9 849.7 406.9 897 513 897c112 0 218.1-47.4 288.6-129.8-70.5-88.2-170.7-135.6-282.7-135.6s-218.1 53.3-288.6 141.6z"
+                            p-id="2902" fill="#ffffff"></path>
+                    </svg>
+                
+                <span class="post-header-info-author-text"> 
+                    <a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+                        付鹏篚
+                    </a>
+                </span>
+                <div class="post-header-info-author-categories">
+                    
+                        
+                            <a href="../../categories/Vue/" target="_blank">Vue</a>
+                        
+                    
+                </div>
+                <p>2024-01-02 20:00:00</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="post-content" id="content">
+  
+  <div id="article" class="post-content-info">
+    
+      <div id="post-toc">
+        <span class="post-toc-title">文章目录</span>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E8%B4%A6%E6%88%B7%E7%94%B3%E8%AF%B7"><span class="toc-text">1、账户申请</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8B%EF%BC%88Vue-js%EF%BC%89"><span class="toc-text">2、登录流程（Vue.js）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-text">步骤：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E8%8E%B7%E5%8F%96access-token"><span class="toc-text">3、获取access_token</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1%E3%80%81API-%E4%BB%8B%E7%BB%8D"><span class="toc-text">3.1、API 介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2%E3%80%81%E7%94%A8Node-js%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1"><span class="toc-text">3.2、用Node.js创建服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2%E8%B0%83%E7%94%A8node%E6%9C%8D%E5%8A%A1"><span class="toc-text">3.3 前端页面调用node服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E5%A4%B4%E5%83%8F%E5%92%8C%E6%98%B5%E7%A7%B0"><span class="toc-text">4、获取用户头像和昵称</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1%E3%80%81API"><span class="toc-text">4.1、API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2%E3%80%81%E6%B7%BB%E5%8A%A0-node-%E6%9C%8D%E5%8A%A1"><span class="toc-text">4.2、添加 node 服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3%E3%80%81%E5%B0%86%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E4%BF%9D%E5%AD%98%E5%88%B0Token%E4%B8%AD"><span class="toc-text">4.3、将用户信息保存到Token中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4%E3%80%81%E4%BF%AE%E6%94%B9weixin-js"><span class="toc-text">4.4、修改weixin.js</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <h3 id="1、账户申请"><a href="#1、账户申请" class="headerlink" title="1、账户申请"></a>1、账户申请</h3><p>1.1 <strong>打开微信开放平台： <a target="_blank" rel="noopener" href="https://open.weixin.qq.com/">https://open.weixin.qq.com/</a> 首先进行账号的注册</strong><br><img src="https://gitee.com/newbiefpf/picture-database/raw/master/20250228175120703.png" alt="image-20250228175118788"><br>1.2 <strong>开发者资质认证</strong><br><img src="https://gitee.com/newbiefpf/picture-database/raw/master/20250228175139767.png" alt="image-20250228175138123"><br>1.3 <strong>创建网站应用</strong><br><img src="https://gitee.com/newbiefpf/picture-database/raw/master/20250228175212862.png" alt="image-20250228175210148"><br><strong>填写应用的相关信息</strong></p>
+<p>应用通过审核后，会得到<code>AppID</code>和 <code>AppSecret</code>,后边进行编码中会使用。<br><img src="https://gitee.com/newbiefpf/picture-database/raw/master/20250228175236598.png" alt="image-20250228175234671"></p>
+<h3 id="2、登录流程（Vue-js）"><a href="#2、登录流程（Vue-js）" class="headerlink" title="2、登录流程（Vue.js）"></a>2、登录流程（Vue.js）</h3><ol>
+<li>第三方发起微信授权登录请求，微信用户允许授权第三方应用后，微信会拉起应用或重定向到第三方网站，并且带上授权临时票据code参数；</li>
+<li>通过code参数加上AppID和AppSecret等，通过API换取access_token；</li>
+<li>通过access_token进行接口调用，获取用户基本数据资源或帮助用户实现基本操作。</li>
+</ol>
+<p>获取access_token时序图：<br><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250228175254730.png" alt="image-20250228175254730"></p>
+<h4 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h4><blockquote>
+<p>说明： <code>domain</code>: 指的是域名或者IP地址</p>
+</blockquote>
+<p><strong>1、添加一个div, 用于显示微信登陆二维码</strong></p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;weixin&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+
+<p><strong>2、添加mounted</strong>，引入微信登录二维码 JS</p>
+<pre><code class="hljs javascript"><span class="hljs-title function_">mounted</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> <span class="hljs-title class_">WxLogin</span>(&#123;
+      <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;weixin&quot;</span>,
+      <span class="hljs-attr">appid</span>: <span class="hljs-string">&quot;wx3bdb1192c22883f3&quot;</span>,
+      <span class="hljs-attr">scope</span>: <span class="hljs-string">&quot;snsapi_login&quot;</span>,
+      <span class="hljs-comment">// 扫码成功后 跳转的地址</span>
+      <span class="hljs-attr">redirect_uri</span>: <span class="hljs-string">&quot;http://domain/weixinlogin&quot;</span>
+    &#125;);
+  &#125;,
+  <span class="hljs-attr">head</span>: &#123;
+    <span class="hljs-attr">script</span>: [
+      &#123; <span class="hljs-attr">src</span>: <span class="hljs-string">&quot;http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js&quot;</span> &#125;
+    ]
+  &#125;</code></pre>
+
+<ul>
+<li><p><strong>appid</strong>: 应用唯一标识</p>
+</li>
+<li><p><strong>scope</strong>：应用授权作用于</p>
+</li>
+<li><p><strong>redirect_uri</strong>：回调地址，是微信登陆成功后要跳转到的页面</p>
+</li>
+</ul>
+<p>3、<strong>显示二维码</strong></p>
+<p>扫描二维码登录后，点击确认登录按钮后，浏览器会自动跳到：</p>
+<p><code>http://domain/weixinlogin?code=02147Yff12Yhgz0ArCef1qabgf147Yf0&amp;state=undefined</code></p>
+<p>这个<strong>code</strong>是微信发给用户的<strong>临时令牌</strong>。我们可以根据<strong>code</strong>再次请求微信第三方登陆接口得到access_token（正式令牌）</p>
+<h3 id="3、获取access-token"><a href="#3、获取access-token" class="headerlink" title="3、获取access_token"></a>3、获取access_token</h3><h4 id="3-1、API-介绍"><a href="#3-1、API-介绍" class="headerlink" title="3.1、API 介绍"></a>3.1、API 介绍</h4><blockquote>
+<p><strong>通过code获取access_token</strong></p>
+</blockquote>
+<p><strong>1、接口说明</strong></p>
+<ul>
+<li><strong>HTTP请求方式</strong>： GET</li>
+<li><strong>URL</strong>：<a target="_blank" rel="noopener" href="https://api.weixin.qq.com/sns/oauth2/access/_token?appid=APPID&secret=SECRET&code=CODE&grant%5C_type=authorization%5C_code">https://api.weixin.qq.com/sns/oauth2/access\_token?appid=APPID&amp;secret=SECRET&amp;code=CODE&amp;grant\_type=authorization\_code</a></li>
+</ul>
+<p><strong>2、参数说明</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>是否必须</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>appid</td>
+<td>是</td>
+<td>应用唯一标识，在微信开放平台提交应用审核通过后获得</td>
+</tr>
+<tr>
+<td>secret</td>
+<td>是</td>
+<td>应用密钥AppSecret，在微信开放平台提交应用审核通过后获得</td>
+</tr>
+<tr>
+<td>code</td>
+<td>是</td>
+<td>填写第一步获取的code参数</td>
+</tr>
+<tr>
+<td>grant_type</td>
+<td>是</td>
+<td>填authorization_code</td>
+</tr>
+</tbody></table>
+<p><strong>3、返回说明</strong></p>
+<pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;access_token&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;ACCESS_TOKEN&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;expires_in&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">7200</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;refresh_token&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;REFRESH_TOKEN&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;openid&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;OPENID&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;scope&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;SCOPE&quot;</span>
+<span class="hljs-punctuation">&#125;</span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>access_token</td>
+<td>接口调用凭证</td>
+</tr>
+<tr>
+<td>expires_in</td>
+<td>access_token接口调用凭证超时时间，单位（秒）</td>
+</tr>
+<tr>
+<td>refresh_token</td>
+<td>用户刷新access_token</td>
+</tr>
+<tr>
+<td>openid</td>
+<td>授权用户唯一标识</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>用户授权的作用域，使用逗号（,）分隔</td>
+</tr>
+</tbody></table>
+<h4 id="3-2、用Node-js创建服务"><a href="#3-2、用Node-js创建服务" class="headerlink" title="3.2、用Node.js创建服务"></a>3.2、用Node.js创建服务</h4><blockquote>
+<p>也可以用Java，Python 等其他语言</p>
+</blockquote>
+<ol>
+<li><p><strong>新建文件 server.js</strong></p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;http&#x27;</span>);  
+<span class="hljs-keyword">var</span> https = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;https&#x27;</span>);  
+<span class="hljs-keyword">var</span> url = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;url&#x27;</span>);
+http.<span class="hljs-title function_">createServer</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">request,response</span>)&#123;   
+    <span class="hljs-keyword">var</span> params=url.<span class="hljs-title function_">parse</span>(request.<span class="hljs-property">url</span>, <span class="hljs-literal">true</span>).<span class="hljs-property">query</span>;
+    <span class="hljs-comment">// 通过审核后，得到的appid, AppSecret</span>
+    <span class="hljs-keyword">var</span> appid=<span class="hljs-string">&#x27;************&#x27;</span>;
+    <span class="hljs-keyword">var</span> secret=<span class="hljs-string">&#x27;*******************&#x27;</span>;
+    <span class="hljs-keyword">if</span>(params.<span class="hljs-property">operation</span>===<span class="hljs-string">&#x27;token&#x27;</span>)&#123;
+        https.<span class="hljs-title function_">get</span>(
+        <span class="hljs-string">`https://api.weixin.qq.com/sns/oauth2/access_token?appid=<span class="hljs-subst">$&#123;appid&#125;</span>&amp;secret=<span class="hljs-subst">$&#123;secret&#125;</span>&amp;code=<span class="hljs-subst">$&#123;params.code&#125;</span>&amp;grant_type=authorization_code`</span>, 
+        <span class="hljs-keyword">function</span> (<span class="hljs-params">res</span>) &#123;
+            res.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">chunk</span>) &#123;  
+              response.<span class="hljs-title function_">writeHead</span>(<span class="hljs-number">200</span>,&#123;<span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=utf-8&#x27;</span> ,<span class="hljs-string">&quot;Access-Control-Allow-Origin&quot;</span>: <span class="hljs-string">&quot;*&quot;</span> &#125;);        
+              response.<span class="hljs-title function_">end</span>(chunk);
+            &#125;);
+        &#125;)
+    &#125;   
+&#125;).<span class="hljs-title function_">listen</span>(<span class="hljs-number">8888</span>);
+<span class="hljs-comment">// 终端打印如下信息</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Server running at http://127.0.0.1:8888/&#x27;</span>);</code></pre>
+</li>
+<li><p><strong>在控制台输入 <code>node server</code> 运行服务</strong></p>
+</li>
+<li><p><strong>访问地址</strong></p>
+<p><code>http://localhost:8888/?code=02147Yff12Yhgz0ArCef1qabgf147Yf0&amp;operation=token</code></p>
+</li>
+<li><p><strong>得到结果</strong></p>
+<pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+  <span class="hljs-attr">&quot;access_token&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;10_zSHADX2JGMivKFfa4nMbZV3ECzY21UY3qrF5ADyjpr_iiLUifo-nlN0GaRnUEN9T7BagiwSC07awplRFIO1Ghw&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;expires_in&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">7200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;refresh_token&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;10__zl8gcJz0RXVDKtksbNTQJZ2uK1HiLJZ3I5PcSkA2VB3b6WXi2CR3R_htW6B8kKOmj-91p08SJMfVKkL84vP1w&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;openid&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;oypcC1u9r-mxVsRGSLFqE65lysVI&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;scope&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;snsapi_login&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;unionid&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;o6JuL1gaIwnVsZC5BpRYImTHKTm8&quot;</span>
+<span class="hljs-punctuation">&#125;</span></code></pre>
+
+<h4 id="3-3-前端页面调用node服务"><a href="#3-3-前端页面调用node服务" class="headerlink" title="3.3 前端页面调用node服务"></a>3.3 前端页面调用node服务</h4><p>1、<strong>通过 axios 调用node服务，新建文件：@&#x2F;api&#x2F;weixin.js</strong></p>
+<blockquote>
+<p>这里是因为接口统一管理，单独存放在api文件下</p>
+</blockquote>
+<pre><code class="hljs javascript"><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;axios&#x27;</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getAccessToken</span>(<span class="hljs-params">code</span>) &#123;
+ <span class="hljs-keyword">return</span> axios.<span class="hljs-title function_">get</span>(<span class="hljs-string">`http://localhost:8888?operation=token&amp;code=<span class="hljs-subst">$&#123;code&#125;</span>`</span>)
+&#125;</code></pre>
+
+<p><strong>2、添加工具 utils&#x2F;param.js （用于获取浏览器地址栏参数code）</strong></p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getUrlParam</span>(<span class="hljs-params">name</span>) &#123;
+　　<span class="hljs-keyword">var</span> reg = <span class="hljs-keyword">new</span> <span class="hljs-title class_">RegExp</span>(<span class="hljs-string">&quot;(^|&amp;)&quot;</span> + name + <span class="hljs-string">&quot;=([^&amp;]*)(&amp;|$)&quot;</span>);
+　　<span class="hljs-keyword">var</span> r = <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">search</span>.<span class="hljs-title function_">substr</span>(<span class="hljs-number">1</span>).<span class="hljs-title function_">match</span>(reg);
+　　<span class="hljs-keyword">if</span>(r != <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">unescape</span>(r[<span class="hljs-number">2</span>]);
+　　<span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+&#125;</code></pre>
+
+<p><strong>3、创建weixinLogin.vue</strong></p>
+<pre><code class="hljs javascript">&lt;template&gt;
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+&lt;/template&gt;
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span>
+<span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">import</span> &#123; getUrlParam &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/utils/param&#x27;</span></span></span>
+<span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">import</span> &#123; getAccessToken &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/api/weixin&#x27;</span></span></span>
+<span class="language-javascript"><span class="language-xml">    </span></span>
+<span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">mounted</span>(<span class="hljs-params"></span>)&#123;</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-keyword">let</span> code=<span class="hljs-title function_">getUrlParam</span>(<span class="hljs-string">&#x27;code&#x27;</span>)</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-keyword">if</span>(code!==<span class="hljs-literal">null</span>)&#123;<span class="hljs-comment">//如果是微信登陆</span></span></span>
+<span class="language-javascript"><span class="language-xml">        <span class="hljs-comment">//根据code获取access_token</span></span></span>
+<span class="language-javascript"><span class="language-xml">        <span class="hljs-title function_">getAccessToken</span>(code).<span class="hljs-title function_">then</span>( <span class="hljs-function"><span class="hljs-params">res</span>=&gt;</span>&#123;</span></span>
+<span class="language-javascript"><span class="language-xml">          <span class="hljs-keyword">let</span> access_token= res.<span class="hljs-property">data</span>.<span class="hljs-property">access_token</span></span></span>
+<span class="language-javascript"><span class="language-xml">          <span class="hljs-keyword">let</span> openid= res.<span class="hljs-property">data</span>.<span class="hljs-property">openid</span></span></span>
+<span class="language-javascript"><span class="language-xml">          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;access_token:&#x27;</span>+access_token+ <span class="hljs-string">&#x27;openid:&#x27;</span>+openid)</span></span>
+<span class="language-javascript"><span class="language-xml">        &#125;)</span></span>
+<span class="language-javascript"><span class="language-xml">      &#125;</span></span>
+<span class="language-javascript"><span class="language-xml">    &#125;</span></span>
+<span class="language-javascript"><span class="language-xml">&#125;</span></span>
+<span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span></code></pre>
+
+<h3 id="4、获取用户头像和昵称"><a href="#4、获取用户头像和昵称" class="headerlink" title="4、获取用户头像和昵称"></a>4、获取用户头像和昵称</h3><h4 id="4-1、API"><a href="#4-1、API" class="headerlink" title="4.1、API"></a>4.1、API</h4><p><strong>1、接口说明</strong></p>
+<ul>
+<li><strong>HTTP请求方式</strong>： GET</li>
+<li><strong>URL</strong>：<code>https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&amp;openid=OPENID</code></li>
+</ul>
+<p><strong>2、参数说明</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>是否必须</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>access_token</td>
+<td>是</td>
+<td>调用凭证</td>
+</tr>
+<tr>
+<td>openid</td>
+<td>是</td>
+<td>普通用户的标识，对当前开发者帐号唯一</td>
+</tr>
+<tr>
+<td>lang</td>
+<td>否</td>
+<td>国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语，默认为zh-CN</td>
+</tr>
+</tbody></table>
+<p><strong>3、返回说明</strong></p>
+<pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;openid&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;OPENID&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;nickname&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;NICKNAME&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;sex&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;province&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;PROVINCE&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;city&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;CITY&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;country&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;COUNTRY&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;headimgurl&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;privilege&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;PRIVILEGE1&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;PRIVILEGE2&quot;</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;unionid&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot; o6_bmasdasdsad6_2sgVt7hMZOPfL&quot;</span>
+<span class="hljs-punctuation">&#125;</span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>openid</td>
+<td>普通用户的标识，对当前开发者帐号唯一</td>
+</tr>
+<tr>
+<td>nickname</td>
+<td>普通用户昵称</td>
+</tr>
+<tr>
+<td>sex</td>
+<td>普通用户性别，1为男性，2为女性</td>
+</tr>
+<tr>
+<td>province</td>
+<td>普通用户个人资料填写的省份</td>
+</tr>
+<tr>
+<td>city</td>
+<td>普通用户个人资料填写的城市</td>
+</tr>
+<tr>
+<td>country</td>
+<td>国家，如中国为CN</td>
+</tr>
+<tr>
+<td>headimgurl</td>
+<td>用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空</td>
+</tr>
+<tr>
+<td>privilege</td>
+<td>用户特权信息，json数组，如微信沃卡用户为（chinaunicom）</td>
+</tr>
+<tr>
+<td>unionid</td>
+<td>用户统一标识。针对一个微信开放平台帐号下的应用，同一用户的unionid是唯一的。</td>
+</tr>
+</tbody></table>
+<h4 id="4-2、添加-node-服务"><a href="#4-2、添加-node-服务" class="headerlink" title="4.2、添加 node 服务"></a>4.2、添加 node 服务</h4><p><strong>新增代码</strong></p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">if</span>(params.<span class="hljs-property">operation</span>===<span class="hljs-string">&#x27;userinfo&#x27;</span>)&#123;
+        https.<span class="hljs-title function_">get</span>(<span class="hljs-string">`https://api.weixin.qq.com/sns/userinfo?access_token=<span class="hljs-subst">$&#123;params.access_token&#125;</span>&amp;openid=<span class="hljs-subst">$&#123;params.openid&#125;</span>`</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">res</span>) &#123;
+            res.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">chunk</span>) &#123;  
+              <span class="hljs-comment">// 发送响应数据 &quot;Hello World&quot;</span>
+              response.<span class="hljs-title function_">writeHead</span>(<span class="hljs-number">200</span>,&#123;<span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=utf-8&#x27;</span> ,<span class="hljs-string">&quot;Access-Control-Allow-Origin&quot;</span>: <span class="hljs-string">&quot;*&quot;</span> &#125;);        
+              response.<span class="hljs-title function_">end</span>(chunk);
+            &#125;);
+        &#125;)
+    &#125;</code></pre>
+
+<p><strong>完整</strong></p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;http&#x27;</span>);
+<span class="hljs-keyword">var</span> https = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;https&#x27;</span>);
+<span class="hljs-keyword">var</span> url = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;url&#x27;</span>);
+http.<span class="hljs-title function_">createServer</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">request, response</span>) &#123;
+    <span class="hljs-keyword">var</span> params = url.<span class="hljs-title function_">parse</span>(request.<span class="hljs-property">url</span>, <span class="hljs-literal">true</span>).<span class="hljs-property">query</span>;
+    <span class="hljs-comment">// 通过审核后，得到的appid, AppSecret</span>
+    <span class="hljs-keyword">var</span> appid = <span class="hljs-string">&#x27;************&#x27;</span>;
+    <span class="hljs-keyword">var</span> secret = <span class="hljs-string">&#x27;*******************&#x27;</span>;
+    <span class="hljs-keyword">if</span> (params.<span class="hljs-property">operation</span> === <span class="hljs-string">&#x27;token&#x27;</span>) &#123;
+        https.<span class="hljs-title function_">get</span>(<span class="hljs-string">`https://api.weixin.qq.com/sns/oauth2/access_token?appid=<span class="hljs-subst">$&#123;appid&#125;</span>&amp;secret=<span class="hljs-subst">$&#123;secret&#125;</span>&amp;code=<span class="hljs-subst">$&#123;params.code&#125;</span>&amp;grant_type=authorization_code`</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">res</span>) &#123;
+            res.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">chunk</span>) &#123;
+                response.<span class="hljs-title function_">writeHead</span>(<span class="hljs-number">200</span>, &#123; <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json;charset=utf-8&#x27;</span>, <span class="hljs-string">&quot;Access-Control-Allow-Origin&quot;</span>: <span class="hljs-string">&quot;*&quot;</span> &#125;);
+                response.<span class="hljs-title function_">end</span>(chunk);
+            &#125;);
+        &#125;)
+    &#125;
+    <span class="hljs-keyword">if</span> (params.<span class="hljs-property">operation</span> === <span class="hljs-string">&#x27;userinfo&#x27;</span>) &#123;
+        https.<span class="hljs-title function_">get</span>(<span class="hljs-string">`https://api.weixin.qq.com/sns/userinfo?access_token=<span class="hljs-subst">$&#123;params.access_token&#125;</span>&amp;openid=<span class="hljs-subst">$&#123;params.openid&#125;</span>`</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">res</span>) &#123;
+            res.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">chunk</span>) &#123;
+                <span class="hljs-comment">// 发送响应数据 &quot;Hello World&quot;</span>
+                response.<span class="hljs-title function_">writeHead</span>(<span class="hljs-number">200</span>, &#123; <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json;charset=utf-8&#x27;</span>, <span class="hljs-string">&quot;Access-Control-Allow-Origin&quot;</span>: <span class="hljs-string">&quot;*&quot;</span> &#125;);
+                response.<span class="hljs-title function_">end</span>(chunk);
+            &#125;);
+        &#125;)
+    &#125;
+&#125;).<span class="hljs-title function_">listen</span>(<span class="hljs-number">8888</span>);
+<span class="hljs-comment">// 终端打印如下信息</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Server running at http://127.0.0.1:8888/&#x27;</span>);</code></pre>
+
+<h4 id="4-3、将用户信息保存到Token中"><a href="#4-3、将用户信息保存到Token中" class="headerlink" title="4.3、将用户信息保存到Token中"></a>4.3、将用户信息保存到Token中</h4><p> <strong>1、安装 js-cookie</strong></p>
+<pre><code class="hljs shell">npm install js-cookie --save</code></pre>
+
+<p> <strong>2、新建auth.js</strong></p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Cookies</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;js-cookie&#x27;</span>
+
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">TokenKey</span> = <span class="hljs-string">&#x27;User-Token&#x27;</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">NameKey</span> = <span class="hljs-string">&#x27;User-Name&#x27;</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">AvatarKey</span> = <span class="hljs-string">&#x27;User-Avatar&#x27;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">setUser</span>(<span class="hljs-params">token, name, avatar</span>) &#123;
+    <span class="hljs-title class_">Cookies</span>.<span class="hljs-title function_">set</span>(<span class="hljs-title class_">NameKey</span>, name)
+    <span class="hljs-title class_">Cookies</span>.<span class="hljs-title function_">set</span>(<span class="hljs-title class_">AvatarKey</span>, avatar)
+    <span class="hljs-title class_">Cookies</span>.<span class="hljs-title function_">set</span>(<span class="hljs-title class_">TokenKey</span>, token)
+&#125;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getUser</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">let</span> name = <span class="hljs-title class_">Cookies</span>.<span class="hljs-title function_">get</span>(<span class="hljs-title class_">NameKey</span>)
+    <span class="hljs-keyword">let</span> avatar = <span class="hljs-title class_">Cookies</span>.<span class="hljs-title function_">get</span>(<span class="hljs-title class_">AvatarKey</span>)
+    <span class="hljs-keyword">let</span> token = <span class="hljs-title class_">Cookies</span>.<span class="hljs-title function_">get</span>(<span class="hljs-title class_">TokenKey</span>)
+    <span class="hljs-keyword">let</span> user = &#123; name, avatar, token &#125;
+    <span class="hljs-keyword">return</span> user
+&#125;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">removeUser</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-title class_">Cookies</span>.<span class="hljs-title function_">remove</span>(<span class="hljs-title class_">NameKey</span>)
+    <span class="hljs-title class_">Cookies</span>.<span class="hljs-title function_">remove</span>(<span class="hljs-title class_">AvatarKey</span>)
+    <span class="hljs-title class_">Cookies</span>.<span class="hljs-title function_">remove</span>(<span class="hljs-title class_">TokenKey</span>)
+&#125;</code></pre>
+
+<h4 id="4-4、修改weixin-js"><a href="#4-4、修改weixin-js" class="headerlink" title="4.4、修改weixin.js"></a>4.4、修改weixin.js</h4><blockquote>
+<p>新增方法，用于根据access_token和openid获取用户信息</p>
+</blockquote>
+<pre><code class="hljs javascript"><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;axios&#x27;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getAccessToken</span>(<span class="hljs-params">code</span>) &#123;
+ <span class="hljs-keyword">return</span> axios.<span class="hljs-title function_">get</span>(<span class="hljs-string">`http://localhost:8888?operation=token&amp;code=<span class="hljs-subst">$&#123;code&#125;</span>`</span>)
+&#125;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getUserinfo</span>(<span class="hljs-params">access_token,openid</span>) &#123;
+<span class="hljs-keyword">return</span> axios.<span class="hljs-title function_">get</span>(<span class="hljs-string">`http://localhost:8888?operation=userinfo&amp;access_token=<span class="hljs-subst">$&#123;access_token&#125;</span>&amp;openid=<span class="hljs-subst">$&#123;openid&#125;</span>`</span>)
+&#125;
+</code></pre>
+
+<p><strong>在获取access_token和openid后，再次请求接口，获取昵称和头像，保存到cookie中</strong></p>
+<pre><code class="hljs js">&lt;template&gt;
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+&lt;/template&gt;
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span>
+<span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">import</span> &#123; getUrlParam &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/utils/param&#x27;</span></span></span>
+<span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">import</span> &#123; getAccessToken &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/api/weixin&#x27;</span></span></span>
+<span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">import</span> &#123; setUser &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/utils/auth&#x27;</span> </span></span>
+<span class="language-javascript"><span class="language-xml"></span></span>
+<span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">mounted</span>(<span class="hljs-params"></span>)&#123;</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-keyword">let</span> code=<span class="hljs-title function_">getUrlParam</span>(<span class="hljs-string">&#x27;code&#x27;</span>)</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-keyword">if</span>(code!==<span class="hljs-literal">null</span>)&#123;<span class="hljs-comment">//如果是微信登陆</span></span></span>
+<span class="language-javascript"><span class="language-xml">        <span class="hljs-comment">//根据code获取access_token</span></span></span>
+<span class="language-javascript"><span class="language-xml">        <span class="hljs-title function_">getAccessToken</span>(code).<span class="hljs-title function_">then</span>( <span class="hljs-function"><span class="hljs-params">res</span>=&gt;</span>&#123;</span></span>
+<span class="language-javascript"><span class="language-xml">          <span class="hljs-keyword">let</span> access_token= res.<span class="hljs-property">data</span>.<span class="hljs-property">access_token</span></span></span>
+<span class="language-javascript"><span class="language-xml">          <span class="hljs-keyword">let</span> openid= res.<span class="hljs-property">data</span>.<span class="hljs-property">openid</span></span></span>
+<span class="language-javascript"><span class="language-xml">          weixin.<span class="hljs-title function_">getUserinfo</span>( access_token, openid ).<span class="hljs-title function_">then</span>( <span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">            <span class="hljs-comment">//提取用户昵称和头像</span></span></span>
+<span class="language-javascript"><span class="language-xml">            <span class="hljs-keyword">let</span> nickname= res.<span class="hljs-property">data</span>.<span class="hljs-property">nickname</span></span></span>
+<span class="language-javascript"><span class="language-xml">            <span class="hljs-keyword">let</span> headimgurl= res.<span class="hljs-property">data</span>.<span class="hljs-property">headimgurl</span></span></span>
+<span class="language-javascript"><span class="language-xml">            <span class="hljs-comment">// 将用户信息保存到token中</span></span></span>
+<span class="language-javascript"><span class="language-xml">            <span class="hljs-title function_">setUser</span>(access_token,nickname,headimgurl)</span></span>
+<span class="language-javascript"><span class="language-xml">            location.<span class="hljs-property">href</span>=<span class="hljs-string">&#x27;/&#x27;</span>  <span class="hljs-comment">//跳转到首页</span></span></span>
+<span class="language-javascript"><span class="language-xml">          &#125;)</span></span>
+<span class="language-javascript"><span class="language-xml">        &#125;)</span></span>
+<span class="language-javascript"><span class="language-xml">      &#125;</span></span>
+<span class="language-javascript"><span class="language-xml">    &#125;</span></span>
+<span class="language-javascript"><span class="language-xml">&#125;</span></span>
+<span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span></code></pre>
+
+<p>这样页面就可以用getUser获取当前登录用户的用户名，头像</p>
+</li>
+</ol>
+
+  </div>
+  <!-- <div id="gitalk-container"></div> -->
+</div>
+
+<script>
+  
+Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
+  dragToClose: true,
+  Toolbar: true,
+  closeButton: "top",
+  Image: {
+    zoom: true,
+  },
+  on: {
+    initCarousel: (fancybox) => {
+      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+    "Carousel.change": (fancybox, carousel, to, from) => {
+      const slide = carousel.slides[to];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+  },
+});
+</script>
+
+<style>
+    #noneimg img {
+        display: none;
+        z-index: 9999;
+        /* width: 600px !important; */
+        min-width: 0%;
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 0px;
+        position: fixed;
+        box-shadow: 0 0 0px #c3c3c300 !important;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto !important;
+    }
+
+    @media screen and (max-width:600px) {
+        #noneimg img {
+            max-width: 88%
+        }
+    }
+</style>
+
+    <div class="post-paging">
+    
+    <a href="/2024/04/18/Payment/">
+        <div class="post-paging-last">
+            <span>上一篇</span>
+            <p>微信小程序支付</p>
+        </div>
+    </a>
+    
+
+    
+    <a href="/2023/08/22/address-parse/">
+        <div class="post-paging-next">
+            <span>下一篇</span>
+            <p>Vue中使用address-parse</p>
+        </div>
+    </a>
+    
+</div>
+</div>
+		
+<div class="footer">
+	<div class="Copyright">
+		©2025 By 付鹏篚. 主题：<a
+			style="text-decoration: none;display: contents; color: #898F9F;"
+			href="#">Quiet</a>
+	</div>
+	<div class="contact">
+		
+		<a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+			<img src="/image/logo.png" alt="Quiet主题">
+		</a>
+		
+	</div>
+</div>
+
+<script src="/js/gotop.js"></script>
+
+
+<style type="text/css">
+    @media screen and (min-width: 600px) {
+        .goTop>span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            opacity: 0.8;
+            background: #F1F5FB;
+            text-align: center;
+            transition: border .5s;
+            border: 1px solid rgba(18, 24, 58, 0.06);
+
+            -moz-transition: border .5s;
+            /* Firefox 4 */
+            -webkit-transition: border .5s;
+            /* Safari 和 Chrome */
+            -o-transition: border .5s;
+            /* Opera */
+        }
+
+        .goTop>span:hover {
+            border: 1px solid #6680B3;
+        }
+
+
+        .goTop {
+            position: fixed;
+            right: 30px;
+            bottom: 80px;
+        }
+
+        .goTop>span>svg {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+    }
+
+    @media screen and (max-width: 600px) {
+        .goTop {
+            display: none;
+        }
+    }
+</style>
+<div class="goTop" id="js-go_top">
+    <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g>
+                <path d="M13 12v8h-2v-8H4l8-8 8 8z"></path>
+            </g>
+        </svg>
+    </span>
+</div>
+<script>
+    $( '#js-go_top' )
+	.gotoTop( {
+		offset: 500,
+		speed: 300,
+		animationShow: {
+			'transform': 'translate(0,0)',
+			'transition': 'transform .5s ease-in-out'
+		},
+		animationHide: {
+			'transform': 'translate(100px,0)',
+			'transition': 'transform .5s ease-in-out'
+		}
+	} );
+</script>
+
+
+    <!-- Gitalk -->
+    <script>
+        const data = '{"clientID":"02b3c","clientSecret":"adfc7b4","repo":"gimment","owner":"duneng","admin":"duneng"}'
+        const gitalk = new Gitalk({
+            ...JSON.parse( data),
+            id:location.pathname,
+            distractionFreeMode:false
+        })
+        
+        // if(Boolean('true')){
+        //     gitalk.render('gitalk-container')
+        // }
+    </script>
+
+
+	</body>
+</html>
+
