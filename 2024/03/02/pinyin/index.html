@@ -2,7 +2,7 @@
 <html>
 	<head>
 		
-<title>微信小程序支付-newbie</title>
+<title>pinyin-pro-newbie</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -14,8 +14,8 @@
 
 
 
-<meta name="keywords" content="Uniapp,">
-<meta name="description" content="通过wx.login()获取code、调用后端接口获取openid。">
+<meta name="keywords" content="JavaScript,Vue,">
+<meta name="description" content="是一个非常强大的拼音处理库，提供了丰富的功能和灵活的配置选项，能够满足开发者在拼音转换、声母韵母提取、多音字处理等方面的需求">
 
 
 <script src="/js/jquery.min.js"></script>
@@ -275,12 +275,14 @@
         <ul class="post-header-tag">
             
                 
-                    <li><a href="/tags/Uniapp">Uniapp</a></li>
+                    <li><a href="/tags/JavaScript">JavaScript</a></li>
+                
+                    <li><a href="/tags/Vue">Vue</a></li>
                 
             
         </ul>
         
-        <h1>微信小程序支付</h1>
+        <h1>pinyin-pro</h1>
 
         <div class="post-header-info">
             <div class="post-header-info-author">
@@ -300,11 +302,11 @@
                 <div class="post-header-info-author-categories">
                     
                         
-                            <a href="../../categories/Uniapp/" target="_blank">Uniapp</a>
+                            <a href="../../categories/Vue/" target="_blank">Vue</a>
                         
                     
                 </div>
-                <p>2024-04-18 20:00:00</p>
+                <p>2024-03-02 20:00:00</p>
             </div>
         </div>
     </div>
@@ -316,93 +318,135 @@
     
       <div id="post-toc">
         <span class="post-toc-title">文章目录</span>
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%94%AF%E4%BB%98"><span class="toc-text">一、微信小程序支付</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#pinyin-pro-%E6%98%AF%E4%B8%80%E4%B8%AA%E9%9D%9E%E5%B8%B8%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%8B%BC%E9%9F%B3%E5%A4%84%E7%90%86%E5%BA%93%EF%BC%8C%E6%8F%90%E4%BE%9B%E4%BA%86%E4%B8%B0%E5%AF%8C%E7%9A%84%E5%8A%9F%E8%83%BD%E5%92%8C%E7%81%B5%E6%B4%BB%E7%9A%84%E9%85%8D%E7%BD%AE%E9%80%89%E9%A1%B9%EF%BC%8C%E8%83%BD%E5%A4%9F%E6%BB%A1%E8%B6%B3%E5%BC%80%E5%8F%91%E8%80%85%E5%9C%A8%E6%8B%BC%E9%9F%B3%E8%BD%AC%E6%8D%A2%E3%80%81%E5%A3%B0%E6%AF%8D%E9%9F%B5%E6%AF%8D%E6%8F%90%E5%8F%96%E3%80%81%E5%A4%9A%E9%9F%B3%E5%AD%97%E5%A4%84%E7%90%86%E7%AD%89%E6%96%B9%E9%9D%A2%E7%9A%84%E9%9C%80%E6%B1%82%E3%80%82"><span class="toc-text">pinyin-pro 是一个非常强大的拼音处理库，提供了丰富的功能和灵活的配置选项，能够满足开发者在拼音转换、声母韵母提取、多音字处理等方面的需求。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E6%80%BB%E7%BB%93"><span class="toc-text">核心功能总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE"><span class="toc-text">使用建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="toc-text">示例代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol>
       </div>
     
 
-    <p><img src="https://gitee.com/newbiefpf/picture-database/raw/master/20250228180307958.png" alt="image-20250228161900970"></p>
-<h4 id="一、微信小程序支付"><a href="#一、微信小程序支付" class="headerlink" title="一、微信小程序支付"></a>一、微信小程序支付</h4><ol>
-<li>通过wx.login()获取code、调用后端接口获取openid；</li>
-</ol>
-<pre><code class="hljs javascript">wx.<span class="hljs-title function_">login</span>(&#123;
-  <span class="hljs-title function_">success</span> (res) &#123;
-    <span class="hljs-keyword">if</span> (res.<span class="hljs-property">code</span>) &#123;
-      <span class="hljs-comment">//发起网络请求获取openid，一般是访问后端封装好的接口，也可以通过访问微信官方接口获取</span>
-      uni.<span class="hljs-title function_">request</span>(&#123;
-         <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;后端接口地址,获取openid&#x27;</span>,
-         <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;GET&#x27;</span>,
-         <span class="hljs-title function_">success</span>(<span class="hljs-params">res</span>) &#123;
-           <span class="hljs-comment">//获取openid：用户真实唯一id进行保存</span>
-           <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">data</span>.<span class="hljs-property">openid</span>)
-        &#125;
-      &#125;)
-    &#125; <span class="hljs-keyword">else</span> &#123;
-      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;登录失败！&#x27;</span> + res.<span class="hljs-property">errMsg</span>)
-    &#125;
-  &#125;
-&#125;)</code></pre>
-
-<ol start="2">
-<li>调用后端接口创建订单，获取orderId；</li>
-</ol>
-<pre><code class="hljs javascript">uni.<span class="hljs-title function_">request</span>(&#123;
-  <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;后端接口地址,获取订单id&#x27;</span>,
-  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
-  <span class="hljs-attr">data</span>: &#123; 传入接口需要的参数,如商品金额,商品个数等 &#125;,
-  <span class="hljs-title function_">success</span>(<span class="hljs-params">res</span>) &#123;
-    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">data</span>.<span class="hljs-property">orderId</span>)
-  &#125;
-&#125;)</code></pre>
-
-<ol start="3">
-<li>调用后端接口获取支付核心参数，预支付；</li>
-</ol>
-<pre><code class="hljs javascript">uni.<span class="hljs-title function_">request</span>(&#123;
-  <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;后端接口地址,获取支付核心数据&#x27;</span>,
-  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
-  <span class="hljs-attr">data</span>: &#123; 传入接口需要的参数,如订单<span class="hljs-variable constant_">ID</span>,openId等 &#125;,
-  <span class="hljs-title function_">success</span>(<span class="hljs-params">res</span>) &#123;
-    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">data</span>)
-    <span class="hljs-comment">//接口会返回以下核心参数</span>
-    <span class="hljs-comment">//timeStamp 时间戳</span>
-    <span class="hljs-comment">//nonceStr  随机字符串</span>
-    <span class="hljs-comment">//package   统一下单接口返回的 prepay_id 参数值</span>
-    <span class="hljs-comment">//signType  签名算法</span>
-    <span class="hljs-comment">//paySign   签名</span>
-  &#125;
-&#125;)</code></pre>
-
-<ol start="4">
-<li>通过支付核心参数调用wx.requestPayment()发起支付；</li>
-</ol>
-<pre><code class="hljs javascript"><span class="hljs-comment">//调用微信官方支付接口弹出付款界面,输入密码扣款</span>
-wx.<span class="hljs-title function_">requestPayment</span>(&#123;
-   timeStamp,  <span class="hljs-comment">//时间戳</span>
-   nonceStr,   <span class="hljs-comment">//随机字符串</span>
-   package,    <span class="hljs-comment">//prepay_id</span>
-   signType,   <span class="hljs-comment">//签名算法MD5</span>
-   paySign,    <span class="hljs-comment">//签名</span>
-   <span class="hljs-title function_">success</span> (res) &#123;
-     <span class="hljs-keyword">if</span> (res.<span class="hljs-property">errMsg</span> == <span class="hljs-string">&quot;requestPayment:ok&quot;</span>)&#123;
-        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;支付成功&#x27;</span>, res)
-     &#125;<span class="hljs-keyword">else</span>&#123;
-        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;支付失败&#x27;</span>)
-     &#125;
-   &#125;,
-   <span class="hljs-title function_">fail</span> (res) &#123; 
-     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;支付失败&#x27;</span>, res)
-   &#125;
-&#125;)</code></pre>
-
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ol>
-<li><p>登录：调用uni.login&#x2F;wx.login调用微信接口，获取code，调用后端后台获取openid；</p>
+    <h2 id="pinyin-pro-是一个非常强大的拼音处理库，提供了丰富的功能和灵活的配置选项，能够满足开发者在拼音转换、声母韵母提取、多音字处理等方面的需求。"><a href="#pinyin-pro-是一个非常强大的拼音处理库，提供了丰富的功能和灵活的配置选项，能够满足开发者在拼音转换、声母韵母提取、多音字处理等方面的需求。" class="headerlink" title="pinyin-pro 是一个非常强大的拼音处理库，提供了丰富的功能和灵活的配置选项，能够满足开发者在拼音转换、声母韵母提取、多音字处理等方面的需求。"></a><code>pinyin-pro</code> 是一个非常强大的拼音处理库，提供了丰富的功能和灵活的配置选项，能够满足开发者在拼音转换、声母韵母提取、多音字处理等方面的需求。<br><img src="https://gitee.com/newbiefpf/picture-database/raw/master/20250228182059707.png" alt="image-20250228161900970"></h2><h3 id="核心功能总结"><a href="#核心功能总结" class="headerlink" title="核心功能总结"></a><strong>核心功能总结</strong></h3><ol>
+<li><p><strong>拼音转换</strong>：</p>
+<ul>
+<li>支持带音调、不带音调、数字音调后缀等多种拼音格式。</li>
+<li>支持返回字符串或数组格式的拼音。</li>
+</ul>
 </li>
-<li><p>订单：调用后端接口获取订单ID，再调用后端接口传入openid、商品id、商品单价、商品数量等参数获取预支付的重要参数（时间戳timeStamp，随机字符串nonceStr，预支付id package，签名算法signType，签名paySign）</p>
+<li><p><strong>声母和韵母提取</strong>：</p>
+<ul>
+<li>可以单独提取拼音的声母或韵母。</li>
+<li>支持韵头、韵腹、韵尾的详细拆分。</li>
+</ul>
 </li>
-<li><p>支付：调用uni&#x2F;wx.requestPayment微信支付方法，传递5个重要参数，获取支付结果（成功或失败）</p>
-<p>可以参考 <a target="_blank" rel="noopener" href="https://uniapp.dcloud.net.cn/tutorial/platform.html#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95">官网文档</a></p>
+<li><p><strong>多音字处理</strong>：</p>
+<ul>
+<li>支持多音字的拼音输出，返回所有可能的拼音。</li>
+</ul>
+</li>
+<li><p><strong>姓氏模式</strong>：</p>
+<ul>
+<li>针对姓氏中的多音字，提供优先输出姓氏拼音的功能。</li>
+</ul>
+</li>
+<li><p><strong>非汉字字符处理</strong>：</p>
+<ul>
+<li>支持保留、移除或连续处理非汉字字符。</li>
+</ul>
+</li>
+<li><p><strong>拼音格式自定义</strong>：</p>
+<ul>
+<li>支持自定义拼音间的分隔符。</li>
+<li>支持将拼音中的 <code>ü</code> 替换为 <code>v</code>。</li>
+</ul>
+</li>
+<li><p><strong>分词算法选择</strong>：</p>
+<ul>
+<li>提供多种分词算法，适用于不同的文本处理场景。</li>
+</ul>
+</li>
+<li><p><strong>完整拼音信息</strong>：</p>
+<ul>
+<li>支持返回拼音的完整信息，包括声母、韵母、音调等。</li>
+</ul>
 </li>
 </ol>
+<hr>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a><strong>适用场景</strong></h3><ol>
+<li><p><strong>中文搜索</strong>：</p>
+<ul>
+<li>通过拼音转换，实现中文内容的拼音搜索功能。</li>
+</ul>
+</li>
+<li><p><strong>姓名处理</strong>：</p>
+<ul>
+<li>针对中文姓名，提供姓氏优先的拼音输出。</li>
+</ul>
+</li>
+<li><p><strong>多音字处理</strong>：</p>
+<ul>
+<li>在需要精确拼音的场景中，处理多音字的拼音输出。</li>
+</ul>
+</li>
+<li><p><strong>文本分析</strong>：</p>
+<ul>
+<li>提取拼音的声母、韵母等信息，用于文本分析或语音处理。</li>
+</ul>
+</li>
+<li><p><strong>国际化支持</strong>：</p>
+<ul>
+<li>将中文内容转换为拼音，方便国际化场景中的使用。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="使用建议"><a href="#使用建议" class="headerlink" title="使用建议"></a><strong>使用建议</strong></h3><ol>
+<li><p><strong>根据需求选择合适的配置</strong>：</p>
+<ul>
+<li>如果需要带音调的拼音，使用 <code>toneType: &#39;symbol&#39;</code>。</li>
+<li>如果需要处理多音字，开启 <code>multiple: true</code>。</li>
+<li>如果需要处理姓氏中的多音字，使用 <code>surname: &#39;head&#39;</code> 或 <code>surname: &#39;all&#39;</code>。</li>
+</ul>
+</li>
+<li><p><strong>处理非汉字字符</strong>：</p>
+<ul>
+<li>如果文本中包含非汉字字符，根据需求选择 <code>nonZh: &#39;spaced&#39;</code>、<code>nonZh: &#39;consecutive&#39;</code> 或 <code>nonZh: &#39;removed&#39;</code>。</li>
+</ul>
+</li>
+<li><p><strong>性能优化</strong>：</p>
+<ul>
+<li>对于长文本，可以选择合适的分词算法（<code>segmentit</code>）以提高性能。</li>
+</ul>
+</li>
+<li><p><strong>调试和测试</strong>：</p>
+<ul>
+<li>使用 <code>type: &#39;all&#39;</code> 获取完整的拼音信息，便于调试和验证结果。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a><strong>示例代码</strong></h3><p>以下是一个综合示例，展示了如何使用 <code>pinyin-pro</code> 处理中文文本：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; pinyin &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;pinyin-pro&#x27;</span>;
+
+<span class="hljs-comment">// 示例文本</span>
+<span class="hljs-keyword">const</span> text = <span class="hljs-string">&#x27;我叫曾乐乐，是一名程序员。&#x27;</span>;
+
+<span class="hljs-comment">// 获取带音调的拼音</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">pinyin</span>(text)); <span class="hljs-comment">// &#x27;wǒ jiào céng lè lè ， shì yī míng chéng xù yuán 。&#x27;</span>
+
+<span class="hljs-comment">// 获取不带音调的拼音</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">pinyin</span>(text, &#123; <span class="hljs-attr">toneType</span>: <span class="hljs-string">&#x27;none&#x27;</span> &#125;)); <span class="hljs-comment">// &#x27;wo jiao ceng le le ， shi yi ming cheng xu yuan 。&#x27;</span>
+
+<span class="hljs-comment">// 获取拼音的首字母</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">pinyin</span>(text, &#123; <span class="hljs-attr">pattern</span>: <span class="hljs-string">&#x27;first&#x27;</span>, <span class="hljs-attr">toneType</span>: <span class="hljs-string">&#x27;none&#x27;</span> &#125;)); <span class="hljs-comment">// &#x27;w j c l l ， s y m c x y 。&#x27;</span>
+
+<span class="hljs-comment">// 处理多音字</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">pinyin</span>(<span class="hljs-string">&#x27;好&#x27;</span>, &#123; <span class="hljs-attr">multiple</span>: <span class="hljs-literal">true</span> &#125;)); <span class="hljs-comment">// &#x27;hǎo hào&#x27;</span>
+
+<span class="hljs-comment">// 开启姓氏模式</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">pinyin</span>(<span class="hljs-string">&#x27;我叫曾乐乐&#x27;</span>, &#123; <span class="hljs-attr">surname</span>: <span class="hljs-string">&#x27;head&#x27;</span> &#125;)); <span class="hljs-comment">// &#x27;wǒ jiào zēng lè lè&#x27;</span>
+
+<span class="hljs-comment">// 处理非汉字字符</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">pinyin</span>(<span class="hljs-string">&#x27;我very喜欢你&#x27;</span>, &#123; <span class="hljs-attr">nonZh</span>: <span class="hljs-string">&#x27;consecutive&#x27;</span> &#125;)); <span class="hljs-comment">// &#x27;wǒ very xǐ huān nǐ&#x27;</span></code></pre>
+
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p><code>pinyin-pro</code> 是一个功能强大且灵活的拼音处理库，适用于各种中文文本处理场景。通过合理配置参数，开发者可以轻松实现拼音转换、声母韵母提取、多音字处理等功能。建议根据实际需求选择合适的配置，并结合文档进行深入学习和使用。</p>
 
   </div>
   <!-- <div id="gitalk-container"></div> -->
@@ -463,19 +507,19 @@ Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
 
     <div class="post-paging">
     
-    <a href="/2024/05/15/MapAPI/">
+    <a href="/2024/04/18/Payment/">
         <div class="post-paging-last">
             <span>上一篇</span>
-            <p>Vue集成腾讯地图API高效接入与交互实战指南</p>
+            <p>微信小程序支付</p>
         </div>
     </a>
     
 
     
-    <a href="/2024/03/02/pinyin/">
+    <a href="/2024/01/02/shaomaLogin/">
         <div class="post-paging-next">
             <span>下一篇</span>
-            <p>pinyin-pro</p>
+            <p>微信扫码登录</p>
         </div>
     </a>
     
