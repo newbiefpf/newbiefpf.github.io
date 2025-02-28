@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+<title>Vue中使用vuedraggable完整指南-newbie</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico">
+
+<link rel="stylesheet" href="/css/index.css">
+
+
+
+<meta name="keywords" content="vuedraggable,">
+<meta name="description" content="vuedraggable是一个基于 Vue 的拖拽排序组件，封装了 SortableJS">
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/index.js"></script>
+
+
+<script src="/js/fancybox.umd.js"></script>
+
+
+<script src="/js/fancybox-images.js"></script>
+
+
+<script src="/js/gitalk.min.js"></script>
+
+
+<script src="/js/hljs.min.js"></script>
+ 
+<script>hljs.highlightAll();</script>
+
+	<meta name="generator" content="Hexo 7.3.0"></head>
+
+	<body>
+		
+	<div class="header">
+		<div class="header-top" id="header-top">
+			<div class="h-left">
+				<a href="/">
+					<img src="/image/logo.png" alt="FPF">
+				</a>
+				
+				<span style="color: #c9d1d9;font-weight: bolder; ">&nbsp;&nbsp;付鹏篚的笔记 </span>
+			</div>
+			<div class="h-right">
+				<ul>
+					
+						
+								<li>
+									<a href="/">
+										主页
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/archives">
+										归档
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/categories">
+										分类
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/tags">
+										标签
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/about">
+										关于
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+				</ul>
+			</div>
+			<div class="h-right-close">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+					<path fill="none" d="M0 0h24v24H0z" />
+					<path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(68,68,68,1)" />
+				</svg>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar">
+    <div class="topo">
+        <h2>付鹏篚</h2>
+    </div>
+    <ul>
+        
+        <li>
+            <a href="/">主页</a>
+        </li>
+        
+        <li>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <a href="/about">关于</a>
+        </li>
+        
+    </ul>
+    <div class="my_foot">
+        
+        <a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+            <img src="/image/logo.png" alt="Quiet主题">
+        </a>
+        
+    </div>
+</div>
+<div class='shelter'>
+</div>
+<style>
+    .shelter{
+        background-color: #333;
+        opacity:0.5;
+        cursor: pointer;
+        display: none; 
+        position: fixed;
+        left: 0;
+        top: 0; 
+        right: 0;
+        bottom: 0;
+        z-index: 1998;
+    }
+    .sidebar {
+        width: 66%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        background: #fff;
+        z-index: 1999;
+        text-align: center;
+        box-shadow: -6px 0 20px rgba(98, 94, 94, .815);
+    }
+
+    .topo {
+        width: 100%;
+        height: 200px;
+        background: url(https://api.ixiaowai.cn/gqapi/gqapi.php) no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+        display: flex;
+        align-items: flex-end
+    }
+
+    .topo h2 {
+        color: #fff;
+        z-index: 1;
+        position: relative;
+        margin: 0 0 10px 10px;
+        font-size: 1.2em;
+        box-sizing: border-box
+    }
+
+    .topo:before {
+        content: '';
+        background-image: url(/image/pattern.png);
+        background-repeat: repeat;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1
+    }
+
+    .sidebar ul {
+        width: 100%;
+        margin-top: 50px
+    }
+
+    .sidebar ul li {
+        height: 50px;
+        list-style: none;
+        font-size: 1.2em;
+        text-align: right;
+        margin-right: 10px
+    }
+
+    .sidebar ul li a {
+        display: grid;
+        color: #5d606a;
+        text-overflow: ellipsis;
+        width: 100%;
+        text-decoration: none
+    }
+
+    .my_foot {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        position: absolute;
+        bottom: 0
+    }
+
+    .my_foot a {
+        text-decoration: none;
+        margin-right: 10px;
+        display: inline-block
+    }
+
+    .my_foot a img {
+        width: 30px;
+        height: 30px
+    }
+</style>
+
+<script>
+    $( function () {
+	$( '.h-right-close>svg' )
+		.click( function () {
+			$( '.sidebar' )
+				.animate( {
+					right: "0"
+				}, 500 );
+			$( '.shelter' )
+				.fadeIn( "slow" )
+		} );
+	$( '.shelter' )
+		.click( function ( e ) {
+			$( '.sidebar' )
+				.animate( {
+					right: "-100%"
+				}, 500 );
+			$( '.shelter' )
+				.fadeOut( "slow" )
+		} )
+} )
+
+</script>
+
+<div class="post">
+    <div class="post-header-background post-header-img"
+    
+>
+    <div class="post-header-background-content">
+        <ul class="post-header-tag">
+            
+                
+                    <li><a href="/tags/vuedraggable">vuedraggable</a></li>
+                
+            
+        </ul>
+        
+        <h1>Vue中使用vuedraggable完整指南</h1>
+
+        <div class="post-header-info">
+            <div class="post-header-info-author">
+                
+                    <svg t="1604839279282" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="2901" width="20" height="20">
+                        <path
+                            d="M513 956.3c-247.7 0-448-200.3-448-448S265.3 66.2 513 66.2s448 200.3 448 448-200.3 442.1-448 442.1z m0-830.9c-212.2 0-388.8 170.7-388.8 388.8C124.2 726.3 294.9 903 513 903c212.2 0 388.8-170.7 388.8-388.8S725.2 125.4 513 125.4z m0 430.2c-94.2 0-170.7-76.5-170.7-170.7S418.8 207.8 513 207.8s170.7 76.5 170.7 170.7S607.2 555.6 513 555.6z m0-289.1c-64.6 0-112 52.8-112 112s47.4 117.9 112 117.9 112-52.8 112-112-47.4-117.9-112-117.9z m0 689.8c-135.7 0-259-58.7-341.9-158.9l-11.8-17.8 11.8-17.8c76.5-117.9 206.2-188.5 347.8-188.5 135.7 0 265 64.6 341.9 182.6l11.8 17.8-11.8 17.8C778 897.1 648.7 956.3 513 956.3zM230.3 773.2C300.9 849.7 406.9 897 513 897c112 0 218.1-47.4 288.6-129.8-70.5-88.2-170.7-135.6-282.7-135.6s-218.1 53.3-288.6 141.6z"
+                            p-id="2902" fill="#ffffff"></path>
+                    </svg>
+                
+                <span class="post-header-info-author-text"> 
+                    <a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+                        付鹏篚
+                    </a>
+                </span>
+                <div class="post-header-info-author-categories">
+                    
+                        
+                            <a href="../../categories/Vue/" target="_blank">Vue</a>
+                        
+                    
+                </div>
+                <p>2019-03-25 20:00:00</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="post-content" id="content">
+  
+  <div id="article" class="post-content-info">
+    
+      <div id="post-toc">
+        <span class="post-toc-title">文章目录</span>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8-Vue-%E4%B8%AD%E4%BD%BF%E7%94%A8-vuedraggable-%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97"><span class="toc-text">在 Vue 中使用 vuedraggable 完整指南</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85-vuedraggable"><span class="toc-text">1. 安装 vuedraggable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%AF%BC%E5%85%A5-vuedraggable"><span class="toc-text">2. 导入 vuedraggable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%9C%A8%E6%A8%A1%E6%9D%BF%E4%B8%AD%E4%BD%BF%E7%94%A8-draggable"><span class="toc-text">3. 在模板中使用 draggable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="toc-text">4. 事件处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E6%A0%B7%E5%BC%8F"><span class="toc-text">5. 样式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD"><span class="toc-text">6. 高级功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E6%8B%96%E6%8B%BD%E7%BB%84"><span class="toc-text">7. 拖拽组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-%E4%BF%9D%E5%AD%98%E6%8B%96%E6%8B%BD%E5%90%8E%E7%9A%84%E9%A1%BA%E5%BA%8F"><span class="toc-text">8. 保存拖拽后的顺序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E5%8F%82%E8%80%83"><span class="toc-text">官方文档参考</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <h3 id="在-Vue-中使用-vuedraggable-完整指南"><a href="#在-Vue-中使用-vuedraggable-完整指南" class="headerlink" title="在 Vue 中使用 vuedraggable 完整指南"></a>在 Vue 中使用 <code>vuedraggable</code> 完整指南</h3><p><code>vuedraggable</code> 是一个基于 Vue 的拖拽排序组件，封装了 <code>SortableJS</code>，可以帮助快速实现拖拽排序、拖拽移动等功能。这个组件支持多种拖拽操作，可以轻松实现列表、卡片等元素的交互功能。</p>
+<h4 id="1-安装-vuedraggable"><a href="#1-安装-vuedraggable" class="headerlink" title="1. 安装 vuedraggable"></a>1. 安装 <code>vuedraggable</code></h4><p>首先需要安装 <code>vuedraggable</code>，可以使用 npm 或 yarn 进行安装。</p>
+<pre><code class="hljs bash">npm install vuedraggable</code></pre>
+
+<p>或</p>
+<pre><code class="hljs bash">yarn add vuedraggable</code></pre>
+
+<h4 id="2-导入-vuedraggable"><a href="#2-导入-vuedraggable" class="headerlink" title="2. 导入 vuedraggable"></a>2. 导入 <code>vuedraggable</code></h4><p>在需要使用的 Vue 组件中导入 <code>vuedraggable</code>，并将其注册为一个局部组件。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">import</span> draggable <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vuedraggable&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;
+  <span class="hljs-attr">components</span>: &#123;
+    draggable
+  &#125;,
+  <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">return</span> &#123;
+      <span class="hljs-attr">items</span>: [
+        &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Item 1&#x27;</span> &#125;,
+        &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Item 2&#x27;</span> &#125;,
+        &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Item 3&#x27;</span> &#125;,
+        &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Item 4&#x27;</span> &#125;
+      ]
+    &#125;;
+  &#125;
+&#125;;</code></pre>
+
+<h4 id="3-在模板中使用-draggable"><a href="#3-在模板中使用-draggable" class="headerlink" title="3. 在模板中使用 draggable"></a>3. 在模板中使用 <code>draggable</code></h4><p>在模板中，将 <code>draggable</code> 用作容器，包裹需要拖拽的列表项，并通过 <code>v-model</code> 将拖拽的列表项与组件的 data 数据绑定。</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">draggable</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;items&quot;</span> <span class="hljs-attr">group</span>=<span class="hljs-string">&quot;items&quot;</span> @<span class="hljs-attr">end</span>=<span class="hljs-string">&quot;onDragEnd&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;item in items&quot;</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;item.id&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item&quot;</span>&gt;</span>
+        &#123;&#123; item.name &#125;&#125;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">draggable</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></code></pre>
+
+<ul>
+<li><code>v-model=&quot;items&quot;</code>：绑定数据，确保拖拽后数组的顺序会自动更新。</li>
+<li><code>group=&quot;items&quot;</code>：设置拖拽组，可以允许不同列表之间的元素互相拖动。如果只有一个列表，不需要设置 <code>group</code>。</li>
+<li><code>@end=&quot;onDragEnd&quot;</code>：监听拖拽结束的事件。</li>
+</ul>
+<h4 id="4-事件处理"><a href="#4-事件处理" class="headerlink" title="4. 事件处理"></a>4. 事件处理</h4><p><code>vuedraggable</code> 提供了几个常用的事件，可以在拖拽开始和结束时执行特定的逻辑。</p>
+<ul>
+<li><code>@start</code>：拖拽开始时触发。</li>
+<li><code>@end</code>：拖拽结束时触发。</li>
+<li><code>@add</code>：当元素被插入到拖拽列表时触发。</li>
+<li><code>@remove</code>：当元素被移出列表时触发。</li>
+</ul>
+<p>例如，使用 <code>@end</code> 事件来处理拖拽后的逻辑：</p>
+<pre><code class="hljs javascript"><span class="hljs-attr">methods</span>: &#123;
+  <span class="hljs-title function_">onDragEnd</span>(<span class="hljs-params">evt</span>) &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;拖拽结束&#x27;</span>, evt);
+    <span class="hljs-comment">// 可以在这里处理数据更新、保存排序等操作</span>
+  &#125;
+&#125;</code></pre>
+
+<h4 id="5-样式"><a href="#5-样式" class="headerlink" title="5. 样式"></a>5. 样式</h4><p>为每个拖拽项添加样式，确保它们具有明显的可拖拽视觉提示：</p>
+<pre><code class="hljs css">&lt;style scoped&gt;
+<span class="hljs-selector-class">.item</span> &#123;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">5px</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f1f1f1</span>;
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#ddd</span>;
+  <span class="hljs-attribute">cursor</span>: move; <span class="hljs-comment">/* 提示用户可以拖拽 */</span>
+&#125;
+&lt;/style&gt;</code></pre>
+
+<h4 id="6-高级功能"><a href="#6-高级功能" class="headerlink" title="6. 高级功能"></a>6. 高级功能</h4><ul>
+<li><strong>禁用拖拽</strong></li>
+</ul>
+<p>通过设置 <code>:disabled=&quot;true&quot;</code>，可以禁用整个拖拽功能。</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">draggable</span> <span class="hljs-attr">:disabled</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;items&quot;</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- 这里的内容不能被拖拽 --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">draggable</span>&gt;</span></code></pre>
+
+<ul>
+<li><strong>自定义拖拽句柄</strong></li>
+</ul>
+<p>使用 <code>:handle</code> 属性指定可以拖拽的区域，例如可以通过添加一个特定的 “拖拽图标” 来控制拖拽区域：</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">draggable</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;items&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;item in items&quot;</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;item.id&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;handle&quot;</span>&gt;</span>☰<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> <span class="hljs-comment">&lt;!-- 只有点击这个区域才可以拖拽 --&gt;</span>
+    &#123;&#123; item.name &#125;&#125;
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">draggable</span>&gt;</span></code></pre>
+
+<h4 id="7-拖拽组"><a href="#7-拖拽组" class="headerlink" title="7. 拖拽组"></a>7. 拖拽组</h4><p><code>vuedraggable</code> 支持多个拖拽组，用于跨多个列表之间拖拽元素。在多个 <code>draggable</code> 组件中，设置相同的 <code>group</code> 属性，就能实现跨列表的拖拽操作。</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">draggable</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;items1&quot;</span> <span class="hljs-attr">group</span>=<span class="hljs-string">&quot;shared&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;list&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;item in items1&quot;</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;item.id&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item&quot;</span>&gt;</span>
+    &#123;&#123; item.name &#125;&#125;
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">draggable</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">draggable</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;items2&quot;</span> <span class="hljs-attr">group</span>=<span class="hljs-string">&quot;shared&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;list&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;item in items2&quot;</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;item.id&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item&quot;</span>&gt;</span>
+    &#123;&#123; item.name &#125;&#125;
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">draggable</span>&gt;</span></code></pre>
+
+<p>在这个例子中，<code>items1</code> 和 <code>items2</code> 可以互相拖动，形成跨列表拖拽的功能。</p>
+<h4 id="8-保存拖拽后的顺序"><a href="#8-保存拖拽后的顺序" class="headerlink" title="8. 保存拖拽后的顺序"></a>8. 保存拖拽后的顺序</h4><p>当拖拽完成后，通常需要保存新的排序顺序。通过监听 <code>@end</code> 事件并将新的数据传到服务器或本地存储，可以实现数据的持久化。</p>
+<pre><code class="hljs javascript"><span class="hljs-attr">methods</span>: &#123;
+  <span class="hljs-title function_">onDragEnd</span>(<span class="hljs-params">evt</span>) &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;新的顺序:&#x27;</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">items</span>);
+    <span class="hljs-comment">// 将新的顺序保存到后端或本地存储</span>
+  &#125;
+&#125;</code></pre>
+
+<h4 id="官方文档参考"><a href="#官方文档参考" class="headerlink" title="官方文档参考"></a>官方文档参考</h4><p>更多的配置选项和功能说明，可以参考 <code>vuedraggable</code> 的官方文档：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://sortablejs.github.io/Vue.Draggable/">vuedraggable 官方文档</a></li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><code>vuedraggable</code> 是一个功能强大的拖拽组件，可以轻松实现 Vue 应用中的列表排序和跨列表拖拽。通过简单的安装和配置，可以快速为项目添加拖拽功能，并通过自定义事件和样式进行扩展。</p>
+
+  </div>
+  <!-- <div id="gitalk-container"></div> -->
+</div>
+
+<script>
+  
+Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
+  dragToClose: true,
+  Toolbar: true,
+  closeButton: "top",
+  Image: {
+    zoom: true,
+  },
+  on: {
+    initCarousel: (fancybox) => {
+      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+    "Carousel.change": (fancybox, carousel, to, from) => {
+      const slide = carousel.slides[to];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+  },
+});
+</script>
+
+<style>
+    #noneimg img {
+        display: none;
+        z-index: 9999;
+        /* width: 600px !important; */
+        min-width: 0%;
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 0px;
+        position: fixed;
+        box-shadow: 0 0 0px #c3c3c300 !important;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto !important;
+    }
+
+    @media screen and (max-width:600px) {
+        #noneimg img {
+            max-width: 88%
+        }
+    }
+</style>
+
+    <div class="post-paging">
+    
+    <a href="/2019/04/15/MapAPI/">
+        <div class="post-paging-last">
+            <span>上一篇</span>
+            <p>Vue集成腾讯地图API高效接入与交互实战指南</p>
+        </div>
+    </a>
+    
+
+    
+    <a href="/2019/03/15/WebSocket/">
+        <div class="post-paging-next">
+            <span>下一篇</span>
+            <p>WebSocket配置与使用指南</p>
+        </div>
+    </a>
+    
+</div>
+</div>
+		
+<div class="footer">
+	<div class="Copyright">
+		©2025 By 付鹏篚. 主题：<a
+			style="text-decoration: none;display: contents; color: #898F9F;"
+			href="#">Quiet</a>
+	</div>
+	<div class="contact">
+		
+		<a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+			<img src="/image/logo.png" alt="Quiet主题">
+		</a>
+		
+	</div>
+</div>
+
+<script src="/js/gotop.js"></script>
+
+
+<style type="text/css">
+    @media screen and (min-width: 600px) {
+        .goTop>span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            opacity: 0.8;
+            background: #F1F5FB;
+            text-align: center;
+            transition: border .5s;
+            border: 1px solid rgba(18, 24, 58, 0.06);
+
+            -moz-transition: border .5s;
+            /* Firefox 4 */
+            -webkit-transition: border .5s;
+            /* Safari 和 Chrome */
+            -o-transition: border .5s;
+            /* Opera */
+        }
+
+        .goTop>span:hover {
+            border: 1px solid #6680B3;
+        }
+
+
+        .goTop {
+            position: fixed;
+            right: 30px;
+            bottom: 80px;
+        }
+
+        .goTop>span>svg {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+    }
+
+    @media screen and (max-width: 600px) {
+        .goTop {
+            display: none;
+        }
+    }
+</style>
+<div class="goTop" id="js-go_top">
+    <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g>
+                <path d="M13 12v8h-2v-8H4l8-8 8 8z"></path>
+            </g>
+        </svg>
+    </span>
+</div>
+<script>
+    $( '#js-go_top' )
+	.gotoTop( {
+		offset: 500,
+		speed: 300,
+		animationShow: {
+			'transform': 'translate(0,0)',
+			'transition': 'transform .5s ease-in-out'
+		},
+		animationHide: {
+			'transform': 'translate(100px,0)',
+			'transition': 'transform .5s ease-in-out'
+		}
+	} );
+</script>
+
+
+    <!-- Gitalk -->
+    <script>
+        const data = '{"clientID":"02b3c","clientSecret":"adfc7b4","repo":"gimment","owner":"duneng","admin":"duneng"}'
+        const gitalk = new Gitalk({
+            ...JSON.parse( data),
+            id:location.pathname,
+            distractionFreeMode:false
+        })
+        
+        // if(Boolean('true')){
+        //     gitalk.render('gitalk-container')
+        // }
+    </script>
+
+
+	</body>
+</html>
+

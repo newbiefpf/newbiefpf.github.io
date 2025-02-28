@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+<title>WebSocket配置与使用指南-newbie</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico">
+
+<link rel="stylesheet" href="/css/index.css">
+
+
+
+<meta name="keywords" content="配置,WebSocket,">
+<meta name="description" content="一篇关于如何配置与使用WebSocket博客的详细指南">
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/index.js"></script>
+
+
+<script src="/js/fancybox.umd.js"></script>
+
+
+<script src="/js/fancybox-images.js"></script>
+
+
+<script src="/js/gitalk.min.js"></script>
+
+
+<script src="/js/hljs.min.js"></script>
+ 
+<script>hljs.highlightAll();</script>
+
+	<meta name="generator" content="Hexo 7.3.0"></head>
+
+	<body>
+		
+	<div class="header">
+		<div class="header-top" id="header-top">
+			<div class="h-left">
+				<a href="/">
+					<img src="/image/logo.png" alt="FPF">
+				</a>
+				
+				<span style="color: #c9d1d9;font-weight: bolder; ">&nbsp;&nbsp;付鹏篚的笔记 </span>
+			</div>
+			<div class="h-right">
+				<ul>
+					
+						
+								<li>
+									<a href="/">
+										主页
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/archives">
+										归档
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/categories">
+										分类
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/tags">
+										标签
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/about">
+										关于
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+				</ul>
+			</div>
+			<div class="h-right-close">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+					<path fill="none" d="M0 0h24v24H0z" />
+					<path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(68,68,68,1)" />
+				</svg>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar">
+    <div class="topo">
+        <h2>付鹏篚</h2>
+    </div>
+    <ul>
+        
+        <li>
+            <a href="/">主页</a>
+        </li>
+        
+        <li>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <a href="/about">关于</a>
+        </li>
+        
+    </ul>
+    <div class="my_foot">
+        
+        <a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+            <img src="/image/logo.png" alt="Quiet主题">
+        </a>
+        
+    </div>
+</div>
+<div class='shelter'>
+</div>
+<style>
+    .shelter{
+        background-color: #333;
+        opacity:0.5;
+        cursor: pointer;
+        display: none; 
+        position: fixed;
+        left: 0;
+        top: 0; 
+        right: 0;
+        bottom: 0;
+        z-index: 1998;
+    }
+    .sidebar {
+        width: 66%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        background: #fff;
+        z-index: 1999;
+        text-align: center;
+        box-shadow: -6px 0 20px rgba(98, 94, 94, .815);
+    }
+
+    .topo {
+        width: 100%;
+        height: 200px;
+        background: url(https://api.ixiaowai.cn/gqapi/gqapi.php) no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+        display: flex;
+        align-items: flex-end
+    }
+
+    .topo h2 {
+        color: #fff;
+        z-index: 1;
+        position: relative;
+        margin: 0 0 10px 10px;
+        font-size: 1.2em;
+        box-sizing: border-box
+    }
+
+    .topo:before {
+        content: '';
+        background-image: url(/image/pattern.png);
+        background-repeat: repeat;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1
+    }
+
+    .sidebar ul {
+        width: 100%;
+        margin-top: 50px
+    }
+
+    .sidebar ul li {
+        height: 50px;
+        list-style: none;
+        font-size: 1.2em;
+        text-align: right;
+        margin-right: 10px
+    }
+
+    .sidebar ul li a {
+        display: grid;
+        color: #5d606a;
+        text-overflow: ellipsis;
+        width: 100%;
+        text-decoration: none
+    }
+
+    .my_foot {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        position: absolute;
+        bottom: 0
+    }
+
+    .my_foot a {
+        text-decoration: none;
+        margin-right: 10px;
+        display: inline-block
+    }
+
+    .my_foot a img {
+        width: 30px;
+        height: 30px
+    }
+</style>
+
+<script>
+    $( function () {
+	$( '.h-right-close>svg' )
+		.click( function () {
+			$( '.sidebar' )
+				.animate( {
+					right: "0"
+				}, 500 );
+			$( '.shelter' )
+				.fadeIn( "slow" )
+		} );
+	$( '.shelter' )
+		.click( function ( e ) {
+			$( '.sidebar' )
+				.animate( {
+					right: "-100%"
+				}, 500 );
+			$( '.shelter' )
+				.fadeOut( "slow" )
+		} )
+} )
+
+</script>
+
+<div class="post">
+    <div class="post-header-background post-header-img"
+    
+>
+    <div class="post-header-background-content">
+        <ul class="post-header-tag">
+            
+                
+                    <li><a href="/tags/配置">配置</a></li>
+                
+                    <li><a href="/tags/WebSocket">WebSocket</a></li>
+                
+            
+        </ul>
+        
+        <h1>WebSocket配置与使用指南</h1>
+
+        <div class="post-header-info">
+            <div class="post-header-info-author">
+                
+                    <svg t="1604839279282" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="2901" width="20" height="20">
+                        <path
+                            d="M513 956.3c-247.7 0-448-200.3-448-448S265.3 66.2 513 66.2s448 200.3 448 448-200.3 442.1-448 442.1z m0-830.9c-212.2 0-388.8 170.7-388.8 388.8C124.2 726.3 294.9 903 513 903c212.2 0 388.8-170.7 388.8-388.8S725.2 125.4 513 125.4z m0 430.2c-94.2 0-170.7-76.5-170.7-170.7S418.8 207.8 513 207.8s170.7 76.5 170.7 170.7S607.2 555.6 513 555.6z m0-289.1c-64.6 0-112 52.8-112 112s47.4 117.9 112 117.9 112-52.8 112-112-47.4-117.9-112-117.9z m0 689.8c-135.7 0-259-58.7-341.9-158.9l-11.8-17.8 11.8-17.8c76.5-117.9 206.2-188.5 347.8-188.5 135.7 0 265 64.6 341.9 182.6l11.8 17.8-11.8 17.8C778 897.1 648.7 956.3 513 956.3zM230.3 773.2C300.9 849.7 406.9 897 513 897c112 0 218.1-47.4 288.6-129.8-70.5-88.2-170.7-135.6-282.7-135.6s-218.1 53.3-288.6 141.6z"
+                            p-id="2902" fill="#ffffff"></path>
+                    </svg>
+                
+                <span class="post-header-info-author-text"> 
+                    <a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+                        付鹏篚
+                    </a>
+                </span>
+                <div class="post-header-info-author-categories">
+                    
+                        
+                            <a href="../../categories/通信/" target="_blank">通信</a>
+                        
+                    
+                </div>
+                <p>2019-03-15 03:00:00</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="post-content" id="content">
+  
+  <div id="article" class="post-content-info">
+    
+      <div id="post-toc">
+        <span class="post-toc-title">文章目录</span>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81WebSocket%EF%BC%9F"><span class="toc-text">为什么需要WebSocket？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue-js%E4%B8%AD%E7%9A%84WebSocket%E8%BF%9E%E6%8E%A5"><span class="toc-text">Vue.js中的WebSocket连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#websocket%E5%B8%B8%E7%94%A8%E4%BA%8B%E4%BB%B6"><span class="toc-text">websocket常用事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WebSocket%E8%BF%9E%E6%8E%A5%E9%85%8D%E7%BD%AE"><span class="toc-text">WebSocket连接配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E6%B6%88%E6%81%AF"><span class="toc-text">发送初始化消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E6%94%B6WebSocket%E6%B6%88%E6%81%AF"><span class="toc-text">接收WebSocket消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E9%87%8D%E8%BF%9E%E9%97%B4%E9%9A%94%E5%8F%8A%E5%BF%83%E8%B7%B3"><span class="toc-text">设置重连间隔及心跳</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%83%E8%B7%B3%E6%A3%80%E6%B5%8B%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-text">心跳检测定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="toc-text">完整代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+      </div>
+    
+
+    <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>WebSocket是一种在Web应用程序中实现<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%8F%8C%E5%90%91%E9%80%9A%E4%BF%A1&spm=1001.2101.3001.7020">双向通信</a>的通信协议，它允许客户端和服务器之间建立持久的、低延迟的连接，以实现实时数据传输。相比传统的HTTP请求，WebSocket更适合需要实时性和交互性的应用程序。</p>
+<h3 id="为什么需要WebSocket？"><a href="#为什么需要WebSocket？" class="headerlink" title="为什么需要WebSocket？"></a>为什么需要WebSocket？</h3><p>WebSocket解决了传统HTTP请求的一些限制，例如：</p>
+<ul>
+<li>实时性: 传统HTTP请求需要客户端定期轮询服务器以获取新数据，而WebSocket允许服务器主动推送数据给客户端，实现实时更新。</li>
+<li>双向通信: WebSocket支持双向通信，客户端和服务器都可以发送消息，而不是仅限于客户端向服务器发送请求。</li>
+<li>低延迟: WebSocket连接保持开放，减少了连接和断开的开销，从而实现更低的通信延迟。</li>
+</ul>
+<h3 id="Vue-js中的WebSocket连接"><a href="#Vue-js中的WebSocket连接" class="headerlink" title="Vue.js中的WebSocket连接"></a>Vue.js中的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=WebSocket%E8%BF%9E%E6%8E%A5&spm=1001.2101.3001.7020">WebSocket连接</a></h3><p>Vue.js是一种流行的JavaScript框架，它使得构建现代Web应用程序变得更加容易。在Vue.js中实现WebSocket连接可以轻松地将实时通信功能集成到应用程序中。</p>
+<h3 id="websocket常用事件"><a href="#websocket常用事件" class="headerlink" title="websocket常用事件"></a>websocket常用事件</h3><ul>
+<li>setupWebSocket(): 用于创建WebSocket连接，配置WebSocket对象，并定义连接的事件处理函数。</li>
+<li>closeWebSocket(): 用于关闭WebSocket连接。</li>
+<li>onWebSocketOpen(): WebSocket连接成功时的事件处理函数。</li>
+<li>onWebSocketMessage(event): 处理接收到的WebSocket消息。</li>
+<li>onWebSocketClose(): 处理WebSocket连接关闭事件。</li>
+<li>sendMessage(message): 用于发送消息到WebSocket服务器。</li>
+<li>startHeartbeat(): 启动心跳检测。</li>
+<li>stopHeartbeat(): 停止心跳检测。</li>
+</ul>
+<h3 id="WebSocket连接配置"><a href="#WebSocket连接配置" class="headerlink" title="WebSocket连接配置"></a>WebSocket连接配置</h3><p>首先，我们需要创建一个Vue.js组件，负责WebSocket连接的创建和管理。在组件的data属性中，我们定义了WebSocket对象</p>
+<pre><code class="hljs javascript">&lt;template&gt;
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+<span class="language-xml">   </span>
+<span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+&lt;/template&gt;
+
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span>
+<span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">  <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-keyword">return</span> &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-attr">websocket</span>: <span class="hljs-literal">null</span>, <span class="hljs-comment">// WebSocket对象</span></span></span>
+<span class="language-javascript"><span class="language-xml">    &#125;;</span></span>
+<span class="language-javascript"><span class="language-xml">  &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">  <span class="hljs-title function_">created</span>(<span class="hljs-params"></span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setupWebSocket</span>(); <span class="hljs-comment">// 创建WebSocket连接</span></span></span>
+<span class="language-javascript"><span class="language-xml">  &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">  <span class="hljs-title function_">beforeDestroy</span>(<span class="hljs-params"></span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">closeWebSocket</span>(); <span class="hljs-comment">// 在组件销毁前关闭WebSocket连接</span></span></span>
+<span class="language-javascript"><span class="language-xml">  &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">  <span class="hljs-attr">methods</span>: &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">     <span class="hljs-title function_">setupWebSocket</span>(<span class="hljs-params"></span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">WebSocket</span>(<span class="hljs-string">&quot;ws链接&quot;</span>); <span class="hljs-comment">// 创建WebSocket连接</span></span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>.<span class="hljs-property">onopen</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">onWebSocketOpen</span>; <span class="hljs-comment">// WebSocket连接打开时的处理函数</span></span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>.<span class="hljs-property">onmessage</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">onWebSocketMessage</span>; <span class="hljs-comment">// 收到WebSocket消息时的处理函数</span></span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>.<span class="hljs-property">onclose</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">onWebSocketClose</span>; <span class="hljs-comment">// WebSocket连接关闭时的处理函数</span></span></span>
+<span class="language-javascript"><span class="language-xml">    &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">onWebSocketOpen</span>(<span class="hljs-params"></span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;链接成功&quot;</span>);</span></span>
+<span class="language-javascript"><span class="language-xml">    &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">closeWebSocket</span>(<span class="hljs-params"></span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">        <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>.<span class="hljs-title function_">close</span>(); <span class="hljs-comment">// 关闭WebSocket连接</span></span></span>
+<span class="language-javascript"><span class="language-xml">      &#125;</span></span>
+<span class="language-javascript"><span class="language-xml">    &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">  &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">&#125;;</span></span>
+<span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span></code></pre>
+
+<h3 id="发送初始化消息"><a href="#发送初始化消息" class="headerlink" title="发送初始化消息"></a>发送初始化消息</h3><p>在WebSocket连接成功后，我们可以在onWebSocketOpen方法中发送初始化消息到服务器。初始化消息的内容和格式应根据服务器的要求进行定义。</p>
+<pre><code class="hljs javascript"><span class="hljs-attr">methods</span>: &#123;
+  <span class="hljs-title function_">onWebSocketOpen</span>(<span class="hljs-params"></span>) &#123;
+   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;链接成功&quot;</span>);
+        
+    <span class="hljs-comment">// 发送初始化消息 根据后端定义的来</span>
+    <span class="hljs-keyword">const</span> initMessage = &#123;
+      <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;sub&#x27;</span>,
+      <span class="hljs-attr">topic</span>: <span class="hljs-string">&#x27;/aa/bb/cc/d&#x27;</span>,
+      <span class="hljs-attr">parameter</span>: &#123;&#125;,
+      <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;bb&#x27;</span>,
+    &#125;;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">sendMessage</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(initMessage));
+&#125;,
+<span class="hljs-title function_">sendMessage</span>(<span class="hljs-params">message</span>) &#123;
+      <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>.<span class="hljs-property">readyState</span> === <span class="hljs-title class_">WebSocket</span>.<span class="hljs-property">OPEN</span>) &#123;
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>.<span class="hljs-title function_">send</span>(message); <span class="hljs-comment">// 发送消息到WebSocket服务器</span>
+      &#125;
+    &#125;,
+
+  <span class="hljs-comment">// 其他方法</span>
+&#125;</code></pre>
+
+<p>这样，当WebSocket连接成功时，初始化消息将被自动发送到服务器，以便启动双向通信。</p>
+<h3 id="接收WebSocket消息"><a href="#接收WebSocket消息" class="headerlink" title="接收WebSocket消息"></a>接收WebSocket消息</h3><p>在onWebSocketMessage方法中，我们通过event.data获取从服务器接收到的消息，然后可以根据消息的内容执行相应的操作。</p>
+<pre><code class="hljs javascript"><span class="hljs-attr">methods</span>: &#123;
+  <span class="hljs-comment">// ... 其他方法 ...</span>
+
+  <span class="hljs-title function_">onWebSocketMessage</span>(<span class="hljs-params">event</span>) &#123;
+    <span class="hljs-keyword">const</span> message = event.<span class="hljs-property">data</span>;
+    <span class="hljs-comment">// 处理从服务器接收的消息</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Received message:&#x27;</span>, message);
+
+    <span class="hljs-comment">// 在这里您可以根据消息的内容执行不同的操作，例如更新界面、触发事件等</span>
+  &#125;,
+
+  <span class="hljs-comment">// ... 其他方法 ...</span>
+&#125;
+</code></pre>
+
+<h3 id="设置重连间隔及心跳"><a href="#设置重连间隔及心跳" class="headerlink" title="设置重连间隔及心跳"></a>设置重连间隔及心跳</h3><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;
+  <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">return</span> &#123;
+      <span class="hljs-attr">websocket</span>: <span class="hljs-literal">null</span>, <span class="hljs-comment">// WebSocket对象</span>
+      <span class="hljs-attr">reconnectInterval</span>: <span class="hljs-number">3000</span>, <span class="hljs-comment">// 重连间隔时间（毫秒）</span>
+    &#125;;
+  &#125;,
+  <span class="hljs-attr">methods</span>: &#123;
+     <span class="hljs-comment">// ... 其他方法 ...</span>
+<span class="hljs-title function_">onWebSocketOpen</span>(<span class="hljs-params"></span>) &#123;
+   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;链接成功&quot;</span>);
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">startHeartbeat</span>(); <span class="hljs-comment">// 开启心跳</span>
+    <span class="hljs-comment">// 发送初始化消息 根据后端定义的来</span>
+    <span class="hljs-keyword">const</span> initMessage = &#123;
+      <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;sub&#x27;</span>,
+      <span class="hljs-attr">topic</span>: <span class="hljs-string">&#x27;/aa/bb/cc/d&#x27;</span>,
+      <span class="hljs-attr">parameter</span>: &#123;&#125;,
+      <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;bb&#x27;</span>,
+    &#125;;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">sendMessage</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(initMessage));
+&#125;,
+  <span class="hljs-title function_">startHeartbeat</span>(<span class="hljs-params"></span>) &#123;
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">heartbeatInterval</span> = <span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> &#123;
+        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>.<span class="hljs-property">readyState</span> === <span class="hljs-title class_">WebSocket</span>.<span class="hljs-property">OPEN</span>) &#123;
+          <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;ping&quot;</span>); <span class="hljs-comment">// 发送心跳消息</span>
+        &#125;
+      &#125;, <span class="hljs-number">10000</span>); <span class="hljs-comment">// 每10秒发送一次心跳</span>
+    &#125;,
+    <span class="hljs-title function_">stopHeartbeat</span>(<span class="hljs-params"></span>) &#123;
+      <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">heartbeatInterval</span>) &#123;
+        <span class="hljs-built_in">clearInterval</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">heartbeatInterval</span>); <span class="hljs-comment">// 停止心跳检测定时器</span>
+      &#125;
+    &#125;,
+<span class="hljs-title function_">onWebSocketClose</span>(<span class="hljs-params"></span>) &#123;
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;WebSocket connection is closed&quot;</span>);
+  <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">stopHeartbeat</span>(); <span class="hljs-comment">// WebSocket连接关闭时，停止心跳检测</span>
+      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">setupWebSocket</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">reconnectInterval</span>); <span class="hljs-comment">// 在一定时间后重连WebSocket</span>
+     &#125;,
+       <span class="hljs-comment">// ... 其他方法 ...</span>
+  &#125;,
+&#125;;
+&#125;</code></pre>
+
+<h3 id="心跳检测定时器"><a href="#心跳检测定时器" class="headerlink" title="心跳检测定时器"></a>心跳检测定时器</h3><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;
+  <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">return</span> &#123;
+      <span class="hljs-attr">websocket</span>: <span class="hljs-literal">null</span>, <span class="hljs-comment">// WebSocket对象</span>
+      <span class="hljs-attr">reconnectInterval</span>: <span class="hljs-number">3000</span>, <span class="hljs-comment">// 重连间隔时间（毫秒）</span>
+      <span class="hljs-attr">heartbeatInterval</span>: <span class="hljs-literal">null</span>, <span class="hljs-comment">// 心跳定时器</span>
+    &#125;;
+  &#125;,
+  <span class="hljs-attr">methods</span>: &#123;
+     <span class="hljs-comment">// ... 其他方法 ...</span>
+    
+<span class="hljs-title function_">onWebSocketClose</span>(<span class="hljs-params"></span>) &#123;
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;WebSocket connection is closed&quot;</span>);
+      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">setupWebSocket</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">reconnectInterval</span>); <span class="hljs-comment">// 在一定时间后重连WebSocket</span>
+     &#125;,
+       <span class="hljs-comment">// ... 其他方法 ...</span>
+  &#125;,
+&#125;;
+&#125;</code></pre>
+
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><pre><code class="hljs javascript">&lt;template&gt;
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+&lt;/template&gt;
+
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span>
+<span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">  <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-keyword">return</span> &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-attr">websocket</span>: <span class="hljs-literal">null</span>, <span class="hljs-comment">// WebSocket对象</span></span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-attr">reconnectInterval</span>: <span class="hljs-number">3000</span>, <span class="hljs-comment">// 重连间隔时间（毫秒）</span></span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-attr">heartbeatInterval</span>: <span class="hljs-literal">null</span>, <span class="hljs-comment">// 心跳定时器</span></span></span>
+<span class="language-javascript"><span class="language-xml">    &#125;;</span></span>
+<span class="language-javascript"><span class="language-xml">  &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">  <span class="hljs-title function_">created</span>(<span class="hljs-params"></span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setupWebSocket</span>(); <span class="hljs-comment">// 创建WebSocket连接</span></span></span>
+<span class="language-javascript"><span class="language-xml">  &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">  <span class="hljs-attr">methods</span>: &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">setupWebSocket</span>(<span class="hljs-params"></span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">WebSocket</span>(<span class="hljs-string">&quot;ws链接地址&quot;</span>); <span class="hljs-comment">// 创建WebSocket连接</span></span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>.<span class="hljs-property">onopen</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">onWebSocketOpen</span>; <span class="hljs-comment">// WebSocket连接打开时的处理函数</span></span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>.<span class="hljs-property">onmessage</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">onWebSocketMessage</span>; <span class="hljs-comment">// 收到WebSocket消息时的处理函数</span></span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>.<span class="hljs-property">onclose</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">onWebSocketClose</span>; <span class="hljs-comment">// WebSocket连接关闭时的处理函数</span></span></span>
+<span class="language-javascript"><span class="language-xml">    &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">closeWebSocket</span>(<span class="hljs-params"></span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">        <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>.<span class="hljs-title function_">close</span>(); <span class="hljs-comment">// 关闭WebSocket连接</span></span></span>
+<span class="language-javascript"><span class="language-xml">      &#125;</span></span>
+<span class="language-javascript"><span class="language-xml">    &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-comment">/**</span></span></span>
+<span class="hljs-comment"><span class="language-javascript"><span class="language-xml">     *  WebSocket连接打开后，启动心跳检测</span></span></span>
+<span class="hljs-comment"><span class="language-javascript"><span class="language-xml">     */</span></span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">onWebSocketOpen</span>(<span class="hljs-params"></span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;WebSocket connection is open&quot;</span>);</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">startHeartbeat</span>();</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-comment">// 发送初始化消息</span></span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-keyword">const</span> initMessage = &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">        <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;sub&quot;</span>,</span></span>
+<span class="language-javascript"><span class="language-xml">        <span class="hljs-attr">topic</span>: <span class="hljs-string">&quot;/aa/bb/cc/d&quot;</span>,</span></span>
+<span class="language-javascript"><span class="language-xml">        <span class="hljs-attr">parameter</span>: &#123;&#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">        <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;bb&quot;</span>,</span></span>
+<span class="language-javascript"><span class="language-xml">      &#125;;</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">sendMessage</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(initMessage));</span></span>
+<span class="language-javascript"><span class="language-xml">    &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-comment">// 处理从服务器接收的消息</span></span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">onWebSocketMessage</span>(<span class="hljs-params">event</span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-keyword">if</span> (event.<span class="hljs-property">data</span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">        <span class="hljs-keyword">const</span> message = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(event.<span class="hljs-property">data</span>);</span></span>
+<span class="language-javascript"><span class="language-xml">        <span class="hljs-comment">//    根据业务来处理数据</span></span></span>
+<span class="language-javascript"><span class="language-xml">      &#125;</span></span>
+<span class="language-javascript"><span class="language-xml">    &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">onWebSocketClose</span>(<span class="hljs-params"></span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;WebSocket connection is closed&quot;</span>);</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">stopHeartbeat</span>(); <span class="hljs-comment">// WebSocket连接关闭时，停止心跳检测</span></span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">setupWebSocket</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">reconnectInterval</span>); <span class="hljs-comment">// 在一定时间后重连WebSocket</span></span></span>
+<span class="language-javascript"><span class="language-xml">    &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">sendMessage</span>(<span class="hljs-params">message</span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>.<span class="hljs-property">readyState</span> === <span class="hljs-title class_">WebSocket</span>.<span class="hljs-property">OPEN</span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">        <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>.<span class="hljs-title function_">send</span>(message); <span class="hljs-comment">// 发送消息到WebSocket服务器</span></span></span>
+<span class="language-javascript"><span class="language-xml">      &#125;</span></span>
+<span class="language-javascript"><span class="language-xml">    &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">startHeartbeat</span>(<span class="hljs-params"></span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">heartbeatInterval</span> = <span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>.<span class="hljs-property">readyState</span> === <span class="hljs-title class_">WebSocket</span>.<span class="hljs-property">OPEN</span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">          <span class="hljs-variable language_">this</span>.<span class="hljs-property">websocket</span>.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;ping&quot;</span>); <span class="hljs-comment">// 发送心跳消息</span></span></span>
+<span class="language-javascript"><span class="language-xml">        &#125;</span></span>
+<span class="language-javascript"><span class="language-xml">      &#125;, <span class="hljs-number">10000</span>); <span class="hljs-comment">// 每10秒发送一次心跳</span></span></span>
+<span class="language-javascript"><span class="language-xml">    &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">stopHeartbeat</span>(<span class="hljs-params"></span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">      <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">heartbeatInterval</span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">        <span class="hljs-built_in">clearInterval</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">heartbeatInterval</span>); <span class="hljs-comment">// 停止心跳检测定时器</span></span></span>
+<span class="language-javascript"><span class="language-xml">      &#125;</span></span>
+<span class="language-javascript"><span class="language-xml">    &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">  &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">  <span class="hljs-title function_">beforeDestroy</span>(<span class="hljs-params"></span>) &#123;</span></span>
+<span class="language-javascript"><span class="language-xml">    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">closeWebSocket</span>(); <span class="hljs-comment">// 在组件销毁前关闭WebSocket连接</span></span></span>
+<span class="language-javascript"><span class="language-xml">  &#125;,</span></span>
+<span class="language-javascript"><span class="language-xml">&#125;;</span></span>
+<span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;scss&quot;</span> <span class="hljs-attr">scoped</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></span></code></pre>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在文章中，我们学习了如何在Vue.js应用中集成WebSocket以实现实时通信。它为你的应用带来了许多可能性。以下是一些关键要点：</p>
+<ol>
+<li>创建WebSocket连接：我们创建了一个Vue.js组件，用于管理WebSocket连接。该组件初始化WebSocket对象，并定义了连接的事件处理函数，以确保连接能够正常运行。</li>
+<li>消息处理：我们实现了处理WebSocket消息的函数。当服务器发送消息时，我们能够捕获这些消息并执行相应的逻辑。</li>
+<li>心跳检测：通过实现心跳检测，我们能够保持WebSocket连接的活跃性，防止连接断开。这是实时通信应用中的关键功能。</li>
+<li>断线重连：当连接意外关闭时，我们通过自动重连确保应用能够继续保持连接，提供无缝的用户体验。</li>
+</ol>
+<p>最终，可以轻松集成WebSocket功能，使应用在实时通信方面表现出色。这个功能对于各种应用，包括聊天应用、协作工具和监控系统等，都具有广泛的应用。</p>
+<p>本文转自 <a target="_blank" rel="noopener" href="https://blog.csdn.net/mi_myself/article/details/134153323">https://blog.csdn.net/mi_myself/article/details/134153323</a>，如有侵权，请联系删除。</p>
+
+  </div>
+  <!-- <div id="gitalk-container"></div> -->
+</div>
+
+<script>
+  
+Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
+  dragToClose: true,
+  Toolbar: true,
+  closeButton: "top",
+  Image: {
+    zoom: true,
+  },
+  on: {
+    initCarousel: (fancybox) => {
+      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+    "Carousel.change": (fancybox, carousel, to, from) => {
+      const slide = carousel.slides[to];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+  },
+});
+</script>
+
+<style>
+    #noneimg img {
+        display: none;
+        z-index: 9999;
+        /* width: 600px !important; */
+        min-width: 0%;
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 0px;
+        position: fixed;
+        box-shadow: 0 0 0px #c3c3c300 !important;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto !important;
+    }
+
+    @media screen and (max-width:600px) {
+        #noneimg img {
+            max-width: 88%
+        }
+    }
+</style>
+
+    <div class="post-paging">
+    
+    <a href="/2019/03/25/vuedraggable/">
+        <div class="post-paging-last">
+            <span>上一篇</span>
+            <p>Vue中使用vuedraggable完整指南</p>
+        </div>
+    </a>
+    
+
+    
+    <a href="/2019/01/15/BTPanel/">
+        <div class="post-paging-next">
+            <span>下一篇</span>
+            <p>宝塔（BT Panel）</p>
+        </div>
+    </a>
+    
+</div>
+</div>
+		
+<div class="footer">
+	<div class="Copyright">
+		©2025 By 付鹏篚. 主题：<a
+			style="text-decoration: none;display: contents; color: #898F9F;"
+			href="#">Quiet</a>
+	</div>
+	<div class="contact">
+		
+		<a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+			<img src="/image/logo.png" alt="Quiet主题">
+		</a>
+		
+	</div>
+</div>
+
+<script src="/js/gotop.js"></script>
+
+
+<style type="text/css">
+    @media screen and (min-width: 600px) {
+        .goTop>span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            opacity: 0.8;
+            background: #F1F5FB;
+            text-align: center;
+            transition: border .5s;
+            border: 1px solid rgba(18, 24, 58, 0.06);
+
+            -moz-transition: border .5s;
+            /* Firefox 4 */
+            -webkit-transition: border .5s;
+            /* Safari 和 Chrome */
+            -o-transition: border .5s;
+            /* Opera */
+        }
+
+        .goTop>span:hover {
+            border: 1px solid #6680B3;
+        }
+
+
+        .goTop {
+            position: fixed;
+            right: 30px;
+            bottom: 80px;
+        }
+
+        .goTop>span>svg {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+    }
+
+    @media screen and (max-width: 600px) {
+        .goTop {
+            display: none;
+        }
+    }
+</style>
+<div class="goTop" id="js-go_top">
+    <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g>
+                <path d="M13 12v8h-2v-8H4l8-8 8 8z"></path>
+            </g>
+        </svg>
+    </span>
+</div>
+<script>
+    $( '#js-go_top' )
+	.gotoTop( {
+		offset: 500,
+		speed: 300,
+		animationShow: {
+			'transform': 'translate(0,0)',
+			'transition': 'transform .5s ease-in-out'
+		},
+		animationHide: {
+			'transform': 'translate(100px,0)',
+			'transition': 'transform .5s ease-in-out'
+		}
+	} );
+</script>
+
+
+    <!-- Gitalk -->
+    <script>
+        const data = '{"clientID":"02b3c","clientSecret":"adfc7b4","repo":"gimment","owner":"duneng","admin":"duneng"}'
+        const gitalk = new Gitalk({
+            ...JSON.parse( data),
+            id:location.pathname,
+            distractionFreeMode:false
+        })
+        
+        // if(Boolean('true')){
+        //     gitalk.render('gitalk-container')
+        // }
+    </script>
+
+
+	</body>
+</html>
+

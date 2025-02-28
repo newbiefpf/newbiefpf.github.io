@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+<title>keep-alive-newbie</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico">
+
+<link rel="stylesheet" href="/css/index.css">
+
+
+
+<meta name="keywords" content="keep-alive,">
+<meta name="description" content="在Vue中keep-alive是一个内置的组件，用于缓存组件的状态，使得组件在切换时不重新渲染">
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/index.js"></script>
+
+
+<script src="/js/fancybox.umd.js"></script>
+
+
+<script src="/js/fancybox-images.js"></script>
+
+
+<script src="/js/gitalk.min.js"></script>
+
+
+<script src="/js/hljs.min.js"></script>
+ 
+<script>hljs.highlightAll();</script>
+
+	<meta name="generator" content="Hexo 7.3.0"></head>
+
+	<body>
+		
+	<div class="header">
+		<div class="header-top" id="header-top">
+			<div class="h-left">
+				<a href="/">
+					<img src="/image/logo.png" alt="FPF">
+				</a>
+				
+				<span style="color: #c9d1d9;font-weight: bolder; ">&nbsp;&nbsp;付鹏篚的笔记 </span>
+			</div>
+			<div class="h-right">
+				<ul>
+					
+						
+								<li>
+									<a href="/">
+										主页
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/archives">
+										归档
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/categories">
+										分类
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/tags">
+										标签
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/about">
+										关于
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+				</ul>
+			</div>
+			<div class="h-right-close">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+					<path fill="none" d="M0 0h24v24H0z" />
+					<path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(68,68,68,1)" />
+				</svg>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar">
+    <div class="topo">
+        <h2>付鹏篚</h2>
+    </div>
+    <ul>
+        
+        <li>
+            <a href="/">主页</a>
+        </li>
+        
+        <li>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <a href="/about">关于</a>
+        </li>
+        
+    </ul>
+    <div class="my_foot">
+        
+        <a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+            <img src="/image/logo.png" alt="Quiet主题">
+        </a>
+        
+    </div>
+</div>
+<div class='shelter'>
+</div>
+<style>
+    .shelter{
+        background-color: #333;
+        opacity:0.5;
+        cursor: pointer;
+        display: none; 
+        position: fixed;
+        left: 0;
+        top: 0; 
+        right: 0;
+        bottom: 0;
+        z-index: 1998;
+    }
+    .sidebar {
+        width: 66%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        background: #fff;
+        z-index: 1999;
+        text-align: center;
+        box-shadow: -6px 0 20px rgba(98, 94, 94, .815);
+    }
+
+    .topo {
+        width: 100%;
+        height: 200px;
+        background: url(https://api.ixiaowai.cn/gqapi/gqapi.php) no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+        display: flex;
+        align-items: flex-end
+    }
+
+    .topo h2 {
+        color: #fff;
+        z-index: 1;
+        position: relative;
+        margin: 0 0 10px 10px;
+        font-size: 1.2em;
+        box-sizing: border-box
+    }
+
+    .topo:before {
+        content: '';
+        background-image: url(/image/pattern.png);
+        background-repeat: repeat;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1
+    }
+
+    .sidebar ul {
+        width: 100%;
+        margin-top: 50px
+    }
+
+    .sidebar ul li {
+        height: 50px;
+        list-style: none;
+        font-size: 1.2em;
+        text-align: right;
+        margin-right: 10px
+    }
+
+    .sidebar ul li a {
+        display: grid;
+        color: #5d606a;
+        text-overflow: ellipsis;
+        width: 100%;
+        text-decoration: none
+    }
+
+    .my_foot {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        position: absolute;
+        bottom: 0
+    }
+
+    .my_foot a {
+        text-decoration: none;
+        margin-right: 10px;
+        display: inline-block
+    }
+
+    .my_foot a img {
+        width: 30px;
+        height: 30px
+    }
+</style>
+
+<script>
+    $( function () {
+	$( '.h-right-close>svg' )
+		.click( function () {
+			$( '.sidebar' )
+				.animate( {
+					right: "0"
+				}, 500 );
+			$( '.shelter' )
+				.fadeIn( "slow" )
+		} );
+	$( '.shelter' )
+		.click( function ( e ) {
+			$( '.sidebar' )
+				.animate( {
+					right: "-100%"
+				}, 500 );
+			$( '.shelter' )
+				.fadeOut( "slow" )
+		} )
+} )
+
+</script>
+
+<div class="post">
+    <div class="post-header-background post-header-img"
+    
+>
+    <div class="post-header-background-content">
+        <ul class="post-header-tag">
+            
+                
+                    <li><a href="/tags/keep-alive">keep-alive</a></li>
+                
+            
+        </ul>
+        
+        <h1>keep-alive</h1>
+
+        <div class="post-header-info">
+            <div class="post-header-info-author">
+                
+                    <svg t="1604839279282" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="2901" width="20" height="20">
+                        <path
+                            d="M513 956.3c-247.7 0-448-200.3-448-448S265.3 66.2 513 66.2s448 200.3 448 448-200.3 442.1-448 442.1z m0-830.9c-212.2 0-388.8 170.7-388.8 388.8C124.2 726.3 294.9 903 513 903c212.2 0 388.8-170.7 388.8-388.8S725.2 125.4 513 125.4z m0 430.2c-94.2 0-170.7-76.5-170.7-170.7S418.8 207.8 513 207.8s170.7 76.5 170.7 170.7S607.2 555.6 513 555.6z m0-289.1c-64.6 0-112 52.8-112 112s47.4 117.9 112 117.9 112-52.8 112-112-47.4-117.9-112-117.9z m0 689.8c-135.7 0-259-58.7-341.9-158.9l-11.8-17.8 11.8-17.8c76.5-117.9 206.2-188.5 347.8-188.5 135.7 0 265 64.6 341.9 182.6l11.8 17.8-11.8 17.8C778 897.1 648.7 956.3 513 956.3zM230.3 773.2C300.9 849.7 406.9 897 513 897c112 0 218.1-47.4 288.6-129.8-70.5-88.2-170.7-135.6-282.7-135.6s-218.1 53.3-288.6 141.6z"
+                            p-id="2902" fill="#ffffff"></path>
+                    </svg>
+                
+                <span class="post-header-info-author-text"> 
+                    <a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+                        付鹏篚
+                    </a>
+                </span>
+                <div class="post-header-info-author-categories">
+                    
+                        
+                            <a href="../../categories/Vue/" target="_blank">Vue</a>
+                        
+                    
+                </div>
+                <p>2019-08-15 20:00:00</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="post-content" id="content">
+  
+  <div id="article" class="post-content-info">
+    
+      <div id="post-toc">
+        <span class="post-toc-title">文章目录</span>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81keep-alive-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">一、keep-alive 基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E7%A4%BA%E4%BE%8B"><span class="toc-text">1. 基本示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-include-%E5%92%8C-exclude-%E5%B1%9E%E6%80%A7"><span class="toc-text">2. include 和 exclude 属性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81keep-alive-%E4%B8%8E-Vue-%E8%B7%AF%E7%94%B1%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8"><span class="toc-text">二、keep-alive 与 Vue 路由结合使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%BD%BF%E7%94%A8-keep-alive-%E7%BC%93%E5%AD%98%E8%B7%AF%E7%94%B1%E7%BB%84%E4%BB%B6"><span class="toc-text">1. 使用 keep-alive 缓存路由组件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-meta-%E9%85%8D%E7%BD%AE%E6%8E%A7%E5%88%B6%E6%98%AF%E5%90%A6%E7%BC%93%E5%AD%98"><span class="toc-text">2. meta 配置控制是否缓存</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81keep-alive-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90"><span class="toc-text">三、keep-alive 的生命周期钩子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="toc-text">示例：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-text">四、总结</span></a></li></ol>
+      </div>
+    
+
+    <p>在 Vue 中，<code>keep-alive</code> 是一个内置的组件，用于缓存组件的状态，使得组件在切换时不重新渲染。它对于需要在不同视图之间切换但希望保留组件状态的场景非常有用，比如在多个页面之间切换时保持页面滚动位置、表单输入值等。</p>
+<h3 id="一、keep-alive-基本使用"><a href="#一、keep-alive-基本使用" class="headerlink" title="一、keep-alive 基本使用"></a>一、<code>keep-alive</code> 基本使用</h3><p><code>keep-alive</code> 主要用于包裹动态组件，通过其 <code>include</code> 和 <code>exclude</code> 属性来控制哪些组件需要缓存。</p>
+<h4 id="1-基本示例"><a href="#1-基本示例" class="headerlink" title="1. 基本示例"></a>1. 基本示例</h4><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">keep-alive</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">component</span> <span class="hljs-attr">:is</span>=<span class="hljs-string">&quot;currentComponent&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">component</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">keep-alive</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;changeComponent&quot;</span>&gt;</span>切换组件<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span>
+<span class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span>
+<span class="language-javascript">  <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span>
+<span class="language-javascript">    <span class="hljs-keyword">return</span> &#123;</span>
+<span class="language-javascript">      <span class="hljs-attr">currentComponent</span>: <span class="hljs-string">&#x27;ComponentA&#x27;</span></span>
+<span class="language-javascript">    &#125;;</span>
+<span class="language-javascript">  &#125;,</span>
+<span class="language-javascript">  <span class="hljs-attr">methods</span>: &#123;</span>
+<span class="language-javascript">    <span class="hljs-title function_">changeComponent</span>(<span class="hljs-params"></span>) &#123;</span>
+<span class="language-javascript">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">currentComponent</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">currentComponent</span> === <span class="hljs-string">&#x27;ComponentA&#x27;</span> ? <span class="hljs-string">&#x27;ComponentB&#x27;</span> : <span class="hljs-string">&#x27;ComponentA&#x27;</span>;</span>
+<span class="language-javascript">    &#125;</span>
+<span class="language-javascript">  &#125;,</span>
+<span class="language-javascript">  <span class="hljs-attr">components</span>: &#123;</span>
+<span class="language-javascript">    <span class="hljs-title class_">ComponentA</span>: &#123; <span class="hljs-attr">template</span>: <span class="hljs-string">&#x27;&lt;div&gt;Component A&lt;/div&gt;&#x27;</span> &#125;,</span>
+<span class="language-javascript">    <span class="hljs-title class_">ComponentB</span>: &#123; <span class="hljs-attr">template</span>: <span class="hljs-string">&#x27;&lt;div&gt;Component B&lt;/div&gt;&#x27;</span> &#125;</span>
+<span class="language-javascript">  &#125;</span>
+<span class="language-javascript">&#125;</span>
+<span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+
+<p>在这个例子中，<code>&lt;keep-alive&gt;</code> 包裹了动态组件 <code>component</code>，每次切换组件时，之前的组件会被缓存，不会被销毁。</p>
+<h4 id="2-include-和-exclude-属性"><a href="#2-include-和-exclude-属性" class="headerlink" title="2. include 和 exclude 属性"></a>2. <code>include</code> 和 <code>exclude</code> 属性</h4><ul>
+<li><code>include</code>：只有匹配的组件会被缓存。</li>
+<li><code>exclude</code>：匹配的组件将不会被缓存。</li>
+</ul>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">keep-alive</span> <span class="hljs-attr">:include</span>=<span class="hljs-string">&quot;[&#x27;ComponentA&#x27;]&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">component</span> <span class="hljs-attr">:is</span>=<span class="hljs-string">&quot;currentComponent&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">component</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">keep-alive</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;changeComponent&quot;</span>&gt;</span>切换组件<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span>
+<span class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span>
+<span class="language-javascript">  <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span>
+<span class="language-javascript">    <span class="hljs-keyword">return</span> &#123;</span>
+<span class="language-javascript">      <span class="hljs-attr">currentComponent</span>: <span class="hljs-string">&#x27;ComponentA&#x27;</span></span>
+<span class="language-javascript">    &#125;;</span>
+<span class="language-javascript">  &#125;,</span>
+<span class="language-javascript">  <span class="hljs-attr">methods</span>: &#123;</span>
+<span class="language-javascript">    <span class="hljs-title function_">changeComponent</span>(<span class="hljs-params"></span>) &#123;</span>
+<span class="language-javascript">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">currentComponent</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">currentComponent</span> === <span class="hljs-string">&#x27;ComponentA&#x27;</span> ? <span class="hljs-string">&#x27;ComponentB&#x27;</span> : <span class="hljs-string">&#x27;ComponentA&#x27;</span>;</span>
+<span class="language-javascript">    &#125;</span>
+<span class="language-javascript">  &#125;,</span>
+<span class="language-javascript">  <span class="hljs-attr">components</span>: &#123;</span>
+<span class="language-javascript">    <span class="hljs-title class_">ComponentA</span>: &#123; <span class="hljs-attr">template</span>: <span class="hljs-string">&#x27;&lt;div&gt;Component A&lt;/div&gt;&#x27;</span> &#125;,</span>
+<span class="language-javascript">    <span class="hljs-title class_">ComponentB</span>: &#123; <span class="hljs-attr">template</span>: <span class="hljs-string">&#x27;&lt;div&gt;Component B&lt;/div&gt;&#x27;</span> &#125;</span>
+<span class="language-javascript">  &#125;</span>
+<span class="language-javascript">&#125;</span>
+<span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+
+<p>在这个例子中，只有 <code>ComponentA</code> 会被缓存，<code>ComponentB</code> 切换时会重新渲染。</p>
+<hr>
+<h3 id="二、keep-alive-与-Vue-路由结合使用"><a href="#二、keep-alive-与-Vue-路由结合使用" class="headerlink" title="二、keep-alive 与 Vue 路由结合使用"></a>二、<code>keep-alive</code> 与 Vue 路由结合使用</h3><p><code>keep-alive</code> 与 <code>vue-router</code> 配合使用时，可以控制页面间切换时的缓存行为，特别是在路由切换时，有时希望某些页面的状态能被保留。</p>
+<h4 id="1-使用-keep-alive-缓存路由组件"><a href="#1-使用-keep-alive-缓存路由组件" class="headerlink" title="1. 使用 keep-alive 缓存路由组件"></a>1. 使用 <code>keep-alive</code> 缓存路由组件</h4><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">keep-alive</span> <span class="hljs-attr">:include</span>=<span class="hljs-string">&quot;[&#x27;Home&#x27;]&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">router-view</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-view</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">keep-alive</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></code></pre>
+
+<p>在这个示例中，<code>Home</code> 路由对应的组件会被缓存，其他路由的组件则不会被缓存。</p>
+<h4 id="2-meta-配置控制是否缓存"><a href="#2-meta-配置控制是否缓存" class="headerlink" title="2. meta 配置控制是否缓存"></a>2. <code>meta</code> 配置控制是否缓存</h4><p>有时我们希望根据路由的某些信息来动态决定是否缓存，可以通过路由的 <code>meta</code> 字段来实现。</p>
+<pre><code class="hljs js"><span class="hljs-comment">// router.js</span>
+<span class="hljs-keyword">const</span> routes = [
+  &#123;
+    <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/&#x27;</span>,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Home&#x27;</span>,
+    <span class="hljs-attr">component</span>: <span class="hljs-title class_">Home</span>,
+    <span class="hljs-attr">meta</span>: &#123; <span class="hljs-attr">keepAlive</span>: <span class="hljs-literal">true</span> &#125;
+  &#125;,
+  &#123;
+    <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/about&#x27;</span>,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;About&#x27;</span>,
+    <span class="hljs-attr">component</span>: <span class="hljs-title class_">About</span>,
+    <span class="hljs-attr">meta</span>: &#123; <span class="hljs-attr">keepAlive</span>: <span class="hljs-literal">false</span> &#125;
+  &#125;
+];
+
+<span class="hljs-comment">// main.js</span>
+<span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;
+  routes
+&#125;);
+
+<span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Vue</span>(&#123;
+  router,
+  <span class="hljs-attr">computed</span>: &#123;
+    <span class="hljs-title function_">include</span>(<span class="hljs-params"></span>) &#123;
+      <span class="hljs-keyword">const</span> matched = <span class="hljs-variable language_">this</span>.<span class="hljs-property">$route</span>.<span class="hljs-property">matched</span>;
+      <span class="hljs-keyword">const</span> keepAlive = matched.<span class="hljs-title function_">some</span>(<span class="hljs-function"><span class="hljs-params">route</span> =&gt;</span> route.<span class="hljs-property">meta</span>.<span class="hljs-property">keepAlive</span>);
+      <span class="hljs-keyword">return</span> keepAlive ? [<span class="hljs-string">&#x27;Home&#x27;</span>] : [];
+    &#125;
+  &#125;,
+  <span class="hljs-attr">render</span>: <span class="hljs-function"><span class="hljs-params">h</span> =&gt;</span> <span class="hljs-title function_">h</span>(<span class="hljs-title class_">App</span>)
+&#125;).$mount(<span class="hljs-string">&#x27;#app&#x27;</span>);</code></pre>
+
+<p>通过这种方式，可以控制 <code>Home</code> 页面是否缓存，而 <code>About</code> 页面则不会缓存。</p>
+<hr>
+<h3 id="三、keep-alive-的生命周期钩子"><a href="#三、keep-alive-的生命周期钩子" class="headerlink" title="三、keep-alive 的生命周期钩子"></a>三、<code>keep-alive</code> 的生命周期钩子</h3><p><code>keep-alive</code> 缓存的组件有两个额外的生命周期钩子：</p>
+<ul>
+<li>**<code>activated</code>**：当组件被激活时触发（即从缓存中激活）。</li>
+<li>**<code>deactivated</code>**：当组件被停用时触发（即进入缓存）。</li>
+</ul>
+<p>这两个钩子可以帮助你在组件被缓存或恢复时执行相应的操作。</p>
+<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h4><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;
+  <span class="hljs-title function_">activated</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;组件已激活&#x27;</span>);
+  &#125;,
+  <span class="hljs-title function_">deactivated</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;组件已停用&#x27;</span>);
+  &#125;
+&#125;</code></pre>
+
+<p>在组件从缓存中恢复时，<code>activated</code> 会被触发，而当组件被缓存时，<code>deactivated</code> 会被触发。</p>
+<hr>
+<h3 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h3><ul>
+<li><code>keep-alive</code> 是 Vue 提供的一个内置组件，用于缓存组件状态。</li>
+<li>它通常用于动态组件和路由视图，以避免组件的重新渲染，提升性能。</li>
+<li><code>include</code> 和 <code>exclude</code> 可以用来精细控制哪些组件被缓存。</li>
+<li>与 Vue Router 配合使用时，可以通过 <code>meta</code> 字段来控制哪些路由对应的组件应该被缓存。</li>
+<li><code>activated</code> 和 <code>deactivated</code> 生命周期钩子允许你在组件激活或停用时执行额外的操作。</li>
+</ul>
+<p><code>keep-alive</code> 是 Vue 中优化性能、提升用户体验的有力工具，特别是在需要频繁切换页面和组件的场景下。</p>
+
+  </div>
+  <!-- <div id="gitalk-container"></div> -->
+</div>
+
+<script>
+  
+Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
+  dragToClose: true,
+  Toolbar: true,
+  closeButton: "top",
+  Image: {
+    zoom: true,
+  },
+  on: {
+    initCarousel: (fancybox) => {
+      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+    "Carousel.change": (fancybox, carousel, to, from) => {
+      const slide = carousel.slides[to];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+  },
+});
+</script>
+
+<style>
+    #noneimg img {
+        display: none;
+        z-index: 9999;
+        /* width: 600px !important; */
+        min-width: 0%;
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 0px;
+        position: fixed;
+        box-shadow: 0 0 0px #c3c3c300 !important;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto !important;
+    }
+
+    @media screen and (max-width:600px) {
+        #noneimg img {
+            max-width: 88%
+        }
+    }
+</style>
+
+    <div class="post-paging">
+    
+    <a href="/2019/11/11/jsonp/">
+        <div class="post-paging-last">
+            <span>上一篇</span>
+            <p>Vue中jsonp使用指南</p>
+        </div>
+    </a>
+    
+
+    
+    <a href="/2019/06/06/hashhistory/">
+        <div class="post-paging-next">
+            <span>下一篇</span>
+            <p>Vue路由模式</p>
+        </div>
+    </a>
+    
+</div>
+</div>
+		
+<div class="footer">
+	<div class="Copyright">
+		©2025 By 付鹏篚. 主题：<a
+			style="text-decoration: none;display: contents; color: #898F9F;"
+			href="#">Quiet</a>
+	</div>
+	<div class="contact">
+		
+		<a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+			<img src="/image/logo.png" alt="Quiet主题">
+		</a>
+		
+	</div>
+</div>
+
+<script src="/js/gotop.js"></script>
+
+
+<style type="text/css">
+    @media screen and (min-width: 600px) {
+        .goTop>span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            opacity: 0.8;
+            background: #F1F5FB;
+            text-align: center;
+            transition: border .5s;
+            border: 1px solid rgba(18, 24, 58, 0.06);
+
+            -moz-transition: border .5s;
+            /* Firefox 4 */
+            -webkit-transition: border .5s;
+            /* Safari 和 Chrome */
+            -o-transition: border .5s;
+            /* Opera */
+        }
+
+        .goTop>span:hover {
+            border: 1px solid #6680B3;
+        }
+
+
+        .goTop {
+            position: fixed;
+            right: 30px;
+            bottom: 80px;
+        }
+
+        .goTop>span>svg {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+    }
+
+    @media screen and (max-width: 600px) {
+        .goTop {
+            display: none;
+        }
+    }
+</style>
+<div class="goTop" id="js-go_top">
+    <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g>
+                <path d="M13 12v8h-2v-8H4l8-8 8 8z"></path>
+            </g>
+        </svg>
+    </span>
+</div>
+<script>
+    $( '#js-go_top' )
+	.gotoTop( {
+		offset: 500,
+		speed: 300,
+		animationShow: {
+			'transform': 'translate(0,0)',
+			'transition': 'transform .5s ease-in-out'
+		},
+		animationHide: {
+			'transform': 'translate(100px,0)',
+			'transition': 'transform .5s ease-in-out'
+		}
+	} );
+</script>
+
+
+    <!-- Gitalk -->
+    <script>
+        const data = '{"clientID":"02b3c","clientSecret":"adfc7b4","repo":"gimment","owner":"duneng","admin":"duneng"}'
+        const gitalk = new Gitalk({
+            ...JSON.parse( data),
+            id:location.pathname,
+            distractionFreeMode:false
+        })
+        
+        // if(Boolean('true')){
+        //     gitalk.render('gitalk-container')
+        // }
+    </script>
+
+
+	</body>
+</html>
+

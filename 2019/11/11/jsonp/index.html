@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+<title>Vue中jsonp使用指南-newbie</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico">
+
+<link rel="stylesheet" href="/css/index.css">
+
+
+
+<meta name="keywords" content="jsonp,">
+<meta name="description" content="一个简单的使用文档，快速了解如何在 Vue 中配置和使用 `$jsonp`">
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/index.js"></script>
+
+
+<script src="/js/fancybox.umd.js"></script>
+
+
+<script src="/js/fancybox-images.js"></script>
+
+
+<script src="/js/gitalk.min.js"></script>
+
+
+<script src="/js/hljs.min.js"></script>
+ 
+<script>hljs.highlightAll();</script>
+
+	<meta name="generator" content="Hexo 7.3.0"></head>
+
+	<body>
+		
+	<div class="header">
+		<div class="header-top" id="header-top">
+			<div class="h-left">
+				<a href="/">
+					<img src="/image/logo.png" alt="FPF">
+				</a>
+				
+				<span style="color: #c9d1d9;font-weight: bolder; ">&nbsp;&nbsp;付鹏篚的笔记 </span>
+			</div>
+			<div class="h-right">
+				<ul>
+					
+						
+								<li>
+									<a href="/">
+										主页
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/archives">
+										归档
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/categories">
+										分类
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/tags">
+										标签
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/about">
+										关于
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+				</ul>
+			</div>
+			<div class="h-right-close">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+					<path fill="none" d="M0 0h24v24H0z" />
+					<path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(68,68,68,1)" />
+				</svg>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar">
+    <div class="topo">
+        <h2>付鹏篚</h2>
+    </div>
+    <ul>
+        
+        <li>
+            <a href="/">主页</a>
+        </li>
+        
+        <li>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <a href="/about">关于</a>
+        </li>
+        
+    </ul>
+    <div class="my_foot">
+        
+        <a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+            <img src="/image/logo.png" alt="Quiet主题">
+        </a>
+        
+    </div>
+</div>
+<div class='shelter'>
+</div>
+<style>
+    .shelter{
+        background-color: #333;
+        opacity:0.5;
+        cursor: pointer;
+        display: none; 
+        position: fixed;
+        left: 0;
+        top: 0; 
+        right: 0;
+        bottom: 0;
+        z-index: 1998;
+    }
+    .sidebar {
+        width: 66%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        background: #fff;
+        z-index: 1999;
+        text-align: center;
+        box-shadow: -6px 0 20px rgba(98, 94, 94, .815);
+    }
+
+    .topo {
+        width: 100%;
+        height: 200px;
+        background: url(https://api.ixiaowai.cn/gqapi/gqapi.php) no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+        display: flex;
+        align-items: flex-end
+    }
+
+    .topo h2 {
+        color: #fff;
+        z-index: 1;
+        position: relative;
+        margin: 0 0 10px 10px;
+        font-size: 1.2em;
+        box-sizing: border-box
+    }
+
+    .topo:before {
+        content: '';
+        background-image: url(/image/pattern.png);
+        background-repeat: repeat;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1
+    }
+
+    .sidebar ul {
+        width: 100%;
+        margin-top: 50px
+    }
+
+    .sidebar ul li {
+        height: 50px;
+        list-style: none;
+        font-size: 1.2em;
+        text-align: right;
+        margin-right: 10px
+    }
+
+    .sidebar ul li a {
+        display: grid;
+        color: #5d606a;
+        text-overflow: ellipsis;
+        width: 100%;
+        text-decoration: none
+    }
+
+    .my_foot {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        position: absolute;
+        bottom: 0
+    }
+
+    .my_foot a {
+        text-decoration: none;
+        margin-right: 10px;
+        display: inline-block
+    }
+
+    .my_foot a img {
+        width: 30px;
+        height: 30px
+    }
+</style>
+
+<script>
+    $( function () {
+	$( '.h-right-close>svg' )
+		.click( function () {
+			$( '.sidebar' )
+				.animate( {
+					right: "0"
+				}, 500 );
+			$( '.shelter' )
+				.fadeIn( "slow" )
+		} );
+	$( '.shelter' )
+		.click( function ( e ) {
+			$( '.sidebar' )
+				.animate( {
+					right: "-100%"
+				}, 500 );
+			$( '.shelter' )
+				.fadeOut( "slow" )
+		} )
+} )
+
+</script>
+
+<div class="post">
+    <div class="post-header-background post-header-img"
+    
+>
+    <div class="post-header-background-content">
+        <ul class="post-header-tag">
+            
+                
+                    <li><a href="/tags/jsonp">jsonp</a></li>
+                
+            
+        </ul>
+        
+        <h1>Vue中jsonp使用指南</h1>
+
+        <div class="post-header-info">
+            <div class="post-header-info-author">
+                
+                    <svg t="1604839279282" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="2901" width="20" height="20">
+                        <path
+                            d="M513 956.3c-247.7 0-448-200.3-448-448S265.3 66.2 513 66.2s448 200.3 448 448-200.3 442.1-448 442.1z m0-830.9c-212.2 0-388.8 170.7-388.8 388.8C124.2 726.3 294.9 903 513 903c212.2 0 388.8-170.7 388.8-388.8S725.2 125.4 513 125.4z m0 430.2c-94.2 0-170.7-76.5-170.7-170.7S418.8 207.8 513 207.8s170.7 76.5 170.7 170.7S607.2 555.6 513 555.6z m0-289.1c-64.6 0-112 52.8-112 112s47.4 117.9 112 117.9 112-52.8 112-112-47.4-117.9-112-117.9z m0 689.8c-135.7 0-259-58.7-341.9-158.9l-11.8-17.8 11.8-17.8c76.5-117.9 206.2-188.5 347.8-188.5 135.7 0 265 64.6 341.9 182.6l11.8 17.8-11.8 17.8C778 897.1 648.7 956.3 513 956.3zM230.3 773.2C300.9 849.7 406.9 897 513 897c112 0 218.1-47.4 288.6-129.8-70.5-88.2-170.7-135.6-282.7-135.6s-218.1 53.3-288.6 141.6z"
+                            p-id="2902" fill="#ffffff"></path>
+                    </svg>
+                
+                <span class="post-header-info-author-text"> 
+                    <a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+                        付鹏篚
+                    </a>
+                </span>
+                <div class="post-header-info-author-categories">
+                    
+                        
+                            <a href="../../categories/JavaScript/" target="_blank">JavaScript</a>
+                        
+                    
+                </div>
+                <p>2019-11-11 20:00:00</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="post-content" id="content">
+  
+  <div id="article" class="post-content-info">
+    
+      <div id="post-toc">
+        <span class="post-toc-title">文章目录</span>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85-jsonp-%E5%BA%93"><span class="toc-text">1. 安装 jsonp 库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA-jsonp-%E6%8F%92%E4%BB%B6"><span class="toc-text">2. 创建 jsonp 插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9C%A8-main-js-%E4%B8%AD%E6%B3%A8%E5%86%8C%E6%8F%92%E4%BB%B6"><span class="toc-text">3. 在 main.js 中注册插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%9C%A8%E7%BB%84%E4%BB%B6%E4%B8%AD%E4%BD%BF%E7%94%A8-jsonp"><span class="toc-text">4. 在组件中使用 $jsonp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-text">5. 参数说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="toc-text">6. 错误处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">7. 注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+      </div>
+    
+
+    <p>在 Vue 中使用 <code>$jsonp</code> 主要是为了方便地发送 JSONP 请求，通常用于跨域请求，因为 JSONP 通过 <code>&lt;script&gt;</code> 标签实现请求，而不受同源策略限制。下面是一个简单的使用文档，帮助你快速了解如何在 Vue 中配置和使用 <code>$jsonp</code>。</p>
+<h3 id="1-安装-jsonp-库"><a href="#1-安装-jsonp-库" class="headerlink" title="1. 安装 jsonp 库"></a>1. 安装 <code>jsonp</code> 库</h3><p>首先，你需要安装 <code>jsonp</code> 库，通常可以通过 npm 或 yarn 安装：</p>
+<pre><code class="hljs bash">npm install jsonp --save</code></pre>
+
+<p>或者</p>
+<pre><code class="hljs bash">yarn add jsonp</code></pre>
+
+<h3 id="2-创建-jsonp-插件"><a href="#2-创建-jsonp-插件" class="headerlink" title="2. 创建 jsonp 插件"></a>2. 创建 <code>jsonp</code> 插件</h3><p>在 Vue 中，通常会通过插件的形式来封装 <code>jsonp</code>，并在全局注入 <code>$jsonp</code>，以便你在任何组件中直接使用。</p>
+<p>首先，在 <code>src/plugins</code> 目录下创建一个名为 <code>jsonp.js</code> 的文件，并将 <code>jsonp</code> 库引入并封装：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// src/plugins/jsonp.js</span>
+<span class="hljs-keyword">import</span> jsonp <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;jsonp&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;
+  <span class="hljs-title function_">install</span>(<span class="hljs-params">Vue</span>) &#123;
+    <span class="hljs-comment">// 给 Vue 原型添加 $jsonp 方法</span>
+    <span class="hljs-title class_">Vue</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">$jsonp</span> = <span class="hljs-function">(<span class="hljs-params">url, params = &#123;&#125;</span>) =&gt;</span> &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;
+        <span class="hljs-comment">// 构建请求的 URL 和参数</span>
+        <span class="hljs-keyword">const</span> queryParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">URLSearchParams</span>(params).<span class="hljs-title function_">toString</span>();
+        <span class="hljs-keyword">const</span> fullUrl = <span class="hljs-string">`<span class="hljs-subst">$&#123;url&#125;</span>?<span class="hljs-subst">$&#123;queryParams&#125;</span>`</span>;
+
+        <span class="hljs-comment">// 使用 jsonp 库进行请求</span>
+        <span class="hljs-title function_">jsonp</span>(fullUrl, &#123; <span class="hljs-attr">param</span>: <span class="hljs-string">&#x27;callback&#x27;</span> &#125;, <span class="hljs-function">(<span class="hljs-params">err, data</span>) =&gt;</span> &#123;
+          <span class="hljs-keyword">if</span> (err) &#123;
+            <span class="hljs-title function_">reject</span>(err); <span class="hljs-comment">// 请求失败时返回错误</span>
+          &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-title function_">resolve</span>(data); <span class="hljs-comment">// 请求成功时返回数据</span>
+          &#125;
+        &#125;);
+      &#125;);
+    &#125;;
+  &#125;
+&#125;;</code></pre>
+
+<h3 id="3-在-main-js-中注册插件"><a href="#3-在-main-js-中注册插件" class="headerlink" title="3. 在 main.js 中注册插件"></a>3. 在 <code>main.js</code> 中注册插件</h3><p>然后，在 <code>main.js</code> 文件中引入并使用这个插件：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// src/main.js</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Vue</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">App</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App.vue&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">JsonpPlugin</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./plugins/jsonp&#x27;</span>;
+
+<span class="hljs-comment">// 注册插件</span>
+<span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">JsonpPlugin</span>);
+
+<span class="hljs-keyword">new</span> <span class="hljs-title class_">Vue</span>(&#123;
+  <span class="hljs-attr">render</span>: <span class="hljs-function"><span class="hljs-params">h</span> =&gt;</span> <span class="hljs-title function_">h</span>(<span class="hljs-title class_">App</span>),
+&#125;).$mount(<span class="hljs-string">&#x27;#app&#x27;</span>);</code></pre>
+
+<h3 id="4-在组件中使用-jsonp"><a href="#4-在组件中使用-jsonp" class="headerlink" title="4. 在组件中使用 $jsonp"></a>4. 在组件中使用 <code>$jsonp</code></h3><p>现在你可以在任何 Vue 组件中使用 <code>$jsonp</code> 进行 JSONP 请求了。下面是一个简单的使用示例：</p>
+<pre><code class="hljs vue">&lt;template&gt;
+  &lt;div&gt;
+    &lt;h1&gt;JSONP 示例&lt;/h1&gt;
+    &lt;button @click=&quot;getData&quot;&gt;获取数据&lt;/button&gt;
+    &lt;pre&gt;&#123;&#123; result &#125;&#125;&lt;/pre&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default &#123;
+  data() &#123;
+    return &#123;
+      result: null,
+    &#125;;
+  &#125;,
+  methods: &#123;
+    async getData() &#123;
+      try &#123;
+        const url = &#x27;https://example.com/api/data&#x27;; // 替换成你的 JSONP 请求 URL
+        const params = &#123; key: &#x27;value&#x27; &#125;; // 替换成你需要的参数
+        this.result = await this.$jsonp(url, params);
+      &#125; catch (error) &#123;
+        console.error(&#x27;请求失败:&#x27;, error);
+      &#125;
+    &#125;
+  &#125;
+&#125;;
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+/* 你可以在这里写样式 */
+&lt;/style&gt;</code></pre>
+
+<h3 id="5-参数说明"><a href="#5-参数说明" class="headerlink" title="5. 参数说明"></a>5. 参数说明</h3><ul>
+<li><strong>url</strong>: 请求的地址，通常是一个 JSONP 支持的 API 地址。</li>
+<li><strong>params</strong>: 一个对象，包含你需要传递的参数（如 <code>key=value</code> 的形式）。这些参数会被拼接到 URL 后面。</li>
+</ul>
+<h3 id="6-错误处理"><a href="#6-错误处理" class="headerlink" title="6. 错误处理"></a>6. 错误处理</h3><ul>
+<li>如果请求失败，<code>$jsonp</code> 方法会返回一个拒绝的 Promise，你可以通过 <code>catch</code> 来处理错误。</li>
+<li>在请求成功时，返回的是从服务器返回的数据，通常是一个 JSON 格式的数据。</li>
+</ul>
+<h3 id="7-注意事项"><a href="#7-注意事项" class="headerlink" title="7. 注意事项"></a>7. 注意事项</h3><ul>
+<li><strong>跨域问题</strong>：由于 JSONP 的实现原理是通过 <code>&lt;script&gt;</code> 标签进行跨域请求，因此它不受同源策略的限制。通常用于服务端提供的支持 JSONP 的接口。</li>
+<li><strong>安全性</strong>：使用 JSONP 需要注意安全问题，因为它会执行返回的数据，可能存在 XSS 攻击风险。因此，只能从信任的来源请求数据。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过上面的步骤，你可以在 Vue 项目中方便地使用 <code>$jsonp</code> 发送跨域请求。你可以根据需要在插件中封装更多配置选项，比如修改 JSONP 请求的参数名称、超时控制等。</p>
+
+  </div>
+  <!-- <div id="gitalk-container"></div> -->
+</div>
+
+<script>
+  
+Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
+  dragToClose: true,
+  Toolbar: true,
+  closeButton: "top",
+  Image: {
+    zoom: true,
+  },
+  on: {
+    initCarousel: (fancybox) => {
+      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+    "Carousel.change": (fancybox, carousel, to, from) => {
+      const slide = carousel.slides[to];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+  },
+});
+</script>
+
+<style>
+    #noneimg img {
+        display: none;
+        z-index: 9999;
+        /* width: 600px !important; */
+        min-width: 0%;
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 0px;
+        position: fixed;
+        box-shadow: 0 0 0px #c3c3c300 !important;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto !important;
+    }
+
+    @media screen and (max-width:600px) {
+        #noneimg img {
+            max-width: 88%
+        }
+    }
+</style>
+
+    <div class="post-paging">
+    
+    <a href="/2019/12/15/computed/">
+        <div class="post-paging-last">
+            <span>上一篇</span>
+            <p>Vue计算属性</p>
+        </div>
+    </a>
+    
+
+    
+    <a href="/2019/08/15/keep-alive/">
+        <div class="post-paging-next">
+            <span>下一篇</span>
+            <p>keep-alive</p>
+        </div>
+    </a>
+    
+</div>
+</div>
+		
+<div class="footer">
+	<div class="Copyright">
+		©2025 By 付鹏篚. 主题：<a
+			style="text-decoration: none;display: contents; color: #898F9F;"
+			href="#">Quiet</a>
+	</div>
+	<div class="contact">
+		
+		<a target="_blank" rel="noopener" href="https://github.com/newbiefpf">
+			<img src="/image/logo.png" alt="Quiet主题">
+		</a>
+		
+	</div>
+</div>
+
+<script src="/js/gotop.js"></script>
+
+
+<style type="text/css">
+    @media screen and (min-width: 600px) {
+        .goTop>span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            opacity: 0.8;
+            background: #F1F5FB;
+            text-align: center;
+            transition: border .5s;
+            border: 1px solid rgba(18, 24, 58, 0.06);
+
+            -moz-transition: border .5s;
+            /* Firefox 4 */
+            -webkit-transition: border .5s;
+            /* Safari 和 Chrome */
+            -o-transition: border .5s;
+            /* Opera */
+        }
+
+        .goTop>span:hover {
+            border: 1px solid #6680B3;
+        }
+
+
+        .goTop {
+            position: fixed;
+            right: 30px;
+            bottom: 80px;
+        }
+
+        .goTop>span>svg {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+    }
+
+    @media screen and (max-width: 600px) {
+        .goTop {
+            display: none;
+        }
+    }
+</style>
+<div class="goTop" id="js-go_top">
+    <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g>
+                <path d="M13 12v8h-2v-8H4l8-8 8 8z"></path>
+            </g>
+        </svg>
+    </span>
+</div>
+<script>
+    $( '#js-go_top' )
+	.gotoTop( {
+		offset: 500,
+		speed: 300,
+		animationShow: {
+			'transform': 'translate(0,0)',
+			'transition': 'transform .5s ease-in-out'
+		},
+		animationHide: {
+			'transform': 'translate(100px,0)',
+			'transition': 'transform .5s ease-in-out'
+		}
+	} );
+</script>
+
+
+    <!-- Gitalk -->
+    <script>
+        const data = '{"clientID":"02b3c","clientSecret":"adfc7b4","repo":"gimment","owner":"duneng","admin":"duneng"}'
+        const gitalk = new Gitalk({
+            ...JSON.parse( data),
+            id:location.pathname,
+            distractionFreeMode:false
+        })
+        
+        // if(Boolean('true')){
+        //     gitalk.render('gitalk-container')
+        // }
+    </script>
+
+
+	</body>
+</html>
+
